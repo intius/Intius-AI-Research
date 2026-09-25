@@ -1,0 +1,54 @@
+R07 — Physical path coverage mattered more than repeated easy examples
+
+EVIDENCE STATUS: PARTIAL SCALE-TRANSFER SUCCESS; DEEP REASONING FAILED
+
+Distance-balanced training improved shallow transfer across graph sizes where more same-distribution data did not.
+
+THE IDEA
+For a propagation mechanism, graph size can change the distance evidence must
+travel. Training examples should cover those physical distances, rather than
+merely repeat the same short routes with more labels.
+
+WHAT SUCCEEDED
+Five arms began from the same neutral initialization and used 600 updates.
+At 150k nominal cells, 240, 2,400 and 24,000 same-distribution unique examples
+all produced the same 60.49% macro accuracy. A 2,400-example distance-balanced
+arm reached 69.86%; depth-2 accuracy reached 99.31%. Macro equally weighted
+five logical depths. The balanced arm still scored 50% at unseen depths 8/16.
+
+WHY MORE ITERATIONS DID NOT FIX IT
+Evidence attenuated approximately as relay_gate^hops * relation_gate^relations.
+The best learned relation gate was about 0.956847; its 16th power was about
+0.4937, below the fixed 0.5 decision threshold even before relay loss.
+Persistent max does not accumulate repeated messages. More sweeps permit
+arrival but cannot rescue a subthreshold product.
+
+CONFOUNDS TO KEEP
+Only two gates were learned; graph flooding and relation semantics were
+engineered. Eighty cell lanes were tied, so 150k physical cells represented
+1,875 independent units. Distance balancing also changed depth mix and
+example exposures (826,400 versus 960,000), so this was not a perfectly
+isolated path-distance intervention. One magnitude-matched random rule solved
+deep conditions, showing a representable solution, not a working optimizer.
+
+HOW TO BUILD ON IT
+For synthetic reasoning data, log dependency distance and task complexity,
+not just example count or sequence length. Match logical depth and exposure
+when testing a coverage hypothesis. Applying the lesson to LoRA curricula is
+a research suggestion; this study did not train an LLM on such a curriculum.
+
+ORIGINALITY
+The exact five-arm comparison and attenuation diagnosis are distinctive local
+evidence. Distribution coverage as a generalization problem is prior art.
+
+SOURCE REPORTS
+  E017: evidence/E017.txt
+    Original: !!!Current/further_testing/experiment_E_data_vs_distance_20260915/RESULTS.md
+  E018: evidence/E018.txt
+    Original: !!!Current/further_testing/experiment_E_data_vs_distance_20260915/INTERPRETATION.md
+
+PRIOR-WORK CONTEXT
+  P06: Towards Better Out-of-Distribution Generalization of Neural Algorithmic Reasoning Tasks (Mahdavi et al., 2022/2023)
+    https://arxiv.org/abs/2211.00692
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

@@ -1,0 +1,116 @@
+E016 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: 21_toy_findings.txt
+Original SHA-256: 59a7d998edb5c5a3b8dfc3d19ed9a6f4b3dc9884d531e8ff80c5c8a94cde6003
+Original byte count: 6116
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | WHAT THE LOCAL DYNAMICS EXPERIMENTS ESTABLISH
+0002 | 2026-09-07 local date. Read with the language-model screen and final assessment.
+0003 | 
+0004 | Result
+0005 | A balanced selective finite-difference objective improved long autonomous
+0006 | rollouts in a small recurrent model when the correct nuisance geometry was
+0007 | available during training. This was confirmed on five fresh data/initialization
+0008 | seeds against both random-direction regularization and full backpropagation
+0009 | through short rollouts. No parameters or additional inference branches were
+0010 | added by the training objective.
+0011 | 
+0012 | This is evidence for a mechanism on a known-manifold dynamics problem. It is
+0013 | not a novel principle, a general intelligence result, or evidence that a 1B
+0014 | language model outperforms another model. The source audit identifies several
+0015 | close conceptual predecessors. The real-language direction estimator is a
+0016 | separate, harder hypothesis.
+0017 | 
+0018 | Confirmed experiment, 4,868 parameters in every arm
+0019 | Method                        Mean 64-step MSE     Across-seed SD
+0020 | RMS normalization                    0.406534             0.11115
+0021 | Isotropic secant + clean             0.142391             0.03704
+0022 | 4-step full BPTT                     0.227320             0.06782
+0023 | 8-step full BPTT, half batch         0.147260             0.04431
+0024 | Selective secant + clean             0.029152             0.00795
+0025 | Exact pair normalization oracle      0.017158             0.00162
+0026 | 
+0027 | The selective recipe reduced mean 64-step MSE by 92.83% relative to RMS,
+0028 | 79.53% relative to isotropic regularization, 87.18% relative to BPTT4, and
+0029 | 80.20% relative to BPTT8. It won all five paired seeds against each control.
+0030 | Mean one-step MSE was 5.19% higher than RMS, within the prewritten 25% limit.
+0031 | The oracle with exact inference-time geometric projection remained better.
+0032 | Numbers above describe rollout MSE, not accuracy, perplexity, or an LLM score.
+0033 | 
+0034 | At eight transitions, within the trained rollout range, selective repair
+0035 | also improved over the RMS, random-direction, and BPTT controls. Wider
+0036 | velocities and initial radial noise were reported separately in the saved
+0037 | tables. These distribution shifts are modest variations of the same task.
+0038 | 
+0039 | What the winning objective actually does
+0040 | 1. Train ordinary transition prediction on two clean example branches.
+0041 | 2. Perturb a teacher state in the normal component of the student's error.
+0042 | 3. Penalize the difference between the next states from the clean and
+0043 |    perturbed inputs, divided by the perturbation magnitude.
+0044 | 4. Keep global RMS normalization in the deployed model.
+0045 | 
+0046 | The two clean branches matter. A stronger or more complicated regularizer
+0047 | was not automatically better. All geometric information used to select the
+0048 | perturbation is training-only; the neural network alone performs the normal
+0049 | arm's inference. However, that information is privileged supervision.
+0050 | 
+0051 | Negative results were preserved
+0052 | Test 1: Ordinary normally corrupted prediction targets lost to RMS in all
+0053 | five seeds. Its primary gate failed.
+0054 | Test 2: A normalized normal secant term lowered long-run MSE but raised
+0055 | single-step MSE by 81.57%. Its primary gate failed.
+0056 | Test 3: Explicitly matching tangent changes did not fix that tradeoff. The
+0057 | primary lost to a simpler normal-only control and raised one-step MSE by
+0058 | 47.03%. Its primary gate failed.
+0059 | Test 4: The best observed simple control from test 3 was frozen, then tested
+0060 | on five new seeds with stronger full-BPTT controls. Its gate passed.
+0061 | The fourth result does not convert the first three failures into successes.
+0062 | 
+0063 | Scope of the screen
+0064 | 130 full training runs, in four sequential experiments with five fresh seeds
+0065 | per experiment. Each trained model has the same 4,868-parameter residual MLP.
+0066 | There were also separate excluded smoke checks. These are not 130 independent
+0067 | confirmatory hypotheses or language-model runs. Hyperparameters were fixed
+0068 | within each experiment; later designs were informed by earlier failures.
+0069 | Five seeds provide a screening result, not a strong statistical guarantee.
+0070 | 
+0071 | Computation qualification
+0072 | The confirmation's balanced arms use approximately 12.5 forward-equivalent
+0073 | matrix-work units per update, versus approximately 12.0 for the BPTT controls.
+0074 | This estimate treats backward as twice forward; it is not an exact hardware
+0075 | profile. The selective arm therefore had approximately 4.2% more estimated
+0076 | matrix work. All arms use the same 1,200 optimizer updates. The raw notes
+0077 | report measured training times, but these tiny CPU timings do not predict
+0078 | GPU throughput or establish compute efficiency for a language model.
+0079 | 
+0080 | The decisive weakness
+0081 | Valid toy states lie on two known unit circles, so the distinction between
+0082 | phase information and radial drift is handed to the trainer. An LLM does not
+0083 | come with such a geometric oracle. Natural-language state errors can lie in
+0084 | directions that carry rare but crucial information. Removing them can hurt
+0085 | the very capabilities we want to retain. Global/PCA variance, output
+0086 | sensitivity, and semantic usefulness must not be equated without evidence.
+0087 | 
+0088 | The task also uses two time-invariant rotations with constant velocities;
+0089 | it does not include language, arbitrary factual recall, discrete branching,
+0090 | or the diversity of computations expected of a general model.
+0091 | 
+0092 | Audit and reproduction
+0093 | 18_audit_and_tables.py.txt independently recalculates saved summaries and
+0094 | gate decisions, verifies source hashes, checks all 130 records and metric
+0095 | finiteness, and verifies the language-model prototype's recorded source hash.
+0096 | It does not independently rerun training. See 19_results_tables.txt and
+0097 | 20_validation_audit.txt. Source scripts and prewritten protocols remain in
+0098 | the workspace, including the negative results.
+0099 | 
+0100 | Run the four experiments with new output filenames to preserve the originals:
+0101 | python 04_mechanism_experiment.py.txt --out repeat_1.txt
+0102 | python 07_secant_experiment.py.txt --out repeat_2.txt
+0103 | python 10_tangent_experiment.py.txt --out repeat_3.txt
+0104 | python 16_confirmation_experiment.py.txt --out repeat_4.txt
+0105 | 
+0106 | The next evidential step is actual causal text prediction with an estimated,
+0107 | teacher-checked direction space. Its protocol is 23_language_screen_preregistration.txt.

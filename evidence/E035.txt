@@ -1,0 +1,43 @@
+E035 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: capability_lab/scanned_backbone/RESULTS.txt
+Original SHA-256: 4b938c5f9e9d3d54cd77254c809f96401aa226d397481a737146a427ce8511e5
+Original byte count: 2173
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | PACKED SCAN TRAINING -- COMPLETE, QUALITY/RETENTION PILOT PASSED
+0002 | Updated 2026-09-08T09:56:52.848995+00:00
+0003 | 
+0004 | An actual601,096,192-value Qwen3-0.6B+LoRA model completed512 exact-objective
+0005 | updates in111.694s; a fresh-process same-seed repeat took111.251s. Both epoch
+0006 | checkpoints reproduced byte-for-byte. The dense compiled reference took
+0007 | 266.449s. The observed complete-time ratio is2.390x on the existing VM.
+0008 | The timing repeat is not an independent learning seed or a universal hardware
+0009 | benchmark. Warm scan updates are slower (~116ms versus74ms); lower compilation
+0010 | and setup cost drives this short-adaptation result.
+0011 | 
+0012 | Selected epoch2 scored60/64 development questions, versus61/64 for the matched
+0013 | dense control. Ordinary HF/PEFT inference loaded the exported adapter with
+0014 | tensor checks. FP32 WikiText guard CE3.42314655 versus original3.37887082 is
+0015 | +1.3104%, within the5% limit. The model retains all596M original learned base
+0016 | values plus5,046,272 adapter values; packing does not make it a5M model.
+0017 | 
+0018 | The strict eight-update parameter-replay gate remains FAILED (6.0644e-5 versus
+0019 | 5e-5). This is a separately tested numerical configuration, not a claim of
+0020 | bit-identical optimizer trajectories. CPU functional and TPU forward/gradient
+0021 | checks passed, and actual trained-model quality was subsequently evaluated.
+0022 | 
+0023 | Scan loops, parameter packing, and optimizer-state priming are established
+0024 | execution techniques. This is useful engineering evidence, not a newly invented
+0025 | learning algorithm,100x training result, frontier parity or a breakthrough.
+0026 | The new paired256-problem confirmation is RUNNING with frozen checkpoints,
+0027 | protocol and1024-token budgets. Those questions are now model-opened; do not
+0028 | treat them as fresh development data for later redesigned candidates.
+0029 | 
+0030 | Exact learned-parameter checkpoint paths/hashes are in22_assessment.txt.
+0031 | Raw evidence: scanned_complete_training.result.txt, scanned_training_repeat.
+0032 | result.txt, scanned_model_validation.result.txt, scanned_language_retention.
+0033 | result.txt. Main goal remains OPEN; next capability work includes gated reuse
+0034 | of existing middle-layer computation, with known ingredients credited.

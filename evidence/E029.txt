@@ -1,0 +1,27 @@
+E029 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/cognitive_kernel_project_20260916/experiment_AJ_unknown_semantics/REPORT.md
+Original SHA-256: fb419e2cf41e1580501a2004d8ae167083c873611cc6c48a373a50927716e9fd
+Original byte count: 721
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Experiment AJ — Unknown-semantics detection
+0002 | 
+0003 | **PASS. The robust solver can reject operations outside its known family.**
+0004 | 
+0005 | AUROC: 0.9870. Known acceptance: 100.00%. Unknown false acceptance: 3.52%. Accepted-known query accuracy: 100.00%.
+0006 | 
+0007 | Mixed deep-program unknown detection: 97.66%. Known deep-program acceptance: 100.00%.
+0008 | 
+0009 | The calibrated fit threshold is 0.75. Consensus fit and margin provide actionable uncertainty: execute recognized affine operations and abstain/escalate unfamiliar semantics.
+0010 | 
+0011 | ## Gates
+0012 | 
+0013 | - PASS — auroc 95
+0014 | - PASS — unknown false accept 5
+0015 | - PASS — known accept 90
+0016 | - PASS — accepted known accuracy 95
+0017 | - PASS — deep unknown detection 95
+0018 | - PASS — deep known accept 95

@@ -1,0 +1,110 @@
+E034 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: godly_3b_20260923/CONFIRMATION_ANALYSIS.json
+Original SHA-256: 29287077c687f00f655335902c0a0f2c18226aed5624ef2d8b936a50df6ac253
+Original byte count: 2735
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | {
+0002 |   "gsm8k": {
+0003 |     "accuracy_difference": 0.25,
+0004 |     "base_correct": 16,
+0005 |     "base_only_correct": 1,
+0006 |     "base_seconds": 115.806,
+0007 |     "base_tokens": 791,
+0008 |     "bootstrap_95_percent_interval": [
+0009 |       0.041666666666666664,
+0010 |       0.4583333333333333
+0011 |     ],
+0012 |     "candidate_correct": 22,
+0013 |     "candidate_only_correct": 7,
+0014 |     "candidate_seconds": 500.509,
+0015 |     "candidate_tokens": 3444,
+0016 |     "count": 24,
+0017 |     "exact_mcnemar_two_sided_p": 0.0703125
+0018 |   },
+0019 |   "mmlu_pro": {
+0020 |     "accuracy_difference": 0.08333333333333333,
+0021 |     "base_correct": 11,
+0022 |     "base_only_correct": 1,
+0023 |     "base_seconds": 395.714,
+0024 |     "base_tokens": 2513,
+0025 |     "bootstrap_95_percent_interval": [
+0026 |       -0.08333333333333333,
+0027 |       0.25
+0028 |     ],
+0029 |     "candidate_correct": 13,
+0030 |     "candidate_only_correct": 3,
+0031 |     "candidate_seconds": 534.042,
+0032 |     "candidate_tokens": 3643,
+0033 |     "count": 24,
+0034 |     "exact_mcnemar_two_sided_p": 0.625
+0035 |   },
+0036 |   "overall": {
+0037 |     "accuracy_difference": 0.16666666666666666,
+0038 |     "base_correct": 27,
+0039 |     "base_only_correct": 2,
+0040 |     "base_seconds": 511.52,
+0041 |     "base_tokens": 3304,
+0042 |     "bootstrap_95_percent_interval": [
+0043 |       0.041666666666666664,
+0044 |       0.3125
+0045 |     ],
+0046 |     "candidate_correct": 35,
+0047 |     "candidate_only_correct": 10,
+0048 |     "candidate_seconds": 1034.551,
+0049 |     "candidate_tokens": 7087,
+0050 |     "count": 48,
+0051 |     "exact_mcnemar_two_sided_p": 0.03857421875
+0052 |   },
+0053 |   "predeclared_confirmation_pass": true,
+0054 |   "receipt_verified": true,
+0055 |   "source_report": {
+0056 |     "base_model": "Nanbeige/Nanbeige4.2-3B",
+0057 |     "base_revision": "b82e54bd609793562a75cbf9337970a93369eab5",
+0058 |     "load_peak_allocated_bytes": 3402043392,
+0059 |     "load_seconds": 106.41,
+0060 |     "seed_base": 73091,
+0061 |     "stage1": {
+0062 |       "gsm8k": {
+0063 |         "count": 24,
+0064 |         "seconds": 115.81,
+0065 |         "semantic": 16,
+0066 |         "strict": 16
+0067 |       },
+0068 |       "mmlu_pro": {
+0069 |         "count": 24,
+0070 |         "seconds": 395.71,
+0071 |         "semantic": 12,
+0072 |         "strict": 11
+0073 |       }
+0074 |     },
+0075 |     "stage1_adapter": "adapter_candidate/step_0256",
+0076 |     "stage1_correct": 27,
+0077 |     "stage1_seconds": 511.52,
+0078 |     "stage1_tokens": 3304,
+0079 |     "stage2": {
+0080 |       "gsm8k": {
+0081 |         "count": 24,
+0082 |         "seconds": 500.51,
+0083 |         "semantic": 22,
+0084 |         "strict": 22
+0085 |       },
+0086 |       "mmlu_pro": {
+0087 |         "count": 24,
+0088 |         "seconds": 534.04,
+0089 |         "semantic": 17,
+0090 |         "strict": 13
+0091 |       }
+0092 |     },
+0093 |     "stage2_adapter": "adapter_stage2/step_0256",
+0094 |     "stage2_correct": 35,
+0095 |     "stage2_seconds": 1034.551,
+0096 |     "stage2_tokens": 7087,
+0097 |     "status": "COMPLETE",
+0098 |     "suite_sha256": "e6df59a919dc3747e2c4d741c4d82aafcf2c28925be509663e7bce64a5f2105b"
+0099 |   },
+0100 |   "suite_sha256": "e6df59a919dc3747e2c4d741c4d82aafcf2c28925be509663e7bce64a5f2105b"
+0101 | }

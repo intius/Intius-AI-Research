@@ -1,0 +1,58 @@
+R13 — Train local transitions well before judging recurrent execution
+
+EVIDENCE STATUS: THREE-SEED SYNTHETIC EXECUTION SUCCESS; FIXED SEMANTICS
+
+A width/training threshold turned weak register execution into strong depth and size transfer.
+
+THE IDEA
+Separate content addressing from the local state transition. A recurrent
+executor can route correctly yet fail because its ordinary transition module
+has not learned the supplied algebra accurately enough.
+
+WHAT SUCCEEDED
+Experiment AC compared five width/update settings over three seeds. The
+113,985-parameter width-512 model at 8,000 updates reached 98.42% frozen
+transfer, 99.78% exhaustive local-transition accuracy, and 97.01% on extended
+depth/register tests including depth 32 and eight registers. A 75,045-parameter
+model at 8,000 updates reached 96.96% transfer and 93.38% extended accuracy.
+At 4,000 updates that smaller model reached only 74.67% and 60.38%.
+For the primary model, erased state fell to 10.10%, shuffled source keys to
+11.95%, and uniform addressing to 6.90% on frozen transfer.
+
+FOLLOW-UP BOUNDARY
+Changing operation semantics per episode defeated the learned adaptation arms.
+A later hybrid used an exact semantic solver and exact differentiable modular
+primitives with a 5,377-parameter learned router; it scored 100% across the
+reported seen/unseen suites in three seeds. That success credits supplied
+algorithms as well as routing; it is not discovery of arbitrary operations.
+Maximum-consensus recovery tolerated 40% corrupted demonstrations at 32 demos
+with 100% reported deep-program accuracy. Unknown-family rejection had AUROC
+0.9870 and 3.52% false acceptance on its declared test.
+
+HOW TO BUILD ON IT
+Measure local transition competence and addressing independently before adding
+more recurrence. Use a width-by-training-budget grid and counterfactual routing
+controls. If exact tools replace learned arithmetic, explicitly report which
+parts are engineered. Application to open natural-language programs is untested.
+
+ORIGINALITY
+The particular capacity diagnosis and component chain are local empirical
+results. Recurrent interpreters, exact solvers and learned routing are known.
+
+SOURCE REPORTS
+  E025: evidence/E025.txt
+    Original: !!!Current/cognitive_kernel_project_20260916/experiment_AC_width_horizon_scaling/REPORT.md
+  E026: evidence/E026.txt
+    Original: !!!Current/cognitive_kernel_project_20260916/experiment_AD_semantic_adaptation/REPORT.md
+  E027: evidence/E027.txt
+    Original: !!!Current/cognitive_kernel_project_20260916/experiment_AH_exact_primitive_learned_routing/REPORT.md
+  E028: evidence/E028.txt
+    Original: !!!Current/cognitive_kernel_project_20260916/experiment_AI_robust_semantic_solver/REPORT.md
+  E029: evidence/E029.txt
+    Original: !!!Current/cognitive_kernel_project_20260916/experiment_AJ_unknown_semantics/REPORT.md
+
+PRIOR-WORK CONTEXT
+  P10: Neural Algorithmic Reasoning (Velickovic and Blundell, 2021)
+    https://arxiv.org/abs/2105.02761
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

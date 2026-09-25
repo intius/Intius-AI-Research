@@ -1,0 +1,48 @@
+R05 — Store operator shape once and recover offsets from evidence
+
+EVIDENCE STATUS: CONFIRMED COMPACT LIBRARY RESULT; NEW-RULE TRANSFER WEAK
+
+Canonicalization reduced a synthetic operator library while preserving or improving composition accuracy.
+
+THE IDEA
+When operators differ mainly by a modular output translation, store their
+shared shape. Canonicalization subtracts f(0); an observed input/output pair
+recovers the offset. This reduces duplicate library entries before inference.
+
+WHAT SUCCEEDED
+A fresh 3,072-world follow-up separated canonicalization from marginalization.
+Primary accuracy and stored numeric state:
+  Capped raw marginal library:    58.69%,  77,824 bytes.
+  Uncapped raw marginal library:  61.72%, 129,523 bytes.
+  Canonical marginal library:     63.33%,  21,280 bytes.
+Against capped raw marginalization, the gain was 4.64 points with about 3.66x
+less numeric state. Against uncapped raw, the point gain was 1.61 points with
+6.09x less state, but adjusted p=0.0782 did not resolve accuracy superiority.
+
+WHAT DID NOT EXPLAIN IT
+Persistent hypotheses and canonical marginalization both scored 63.33%, with
+40 gains and 40 losses. Persistent identity was not an established benefit.
+Canonical marginal accuracy was 91.80% on ordinary new worlds and 82.62% on
+long compositions, but only 18.36% on the new cubic-rule family.
+The later 82.67% symbolic/library mixture mainly gained from a supplied
+polynomial prior: cubic accuracy reached 100%. That is a different mechanism.
+
+HOW TO BUILD ON IT
+Deduplicate by a verified symmetry, retain the transformation needed to recover
+the original function, and test unseen symmetry-breaking rules. Compare capped
+and uncapped raw libraries separately so a storage limit is not mistaken for
+an inference advantage. The explicit executor and mathematical priors count as
+part of the system; stored numeric bytes do not equal total RAM.
+
+ORIGINALITY
+The controlled state/accuracy tradeoff is local evidence. Symmetry reduction,
+canonicalization and Bayesian inference are established ideas. This is not
+general semantic compression or a compressed LLM.
+
+SOURCE REPORTS
+  E014: evidence/E014.txt
+    Original: composition_quality_20260909/RESULTS.md
+  E012: evidence/E012.txt
+    Original: quantum_composition_20260909/RESULTS.md
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

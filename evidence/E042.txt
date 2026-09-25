@@ -1,0 +1,60 @@
+E042 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/cognitive_kernel_project_20260919/experiment_BC_protected_bb_reranker/REPORT.md
+Original SHA-256: 57c76254209204c4a2de732f16926a1205c04f109268ae1070f36285059e4904
+Original byte count: 2103
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Experiment BC — Protected BB passage reranker
+0002 | 
+0003 | Completed privately on Kaggle on 2026-09-19.
+0004 | 
+0005 | ## Result
+0006 | 
+0007 | BC passed every preregistered promotion gate. The primary pairwise XGBoost
+0008 | ranker raised mean full-corpus token F1 from BB's 53.64% raw top-five selection
+0009 | to 56.91%, a gain of 3.27 points. Every reader seed improved:
+0010 | 
+0011 | | BB seed | Raw top-5 F1 | Pairwise F1 | Gain |
+0012 | |---|---:|---:|---:|
+0013 | | 4101 | 53.02% | 56.26% | +3.24 |
+0014 | | 4102 | 54.17% | 56.75% | +2.58 |
+0015 | | 4103 | 53.73% | 57.73% | +4.01 |
+0016 | 
+0017 | The independent 3,201-parameter listwise MLP reached 56.94% mean F1, nearly
+0018 | identical to the primary pairwise result. Mean top-five oracle F1 is 64.85%, so
+0019 | 7.93 points of selection/reading headroom remain.
+0020 | 
+0021 | ## Integrity and efficiency
+0022 | 
+0023 | - All three BB checkpoint hashes were identical before and after inference.
+0024 | - BB top-1, raw top-five and answerability predictions reproduced exactly.
+0025 | - The complete 1,000-question/2,067-context validation corpus and frozen
+0026 |   retrieval hash were preserved.
+0027 | - All 14 manifest entries verified after the private archive was copied local.
+0028 | - Reader feature extraction peaked at 207,316,992 allocated CUDA bytes in the
+0029 |   largest branch; ranking ran on CPU.
+0030 | - Host peak RSS was 3,036,246,016 bytes.
+0031 | 
+0032 | ## Decision
+0033 | 
+0034 | Promote `BB reader → BC pairwise ranker` as the strongest directly tested
+0035 | non-LLM general-knowledge QA stack. The listwise MLP is retained as a confirming
+0036 | secondary selector, but the preregistered pairwise model remains primary.
+0037 | 
+0038 | The next necessary test is zero-shot transfer beyond SQuAD. Experiment BD will
+0039 | freeze BB and BC and evaluate them on deterministic answer-bearing HotpotQA
+0040 | distractor questions without fitting any HotpotQA labels.
+0041 | 
+0042 | ## Artifacts
+0043 | 
+0044 | - Kaggle version 1: [private compute link omitted]
+0045 | - Exact archive SHA-256:
+0046 |   `2670c7a8355edb21f3bc183d2ebf2cdb69520df2631570272af64d7544c74329`
+0047 | - Exact result SHA-256:
+0048 |   `98714805bfa5844c2d1a045fc665d43e5740d3643961482e055bc9b04da13bc3`
+0049 | - Source SHA-256:
+0050 |   `701c39e6da733d99dd5c454cbe0314e538b63c4ef8c8363cd1c790c3f399c41b`
+0051 |

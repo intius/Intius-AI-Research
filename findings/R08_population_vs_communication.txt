@@ -1,0 +1,51 @@
+R08 — More fixed-rule state helped recall without useful inter-cell recurrence
+
+EVIDENCE STATUS: PARTIAL RECALL SUCCESS; RECURRENT-REASONING ATTRIBUTION REJECTED
+
+A normalized frozen population curve separated extra state from communication benefits.
+
+THE IDEA
+Scale the number of stateful cells while freezing shared rule and decoder
+values. Then control pooling amplitude, recurrence, graph wiring and erasure
+to identify which part of the apparent scaling benefit survives.
+
+WHAT SUCCEEDED
+The strict B2 study evaluated 1,010/5,000/20,000/50,000 cells, five graph seeds,
+two branches and four conditions: 160 fresh-process runs without retraining.
+On the same previously observed 2,400 recall responses, B2 normal means were
+6.56%, 18.20%, 39.80%, 41.99%. At 50k cells, no recurrence scored 42.29%,
+shuffled messages 41.58%, and erased state 6.42%.
+
+The population benefit survived mean pooling and equal decoder-input RMS.
+The result supports retained state/feature coverage; it does not establish a
+benefit from inter-cell communication. B1 was nonmonotonic and peaked at 20k.
+
+ACCOUNTING THAT CHANGES THE HEADLINE
+The shared rule and decoder had 1,959 learned values. The separate upstream
+backbone contained 3,725,153 more; the complete saved tool stored 3,727,112
+learned values plus normalization statistics. State alone at 50k cells was
+about 1,171.88 KiB per session; normal sampled process RSS about 302.9 MiB.
+Thus this was not a 1,959-parameter general model or constant-memory scaling.
+
+HOW TO BUILD ON IT
+Test scaling at fixed learned values, but count all upstream weights and
+dynamic state. Add no-connection, shuffled-message and state-erasure controls.
+Compare with a conventional recurrent memory: a separate fair recall study
+found GRU 92.00% versus best dendritic variant 73.54%, with much less state.
+Those separate scores are context, not a common benchmark ranking with B2.
+
+ORIGINALITY
+The normalized ablation package is the useful local contribution. Reservoirs,
+shared update rules and cellular computation have substantial precedents.
+
+SOURCE REPORTS
+  E019: evidence/E019.txt
+    Original: !!!Current/further_testing/strict_frozen_B_scaling_20260915/RESULTS.md
+  E020: evidence/E020.txt
+    Original: !!!Current/further_testing/simplified_state_comparison_20260915/RESULTS.md
+
+PRIOR-WORK CONTEXT
+  P07: Growing Neural Cellular Automata (Mordvintsev et al., 2020)
+    https://distill.pub/2020/growing-ca/
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

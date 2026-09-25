@@ -1,0 +1,63 @@
+R02 — Recover useful coordinates from what actions change
+
+EVIDENCE STATUS: CONFIRMED SYNTHETIC COMPONENT; SHARP FAILURE BOUNDARY
+
+Learned Boolean coordinates generalized much better than raw-observation prediction within a tightly specified family.
+
+THE IDEA
+Learn a representation in which each action has a simple effect. Here the
+observation is an opaque encoding of a Boolean world. The learner solves for
+low-degree polynomial coordinates q_i(y) using action-induced differences:
+  q_i(y_next) XOR q_i(y) = 1 only when action i actually changes its factor.
+It then learns sparse conditional gates and a decoder back to observations.
+
+WHAT SUCCEEDED
+Confirmation used three fresh seeds, 8/12-bit worlds, three encoding families,
+four data budgets and four methods: 288 configurations. In the six quadratic
+worlds at 64 observed transitions/action, equal-world mean unseen-state accuracy
+was 99.634% versus 61.105% for ordinary direct regression. A stronger reversible
+regression control reached 71.099%. Candidate planning achieved 35/36 actual
+goals under the same 8,000-state search cap. Training transitions were one-step;
+plans composed the learned dynamics. The worst primary world was 97.804%.
+
+WHAT WAS PROVIDED
+Every action changes at most one independent coordinate; gates have at most
+three parents; inverse observation coordinates have degree one or two. A
+separate model is fitted for each world/size. The learner is not given true
+latent coordinates during ordinary fitting. These assumptions are powerful.
+
+WHERE IT FAILS
+Cubic observation encodings and multi-coordinate action effects produced 0%
+accuracy through abstention in the frozen stress tests. Some multi-effect
+test states had appeared as next observations; the corrected audit discloses
+that exposure. The primary quadratic test retained strict state non-exposure.
+A handwritten technical text interface passed 23/24 curated requests but
+answered 0/6 unrelated requests. It is not learned general language.
+
+RESOURCES
+Primary candidate model JSON averaged 1,158.7 bytes. This is serialized model
+state, not process RAM: polynomial features, solvers, caches and runtime also
+cost memory. The reports did not measure peak RAM for every candidate helper.
+
+HOW TO BUILD ON IT
+Use interventions to define representation constraints before fitting a broad
+predictor. Verify the assumed action structure and include explicit abstention
+when the equations are inconsistent. For a new domain, first test multi-effect,
+noisy and irreversible actions. Exporting this solver as an LLM tool is a
+possible application, not an integration demonstrated by this experiment.
+
+ORIGINALITY
+The Boolean estimator and its measured boundary are a local contribution
+candidate. Interventional causal representation learning is established.
+
+SOURCE REPORTS
+  E005: evidence/E005.txt
+    Original: non_llm_intervention_lab/RESULTS.txt
+  E006: evidence/E006.txt
+    Original: non_llm_intervention_lab/confirmation/summary.json.txt
+
+PRIOR-WORK CONTEXT
+  P02: Interventional Causal Representation Learning (Ahuja et al., 2023)
+    https://proceedings.mlr.press/v202/ahuja23a.html
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

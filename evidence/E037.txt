@@ -1,0 +1,162 @@
+E037 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: training_efficiency/RESULTS.txt
+Original SHA-256: c5c6a0b1b1aaf79ffed7130e81a87cd092aba091762d8e322a14f2d6b8016c72
+Original byte count: 9431
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | TRAINING EFFICIENCY: RESEARCH ASSESSMENT
+0002 | 2026-09-07. Work performed solo and locally.
+0003 | 
+0004 | The fresh, controlled comparison reached matched test quality with 40.7% less timed wall time and 40.4% less process CPU time.
+0005 | This is a local implementation and measurement of progressive-training ideas.
+0006 | It does not establish a new universal scientific breakthrough or a GPU-scale speedup.
+0007 | 
+0008 | THE USEFUL RECIPE
+0009 | Start with a shallow active network, use its cheaper updates to process more
+0010 | training examples, then grow to the desired full architecture. Pace the
+0011 | learning rate and growth by estimated computation rather than optimizer-step
+0012 | count. Copy trained neighboring features into added layers, zero their output
+0013 | projections at insertion, retain the old optimizer states, and let the new
+0014 | layers learn. Stop after the fully expanded model meets the validation target.
+0015 | 
+0016 | The tested conservative schedule uses 4, then 8, then 12 blocks. Growth occurs
+0017 | after one quarter and one half of the computation budget. All final models
+0018 | have the same standard 12-block architecture; no teacher or extra inference
+0019 | branch is required. New parameters are independent after copying.
+0020 | 
+0021 | An aggressive 1-to-12 variant was also tested. It used many more cheap early
+0022 | updates and obtained especially good final sampled loss on the larger corpus,
+0023 | but was less consistent on the smaller corpus. It is not a universal default.
+0024 | 
+0025 | FRESH CONTROLLED TIMING CHECK
+0026 | Actual models: 1,212,768 parameters, trained from scratch on byte-level WikiText2.
+0027 | Logical processor affinity: [0, 2]; two PyTorch CPU threads.
+0028 | The baseline gets its earliest single passing validation checkpoint. The
+0029 | progressive candidate must pass twice consecutively after all 12 blocks are
+0030 | active. The progressive trainer actually stops and saves that early model.
+0031 | Both exact saved models are evaluated on the entire official test split.
+0032 | 
+0033 | Metric                         Reference             Progressive
+0034 | Timed wall seconds               152.942                  90.666
+0035 | Timed process CPU seconds        269.500                 160.656
+0036 | Matrix-work proxy units         1150.000                 700.026
+0037 | Optimizer updates                   1150                    1410
+0038 | Full-test CE, nats/byte         1.9274640               1.8635314
+0039 | 
+0040 | Snapshot-overhead-adjusted wall reduction: 40.700%
+0041 | Snapshot-overhead-adjusted process CPU reduction: 40.373%
+0042 | Full-test loss change: -3.317% (negative is better)
+0043 | Prospective corrected-rule gate: PASS
+0044 | 
+0045 | The rule required at least 20% reduction in both wall and process CPU time,
+0046 | including adjusted ratios that remove baseline-only snapshot-copy overhead,
+0047 | and no more than 0.5% higher full-test loss. The reference timing is deliberately
+0048 | favorable to the baseline. Test scores were not used to choose a stopping point.
+0049 | 
+0050 | This was one new prospective seed (5801), following the timing issue described
+0051 | below. It is limited evidence, not an independently replicated universal result.
+0052 | Shared warmup, baseline-calibration research, full-test verification, and some
+0053 | logging are outside the quoted training-to-quality interval and are recorded
+0054 | separately. These numbers are not a claim of net savings on this research session.
+0055 | 
+0056 | EARLIER EVIDENCE AND NEGATIVE RESULTS
+0057 | 1. Gradient prediction: raw unbiasedness checks passed, but the tested cheap
+0058 |    head-gradient anchor predictors had poor prospective gradient alignment.
+0059 |    I rejected that implementation before relying on skipped backward passes.
+0060 | 2. Fixed-update growth: the moment-inheritance candidate ran faster per fixed
+0061 |    training schedule but lost too much quality; its original gate failed.
+0062 | 3. Computation-paced growth: allowing cheap phases to see more examples was
+0063 |    substantially more useful than merely reducing work per iteration.
+0064 | 
+0065 | Small-corpus comparison: 550,464 parameters, three paired seeds.
+0066 | Method          Final-budget test CE   Mean final-budget time   Validation target time/full
+0067 | full                    1.92659371                   92.993                        1.0000
+0068 | copy_zero               1.88536797                  100.511                        0.6330
+0069 | gate50                  1.89023874                   95.680                        0.6125
+0070 | cancel50                1.89776808                   98.144                        0.6597
+0071 | one_layer               1.93840031                   96.302                        0.7063
+0072 | 
+0073 | The early time-to-quality column and the final-budget test score refer to
+0074 | different checkpoints. Early test models were not retained in that first
+0075 | experiment, so its approximately 37% validation-convergence gain alone is
+0076 | not presented as verified early test-set parity. The grown models continued
+0077 | training after that threshold and improved further.
+0078 | 
+0079 | Different corpus/larger model: WikiText2, 1,212,768 parameters, three seeds.
+0080 | The following final-budget scores use 2,048 fixed windows per held-out split.
+0081 | The separately saved early models were checked on the complete test split.
+0082 | Method          Final sampled test CE   Mean raw updates   Mean training seconds
+0083 | full                     1.89158513            1200.00                 138.551
+0084 | full_short               1.97027115             900.00                 106.692
+0085 | copy_zero                1.76559365            1910.00                 137.257
+0086 | cancel50                 1.77702661            1883.00                 132.925
+0087 | one_layer                1.67789284            6464.00                 131.896
+0088 | 
+0089 | The growing methods use additional raw training examples within a similar
+0090 | matrix-work budget. The work proxy is not exact FLOPs and does not capture
+0091 | every optimizer, attention, memory, or input-processing cost; actual times
+0092 | are measured. Faster fixed-step iterations are not the claimed outcome.
+0093 | 
+0094 | REFERENCE-RULE CORRECTION
+0095 | The original three-seed WikiText timing gate required two passing readings
+0096 | even from the model defining the target. One baseline reached its own final
+0097 | band only on the last reading, leaving that reference time undefined.
+0098 | Those original gates remain: growth=fail, cancellation=fail.
+0099 | I did not widen the loss tolerance or relabel those gates. A separate rule
+0100 | was written before seed 5801: earliest single passing baseline versus two
+0101 | passing candidate readings, with full-test verification. CPU-time recording
+0102 | and fixed process affinity were added because earlier wall times varied.
+0103 | This chronology and the one-seed scope of the corrected check are important.
+0104 | 
+0105 | THE MORE NOVEL CANDIDATE DID NOT EARN ITS COMPLEXITY
+0106 | Temporary cancellation inserts x + R_theta(x) - a*R_initial(x), starting
+0107 | with a=1 and fading it to zero. At insertion it preserves outputs and old
+0108 | raw gradients while permitting nonzero internal gradients in the new layer.
+0109 | The frozen anchor still differentiates through its input; it is discarded
+0110 | after the fade, leaving the standard inference model. Algebra and numerical
+0111 | checks support those properties in the deterministic implementation.
+0112 | They do not prove better convergence. Global clipping and adaptive optimizer
+0113 | state can also change effective updates despite raw-gradient preservation.
+0114 | The tested cancellation did not consistently beat simpler growth, so it is
+0115 | not the recommended result or a validated new breakthrough. Cancellation/
+0116 | centering and progressive growth also have substantial prior art.
+0117 | 
+0118 | SCOPE AND LIMITS
+0119 | - CPU experiments on small byte-level language models with 64-byte contexts.
+0120 | - Real trained models at 550,464 and 1,212,768 parameters; no 1B model was trained.
+0121 | - No GPU, distributed-training, monetary-cost or energy reduction was measured.
+0122 | - Memory-resident text and a small 256-symbol output head favor cheap early phases.
+0123 | - This does not establish improvement in general reasoning/chat capability.
+0124 | - AdamW and the stated reference settings were tested, not every optimized baseline.
+0125 | - The final peak model capacity remains unchanged; peak training memory savings
+0126 |   are not claimed. Snapshot/anchor storage is counted separately where used.
+0127 | - No architecture or optimization principle has been established as novel by
+0128 |   an exhaustive prior-art review. This is an internally checked local result.
+0129 | 
+0130 | PRIOR WORK
+0131 | Scaling depth capacity via zero/one-layer model expansion:
+0132 | https://arxiv.org/html/2511.04981v2
+0133 | Stacking Your Transformers:
+0134 | https://arxiv.org/html/2405.15319v2
+0135 | Landscape-Aware Growing:
+0136 | https://arxiv.org/html/2406.02469v1
+0137 | See 15_sources_and_novelty.txt for the full primary-source audit.
+0138 | 
+0139 | ARTIFACTS AND REPRODUCTION
+0140 | 25_train_to_target.py.txt contains the actual target-stopping research trainer.
+0141 | Its default run performs the controlled reference/candidate comparison.
+0142 | Example preserving original outputs:
+0143 | python 25_train_to_target.py.txt --name repeat_reference_rule
+0144 | The train_to_target function can instead accept an existing validation target;
+0145 | a production use need not recalibrate it by training a new reference each time.
+0146 | This implementation is a small-model research reference, not a distributed
+0147 | production trainer for arbitrary pretrained LLMs.
+0148 | 
+0149 | 26_reference_rule_checkpoints/full_reference.txt and progressive_at_stop.txt
+0150 | are the actual comparison models, encoded as local text. Loaders and replay
+0151 | checks are in the audit scripts. Full source, data hashes, protocols, raw
+0152 | trajectories, negative results and model checkpoints remain in this folder.
+0153 | No project or model was published, hosted or uploaded.

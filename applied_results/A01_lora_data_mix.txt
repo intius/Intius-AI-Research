@@ -1,0 +1,74 @@
+A01 — A checked four-part data mix improved a small LoRA
+
+EVIDENCE STATUS: SMALL FROZEN CONFIRMATION PASSED; ESTABLISHED METHOD
+
+Continuing a rank-8 adapter improved a separate public subset from 27/48 to 35/48, with a generation-time cost.
+
+WHY THIS IS AN APPLIED APPENDIX
+LoRA, supervised distillation and replay are known. The reusable information
+is the exact data mixture, the held-out observation and the failed successors.
+
+RECIPE THAT WAS ACTUALLY TESTED
+Base: Nanbeige/Nanbeige4.2-3B, revision
+b82e54bd609793562a75cbf9337970a93369eab5. Continue the existing Stage 1 rank-8
+LoRA for 256 updates, accumulation 4, AdamW learning rate 4e-5, FP16 base,
+gradient checkpointing, with maximum 512 prompt-plus-completion tokens.
+The 1,024-row mix contained four equal groups:
+  256 OpenMathInstruct-2 integer-answer examples with checked final numbers;
+  256 Tulu 3 persona instruction-following examples;
+  256 Tulu 3 persona code examples containing parseable Python functions;
+  256 verified synthetic replay examples from the original training pool.
+Exact evaluation-prompt overlap was excluded. A matching boxed number is not
+a proof of every reasoning step; parseable code is not necessarily correct.
+The setup includes all earlier Stage 1 training and the pretrained backbone.
+
+BEST EVIDENCE
+A separate frozen 48-question suite compared unchanged Stage 1 and Stage 2:
+  MMLU-Pro subset: 11/24 -> 13/24.
+  GSM8K subset:    16/24 -> 22/24.
+  Total:          27/48 -> 35/48.
+Ten cases favored Stage 2 and two favored Stage 1. Exact paired p=0.038574;
+the reported paired 95% bootstrap interval was +4.17 to +31.25 points.
+Both used the same T4, prompt construction, seed base 73091, 512-token cap,
+temperature 0.6, top-p 0.95 and top-k 20. The set was disjoint from the earlier
+selection subset, but possible pretraining overlap remains unknown. One
+training trajectory and one sampled generation per item are limited evidence.
+
+COST AND RETENTION
+Stage 2 used 7,087 output tokens and 1,034.55 seconds, versus 3,304 tokens and
+511.52 seconds for Stage 1. Stage 2 fitting took 1,015.92 seconds and peaked
+at 9,791,131,136 allocated GPU bytes. The selected system stored 4,181,785,600
+total parameters, including embeddings and 11,984,896 adapter parameters;
+the conventional 3B label refers to non-embedding scale.
+Earlier retention checks tied generated holdout at 15/24 and direct tasks at
+24/24, while IFEval fell 21/24 to 20/24 and dialogue 12/12 to 11/12.
+
+FOLLOW-UPS
+Stage 3's larger 7,168-row mix gained only 2/48 public cases versus Stage 2,
+below its +4 gate; Stage 2 remained selected. Key aliasing saved about 25%
+of KV storage on narrow retrieval, but later direct accuracy fell 24/24 to
+18/24. Persistent-neuron and attention-kernel variants did not beat matched
+controls enough to promote. These do not strengthen the LoRA claim.
+
+HOW TO USE THIS
+Treat the four-way mixture and retention gates as a reproducible starting
+point for an ablation, not an optimized universal ratio. The study did not
+isolate which data group caused the gain. Keep independent confirmation and
+report output length. The third-party datasets and weights are not included
+in this text release; source revisions appear in the evidence snapshot.
+
+SOURCE REPORTS
+  E031: evidence/E031.txt
+    Original: godly_3b_20260923/RESULTS.md
+  E032: evidence/E032.txt
+    Original: godly_3b_20260923/STAGE2_FREEZE.md
+  E033: evidence/E033.txt
+    Original: godly_3b_20260923/CONFIRMATION_FREEZE.md
+  E034: evidence/E034.txt
+    Original: godly_3b_20260923/CONFIRMATION_ANALYSIS.json
+
+PRIOR-WORK CONTEXT
+  P11: LoRA: Low-Rank Adaptation of Large Language Models (Hu et al., 2021)
+    https://arxiv.org/abs/2106.09685
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

@@ -1,0 +1,73 @@
+NOVELTY AND PRIOR WORK
+Reviewed 2026-09-25.
+
+The folder does not establish any world-first mechanism. The R-series selects
+specific, potentially distinctive empirical findings with a positive component.
+The A-series keeps practical successes whose underlying methods are already
+established. Neither prefix measures public awareness, which was not studied.
+
+Strongest candidates for a focused originality investigation: the restricted
+exact sparse likelihood and query correction (R01), the Boolean intervention
+estimator (R02), decoder conformance plus interface stress tests (R03), and
+training-square-triggered selective operator opening (R10). This is editorial
+prioritization, not certification of novelty or superiority.
+
+Primary-source checks found the following relevant precedents. Links support
+the stated broad relationships, not a proof that every local implementation
+already exists. A limited search cannot establish absence from the literature.
+
+P01 — Residual Learning of Neural Text Generation with n-gram Language Model (Li et al., 2022)
+https://aclanthology.org/2022.findings-emnlp.109/
+Neural residual prediction over an n-gram prior is established. This does not settle the priority of the exact sparse normalizer in R01.
+
+P02 — Interventional Causal Representation Learning (Ahuja et al., 2023)
+https://proceedings.mlr.press/v202/ahuja23a.html
+Interventions can identify latent factors under assumptions. R02 uses a different finite Boolean estimator; the broad idea is not new.
+
+P03 — Latent Translation: Crossing Modalities by Bridging Generative Models (2019)
+https://arxiv.org/abs/1902.08261
+Latent-space translation and alignment provide precedent for modular interoperability; this is not a direct replication of R03.
+
+P04 — Deep Sets (Zaheer et al., 2017)
+https://arxiv.org/abs/1703.06114
+Permutation-invariant set modeling is established and explains one supplied input-order repair.
+
+P05 — Introducing Non-Linear Activations into Quantum Generative Models (2022)
+https://arxiv.org/abs/2205.14506
+Born-machine and nonlinear model families predate this archive. This is broad context, not evidence that R04 implements that paper or a quantum advantage.
+
+P06 — Towards Better Out-of-Distribution Generalization of Neural Algorithmic Reasoning Tasks (Mahdavi et al., 2022/2023)
+https://arxiv.org/abs/2211.00692
+Nonrepresentative data generation and distribution shift in algorithmic reasoning are established concerns.
+
+P07 — Growing Neural Cellular Automata (Mordvintsev et al., 2020)
+https://distill.pub/2020/growing-ca/
+Shared local update rules over populations are prior art, not an invention established by R08.
+
+P08 — Learning Multiagent Communication with Backpropagation (Sukhbaatar et al., 2016)
+https://arxiv.org/abs/1605.07736
+CommNet learns communication jointly with a cooperative task. R09 contributes local failure diagnostics, not the idea of learned communication.
+
+P09 — A Non-commutative Bilinear Model for Answering Path Queries in Knowledge Graphs (Hayashi and Shimbo, 2019)
+https://arxiv.org/abs/1909.01567
+Order-sensitive relation-matrix composition is established; selective opening from observed squares is the narrower candidate in R10.
+
+P10 — Neural Algorithmic Reasoning (Velickovic and Blundell, 2021)
+https://arxiv.org/abs/2105.02761
+Learning algorithmic computations is an existing research direction. R11/R13 are scoped local experiments.
+
+P11 — LoRA: Low-Rank Adaptation of Large Language Models (Hu et al., 2021)
+https://arxiv.org/abs/2106.09685
+Low-rank adaptation of a frozen backbone is established; A01 is a particular post-training result.
+
+P12 — Stacking Your Transformers: A Closer Look at Model Growth for Efficient LLM Pre-Training (2024)
+https://arxiv.org/abs/2405.15319
+Progressive Transformer growth has direct precedent; A03 is a local implementation and timing study.
+
+P13 — Bidirectional Attention Flow for Machine Comprehension (Seo et al., 2016)
+https://arxiv.org/abs/1611.01603
+BiDAF is an established extractive-reader architecture; A05 is an engineering and transfer case study.
+
+Some cards describe known mathematical or engineering ideas without a
+claim to a novel algorithm. Their inclusion is for specific local evidence.
+No exhaustive patent, publication-priority or public-popularity audit was done.

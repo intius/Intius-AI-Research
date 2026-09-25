@@ -1,0 +1,25 @@
+RELEASE VALIDATION — 2026-09-25
+
+- 47 selected source files exist and retained their recorded hashes during packaging.
+- 20 unique cards: 14 distinctive experiments, 6 applied results. All source/reference IDs resolve.
+- A01: structured summary confirms 27/48 vs 35/48, 10 gains/2 losses. Paired exact p independently recalculated: 0.03857421875.
+- R01: saved audit agrees with the stated CE/time reduction; 45.588781% wall saving recalculated from means.
+- R02: six-world aggregate checked from saved summary: 99.634009% accuracy and 35/36 plans.
+- All original packaged files were UTF-8 TXT; no replacement characters, NULs, absolute Windows paths, private Kaggle notebook links or scanned credential patterns found.
+- Publication-metadata substitutions were made in 9 evidence snapshots; original source hashes remain in the register.
+- 20 Q/A records have paired boundaries, source IDs and scope qualifications.
+
+Evidence level: report synthesis with limited saved-summary/arithmetic checks.
+No new model inference, independent retraining or complete raw-data replay.
+No claim that every historical audit was re-executed. Original audit assertions
+remain attributed to the original reports. Hashes prove byte identity, not
+scientific correctness or novelty. Pattern scanning is not a formal security audit.
+
+The final manifest covers every packaged file except itself. To verify after
+copying, compute SHA-256 for each relative path and compare with that manifest.
+
+PUBLICATION PREPARATION
+The user requested public GitHub publication as Intius AI Research.
+Added README.md and retained the owner's edited 00_START_HERE.txt.
+Rebuilt the manifest to include all 80 text/Markdown files (79 hash entries
+plus the manifest). No binary files or private source archive are included.

@@ -1,0 +1,130 @@
+E014 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: composition_quality_20260909/RESULTS.md
+Original SHA-256: b646ebcd67717520d3859cb2201f2f7a5d5a2d537794bda57bbdf9ab5db64e3d
+Original byte count: 6762
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Completed compact composition experiments
+0002 | 
+0003 | **28 distinct configurations were tested on the private [private compute account] Colab VM:**
+0004 | 19 randomly initialized neural models/configurations and 9 non-LLM induction
+0005 | or learned-library configurations. The initial screen contained 25; a separate
+0006 | fresh-case follow-up added three controls. Repeated evaluations are not counted
+0007 | as new models. No pretrained weights or model API calls were used.
+0008 | 
+0009 | The nine VM integrity checks passed before fitting, covering every neural
+0010 | forward/backward implementation, evidence anchoring, operator identity, public
+0011 | input boundaries, reference execution, and data reproducibility.
+0012 | 
+0013 | ## Main screen
+0014 | 
+0015 | Six thousand training worlds, 512 validation worlds, and 2,304 held-out test
+0016 | worlds across six slices. Each neural model received 384 updates. The primary
+0017 | score excludes the two complete-evidence execution diagnostics.
+0018 | 
+0019 | All 25 configurations completed without an experimental execution failure.
+0020 | Training, checkpoint selection, replay and final evaluation took 251.29 seconds
+0021 | in the recorded VM process. Source preparation, integrity checks, exporting and
+0022 | analysis are additional work. Checkpoint hashes and saved prediction counts for
+0023 | all 25 models were verified locally after export.
+0024 | 
+0025 | | Configuration | Initial primary accuracy | Stored numeric state |
+0026 | | --- | ---: | ---: |
+0027 | | Canonical library, persistent hypotheses | 63.22% | 21,280 bytes |
+0028 | | Canonical library, marginal transitions | 63.09% | 21,280 bytes |
+0029 | | Raw learned library, MAP selection | 57.94% | 77,824 bytes |
+0030 | | Quadratic induction control | 53.84% | 25,289 bytes of fixed prior tables |
+0031 | | Relation-conditioned neural mixture | 24.48% | 18,080 bytes / 4,520 parameters |
+0032 | | Causal Transformer control | 10.35% | See complete comparison |
+0033 | 
+0034 | The ordinary neural controls were near chance under this budget. A large gain
+0035 | over them alone is not convincing evidence of a new general learning method.
+0036 | Structured methods have an explicit composition algorithm, while the direct
+0037 | controls must learn more of that algorithm. Those priors must be credited.
+0038 | 
+0039 | [All 25 scores and comparisons](runs/screen-20260909/artifacts/run/RESULTS.md)
+0040 | and [CSV](runs/screen-20260909/artifacts/run/comparison.csv).
+0041 | 
+0042 | ## Fresh follow-up: what caused the library gain?
+0043 | 
+0044 | The first screen changed canonicalization and selection together. The follow-up
+0045 | added raw marginal, uncapped raw marginal, and canonical MAP controls. It used
+0046 | 3,072 fresh worlds and retained the original training data and frozen neural
+0047 | reference. Seven methods were evaluated; this is not seven new training seeds.
+0048 | The follow-up took 25.80 seconds in the recorded VM process.
+0049 | 
+0050 | | Method | Fresh primary accuracy | Stored numeric state |
+0051 | | --- | ---: | ---: |
+0052 | | Raw library, MAP | 58.64% | 77,824 bytes |
+0053 | | Raw library, marginal | 58.69% | 77,824 bytes |
+0054 | | Uncapped raw library, marginal | 61.72% | 129,523 bytes |
+0055 | | Canonical library, MAP | 62.55% | 21,280 bytes |
+0056 | | Canonical library, marginal | 63.33% | 21,280 bytes |
+0057 | | Canonical library, persistent | 63.33% | 21,280 bytes |
+0058 | | Frozen relation-conditioned neural mixture | 23.93% | 18,080 bytes |
+0059 | 
+0060 | The canonical marginal library gains 4.64 percentage points over the capped raw
+0061 | marginal control while retaining approximately 3.66x less numeric state. The
+0062 | paired, multiplicity-adjusted p-value is approximately 9.83e-10 for these sampled
+0063 | synthetic worlds. Against the uncapped raw library, its point score is 1.61
+0064 | points higher with approximately 6.09x less state, but the adjusted p-value is
+0065 | 0.0782; accuracy superiority over that stronger control is uncertain.
+0066 | 
+0067 | Persistent hypotheses versus canonical marginalization: 40 gains and 40 losses
+0068 | on the fresh primary cases, exactly zero aggregate gain. The special persistent
+0069 | identity hypothesis therefore has no confirmed overall benefit here. Its unit
+0070 | test is mathematically correct, but that does not establish practical superiority.
+0071 | 
+0072 | Canonicalization here subtracts an operator's output at state zero and stores
+0073 | the shared shape; an observed input/output pair determines its output offset.
+0074 | That exploits an explicit modular output-translation symmetry. Canonicalization,
+0075 | symmetry reuse and Bayesian inference have established precedents. This result
+0076 | does not certify a novel AI principle.
+0077 | 
+0078 | [Fresh raw report](runs/library-followup-2026090911/artifacts/run/report.json)
+0079 | and [fresh CSV](runs/library-followup-2026090911/artifacts/run/comparison.csv).
+0080 | 
+0081 | ## Important failure: genuinely different rules
+0082 | 
+0083 | The canonical marginal library scores 91.80% on ordinary new worlds and 82.62%
+0084 | on long compositions, but only 18.36% on the new cubic-rule family. The compact
+0085 | neural mixture scores 29.30% on that new family, yet only 23.93% overall in the
+0086 | fresh follow-up. Neither is a generally capable reasoner.
+0087 | 
+0088 | Full-evidence and renamed-state diagnostics are solved exactly by many methods
+0089 | because their supplied composition algorithm can follow an explicit complete
+0090 | table. These easy-to-certify execution results are deliberately excluded from
+0091 | the primary score and cannot be used as an intelligence claim.
+0092 | 
+0093 | ## Novelty and scope
+0094 | 
+0095 | Ten initial configurations tested experimental combinations around six broad
+0096 | mechanisms: evidence anchoring, residual witness recurrence, adaptive temperature,
+0097 | relative transport, adaptive permutation constraints, and persistent hypotheses.
+0098 | Their controls and prior art are in [NOVELTY.md](NOVELTY.md). They are not ten
+0099 | verified inventions, and this campaign is not a breakthrough or a 1B/100B result.
+0100 | 
+0101 | This is a bounded synthetic rule-induction/composition benchmark, not a natural
+0102 | language or coding-agent benchmark. All neural models received full operator
+0103 | table labels during training; partial evaluation evidence can be ambiguous.
+0104 | Different model sizes, supplied algorithms and inference work prevent treating
+0105 | this as a universal parameter/compute frontier. Model-state bytes exclude code,
+0106 | input data, Python/NumPy/PyTorch and transient inference arrays. The timing is
+0107 | amortized batched throughput, not single-request latency or energy consumption.
+0108 | 
+0109 | **Astra trials: zero. Terminal-Bench trials: zero. Codex activation: disabled.**
+0110 | Further work needs genuinely broader tasks, independent training seeds, stronger
+0111 | converged neural controls, and learned interpretation of natural requests.
+0112 | 
+0113 | ## Figure and evidence
+0114 | 
+0115 | [Full screen heatmap](runs/library-followup-2026090911/artifacts/figures/screen_heatmap.png)
+0116 | and [vector version](runs/library-followup-2026090911/artifacts/figures/screen_heatmap.svg).
+0117 | 
+0118 | The original screen archive contains 89 manifest-verified files; the follow-up
+0119 | archive contains 29. They preserve all model states, per-case probability arrays,
+0120 | data manifests, protocols, source, and the figure. The old research folders and
+0121 | shared rankings were not modified.

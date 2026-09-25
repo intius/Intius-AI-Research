@@ -1,0 +1,52 @@
+E040 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: pretrained_compaction_lab/recovery/RESULTS.txt
+Original SHA-256: 98b19cd4ff33a992bb663b70693d5149269a8500c885b3ac2f5c5a26b9e9eb23
+Original byte count: 3142
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | RECOVERY DISTILLATION -- FRESH CONFIRMATION
+0002 | 
+0003 | The 50B/frontier-capability objective remains unproven. These results concern one Qwen3-0.6B compression study.
+0004 | All heavy work ran on the private [private compute account] VM; model artifacts remain there.
+0005 | 
+0006 | FRESH COHORT B
+0007 | Model                Parameters    Selected step    Text NLL     PIQA accuracy   PIQA acc_norm
+0008 | frozen_dense         596,049,920                0     3.583083         64.0625%       67.9688%
+0009 | dense                596,049,920               64     3.100982         64.4531%       64.8438%
+0010 | prune                505,905,152              256     3.352491         58.9844%       62.1094%
+0011 | svd                  505,905,152              512     3.607922         54.2969%       58.2031%
+0012 | split_svd            505,905,152              512     3.618358         56.2500%       59.3750%
+0013 | 
+0014 | 128 nonoverlapping WikiText-2 test blocks and 256 PIQA questions were excluded from the first cohort.
+0015 | These examples were scored only after all four training runs, checkpoint selection and export audits.
+0016 | Do not compare cohort A and B percentages as if they were the same examples.
+0017 | 
+0018 | FROZEN RETENTION GATES
+0019 | {'perplexity_retention': True, 'commonsense_retention': False}
+0020 | Pruned perplexity / frozen-dense perplexity: 0.794063.
+0021 | The prewritten limits were a perplexity ratio no greater than 1.10 and PIQA accuracy within 3 percentage points of frozen dense.
+0022 | 
+0023 | PAIRED UNCERTAINTY (PRUNING MINUS CONTROL)
+0024 | frozen_dense: NLL -0.230593, 95% CI [-0.272919, -0.186273]; PIQA -5.0781 points, 95% CI [-10.5469, +0.0000].
+0025 | dense: NLL +0.251509, 95% CI [+0.223125, +0.283228]; PIQA -5.4688 points, 95% CI [-10.5469, -0.3906].
+0026 | svd: NLL -0.255431, 95% CI [-0.275677, -0.234750]; PIQA +4.6875 points, 95% CI [+0.3906, +9.3750].
+0027 | split_svd: NLL -0.265868, 95% CI [-0.287565, -0.243030]; PIQA +2.7344 points, 95% CI [-2.3438, +7.8125].
+0028 | 
+0029 | TRAINING AND ACCOUNTING
+0030 | Each condition completed 512 updates on the same 524,288 natural-text targets. Only FFN weights were updated.
+0031 | Attention, norms, the embedding and tied output head stayed frozen. Each compact model has 174,096,384 trainable FFN values;
+0032 | dense continuation has 264,241,152. All total parameter counts include the frozen backbone.
+0033 | The loss was CE + 0.5 KL(teacher || student). The teacher cache and its preparation are training costs, not inference dependencies.
+0034 | Checkpoints were selected using only the fixed WikiText validation blocks, including step 0 as a valid fallback.
+0035 | CPU FP16 export rounding and independent CPU replay were required after the TPU rounding check failed.
+0036 | The failed disposable KL/rounding probes remain documented and were excluded from final optimizer-update counts.
+0037 | 
+0038 | LIMITS
+0039 | Public benchmark presence in original pretraining is unknown. The PIQA sample is small; report intervals and tradeoffs.
+0040 | Earlier CPU timing measured the architecture on the original compressed weights, not complete recovered-model generation.
+0041 | Novelty and hardware-independent or whole-family Pareto dominance are not established.
+0042 | 
+0043 | See ../RESULTS.txt for the earlier no-recovery compression study and STATUS.txt for the diagnostic history.

@@ -1,0 +1,222 @@
+E046 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: breakthrough_orchestra_20260923/agents/02_memory/01_REVISION_PROPAGATION_RESULTS.txt
+Original SHA-256: b5cc553fa7869cec0dbcdc691c3f93680d701b8b0ae4c58b71a566c091818f38
+Original byte count: 13494
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | 01 — PROOF-DEPENDENCY REVISION PROPAGATION: CPU PRIMITIVE SCREEN
+0002 | Date: 2026-09-23
+0003 | Status: INCONCLUSIVE AS AN AI ADVANCE; bounded exact mechanism evidence.
+0004 | 
+0005 | QUESTION
+0006 | Can a persistent belief store repair derived facts after an edit by visiting
+0007 | only conclusions that depend on the changed fact, while matching a strong exact
+0008 | recomputation control?
+0009 | 
+0010 | MECHANISM TESTED
+0011 | For supplied acyclic unary and binary rules, each fact has a current base
+0012 | assertion and derived truth value. Each rule is a separate support. The
+0013 | candidate builds a reverse index from premise to dependent rule, traverses the
+0014 | transitive dependents after a base write, and re-evaluates those nodes in
+0015 | topological order. Independent rules preserve alternative support. This is an
+0016 | incremental dependency-propagation screen; it is not a natural-language writer,
+0017 | learned belief system, or full evidence-provenance implementation.
+0018 | 
+0019 | OBSERVED — PRIMARY RESULTS
+0020 | Three CPU runs used seeds 1701, 1702 and 1703. Each graph contained 20,000
+0021 | propositions, 16 scopes, about 26,500 unary/binary rules, and 135 sparse
+0022 | cross-scope rules. Each received 60 scheduled source writes. Every update was
+0023 | followed by comparison of all 20,000 candidate truth values against full
+0024 | recomputation.
+0025 | 
+0026 | - Exact parity: all three seeds matched after every scheduled write; zero stale
+0027 |   propositions were observed across 180 candidate/control state comparisons.
+0028 | - Actual changed writes: 58, 57 and 58 per seed. A raw-input audit found 2, 3
+0029 |   and 2 repeated idempotent writes respectively. This is a protocol deviation
+0030 |   from the frozen prediction of 60 changed claims per seed; the result is
+0031 |   treated as a qualified screen, not a clean confirmatory pass.
+0032 | - Median affected graph fraction by seed: 0.0175%, 0.0100%, 0.0100%.
+0033 |   Median across seeds: 0.0100%.
+0034 | - P95 affected fraction by seed: 69.165%, 64.860%, 53.120%. Some cross-scope
+0035 |   corrections were broad and touched most of the graph.
+0036 | - A post-hoc structural audit of preserved graph/event files found a bimodal
+0037 |   workload: 67/180 writes (37.2%) touched only the edited source, 41 touched
+0038 |   2–10 nodes, 23 touched 1,001–5,000 nodes, and 48 (26.7%) touched more than
+0039 |   5,000 nodes. Maximum impact was 16,217/20,000 nodes (81.1%). 71/180 writes
+0040 |   (39.4%) traversed at least one of the 135 cross-scope rules.
+0041 | - The candidate scanned 831,023 reverse-index premise incidences in total
+0042 |   across the 180 scheduled writes, including 4,509 cross-scope incidences.
+0043 |   This traversal is real candidate work. The 10,284.5x statistic below counts
+0044 |   support-rule evaluations only and omits these index-edge scans; it is not a
+0045 |   total-work reduction.
+0046 | - Median support-rule checks for full recomputation: 20,942; 20,569; 20,919.
+0047 |   For the candidate: 4; 2; 1.5. The median per-seed reduction factors were
+0048 |   5,235.5x, 10,284.5x and 13,946x; the median of these was 10,284.5x. These
+0049 |   counts include work on the synthetic graph only, not language parsing or
+0050 |   answer generation. Event-level latency arrays were not preserved, so
+0051 |   per-edit latency bins and maximum latency are unavailable; only per-seed
+0052 |   median and P95 times below were retained.
+0053 | - Median update latency: full recomputation 10.17–10.33 ms; candidate
+0054 |   0.051–0.286 ms. Median of per-seed latency speedups: 44.75x. At P95, candidate
+0055 |   latency was 8.73–11.36 ms versus 10.67–15.67 ms for the control; the broad
+0056 |   updates erase much of the tail advantage.
+0057 | - Direct exact-ID boolean lookup averaged 0.060–0.064 microseconds over 10,000
+0058 |   reads per seed. This is an array lookup, not a natural-language query.
+0059 | 
+0060 | OBSERVED — MEMORY AND COMPUTE COST
+0061 | The full-recompute data layout was estimated at 837,080–840,128 bytes. The
+0062 | candidate layout was estimated at 1,036,244–1,039,836 bytes, or 1.238x the
+0063 | control, including a 199,164–199,708-byte reverse index. These are calculated
+0064 | fixed-width struct sizes, not measured on-disk serialization. The nominal
+0065 | 9-byte base-claim and 24-byte rule/source/time records are size-accounting
+0066 | placeholders; source/time fields were not used by update semantics. The
+0067 | algorithm stores supplied graph structure and truth values only. The estimates
+0068 | exclude original prose, tokenizer/model parameters, vectors, semantic-query
+0069 | indexes, operating-system and interpreter libraries, and language-generation
+0070 | prompt/KV state. Raw generated JSON fixtures occupy 1,252,419 bytes total.
+0071 | 
+0072 | Peak process RSS was 46,096,384–46,178,304 bytes on Python 3.13.7 / Windows.
+0073 | The experiment used CPU only: no training, GPU, external service or shared
+0074 | accelerator. Physical inference VRAM was 0 bytes because no model was loaded;
+0075 | this is not a VRAM-efficiency comparison. The initial experiment command took
+0076 | 4.8 seconds by tool wall-clock observation. No training compute was used.
+0077 | Graph generation plus reverse-index construction took 0.029–0.042 seconds per
+0078 | seed; it was not separately timed or amortized against a long-life write
+0079 | stream.
+0080 | 
+0081 | OBSERVED — CONTROL AND PROTOCOL
+0082 | Strongest control: recompute the entire current closure in topological order
+0083 | after every identical write, using the same fact values and rules. It is exact
+0084 | for this acyclic rule family. The code compares every proposition after each
+0085 | write, not only a sampled query list. Raw inputs and result JSON are preserved
+0086 | in 01_raw/ and 01_results.json. The frozen design is in 00_PROTOCOL.txt.
+0087 | 
+0088 | The initial write schedule included 2–3 duplicate roots per seed. Those
+0089 | repeated writes were idempotent and are disclosed above. No data were removed
+0090 | or rewritten after the run. This screen has a hand-specified support graph;
+0091 | there was no held-out language/domain transfer set, no hallucination test, and
+0092 | no confidence/provenance calibration.
+0093 | 
+0094 | INFERRED — LIMITED INTERPRETATION
+0095 | The reverse dependency index can reduce update work when edits have few
+0096 | downstream consequences. The observed high-impact tail shows that broad edits
+0097 | can still require near-global recomputation. Storage overhead in this generated
+0098 | fixture was modest relative to the rule table, but true long-life memory must
+0099 | also retain original evidence and semantic indexes, whose costs were not
+0100 | measured. Exact parity establishes only the tested algorithm/data family.
+0101 | 
+0102 | The 10,284.5x median rule-check reduction is not a 10,284.5x total-work,
+0103 | answer-speed or AI capability gain; it excludes reverse-index edge scans. The
+0104 | measured 44.75x median update-latency ratio includes those scans but is highly
+0105 | topology-dependent: 37.2% of writes touch only the source, while 26.7% touch
+0106 | more than 5,000 nodes. P95 update times are close to full recomputation. The
+0107 | answer operation was a direct boolean array lookup. The test does not show
+0108 | that a language model can extract claims, maintain dependencies, resolve
+0109 | source reliability, answer open-ended questions, or transfer.
+0110 | 
+0111 | PRE-REGISTERED PREDICTION / DECISION
+0112 | 00_PROTOCOL.txt predicted exact state parity, at least 10x fewer rule checks
+0113 | for sparse edits, and no more than 3x calculated persistent bytes. Those
+0114 | nominal thresholds were met in the generated family. The work-count prediction
+0115 | did not include index scans, the workload included seven idempotent writes,
+0116 | and its impact distribution has a broad high-cost tail. Decision: OBSERVED
+0117 | exact-propagation component; INCONCLUSIVE for the candidate as an AI advance.
+0118 | Do not promote or scale this exact synthetic recipe unchanged.
+0119 | 
+0120 | STOPPING RULE
+0121 | For any successor, stop if an exact reference state differs, any stale claim
+0122 | survives, median work improvement is under 10x when no more than 5% of records
+0123 | are affected, or total stored state exceeds 3x the matched full-recompute
+0124 | control. A successor must add a changed mechanism or a language-grounded test;
+0125 | do not rerun this exact graph/update schedule as a fresh study.
+0126 | 
+0127 | CLOSEST LOCAL PREDECESSORS AND CAUSAL DIFFERENCE
+0128 | 1. H30 — cognitive_kernel_project_20260916/CURRENT_STATUS.md, Experiments
+0129 |    AN–BI and linked reports. AN's 25.04 MB character TF-IDF store retrieved
+0130 |    answer-bearing evidence at 71.08% Recall@1 / 90.44% Recall@5 over 5,000
+0131 |    SQuAD questions. Reader/reranker stages improved QA, but stayed component
+0132 |    retrieval. Difference: the present screen's manipulated variable is the
+0133 |    lifetime effect of a correction on derived beliefs, not which chunk is
+0134 |    nearest to a query. It does not improve AN-style relevance or answer quality.
+0135 | 2. H31 — experiment_BJ_iterative_working_memory_reasoner/REPORT.md,
+0136 |    AUDIT.json, DIAGNOSTIC_ADDENDUM.md; BK and BL reports/audits. BJ's traversal
+0137 |    interpretation was invalidated by a final-operation shortcut; BK joint
+0138 |    reasoning was 3.10%, and BL's fresh one-hop endpoint accuracy was 1.86%.
+0139 |    Difference: this screen does not train a neural workspace or claim learned
+0140 |    traversal. Rules/dependencies are supplied and only revision propagation is
+0141 |    measured.
+0142 | 3. H36 — !!!Current/three_theory_rebuild_20260920/REPORT.md and
+0143 |    REPRODUCTION_AUDIT.json. The largest knowledge web memorized 91.69% of
+0144 |    training facts but generalized 6.40% to held-out facts. Difference: no
+0145 |    knowledge acquisition or OOD claim is made here; the test asks how existing
+0146 |    exact consequences change after correction.
+0147 | 4. H43 — hyperquantization_20260919/round8/SCREEN_V1_REPORT.md,
+0148 |    BRANCH_DECISION.txt, closure_artifacts/branch_closure.json and memory code
+0149 |    audits. Attached learned memory added about 1.3 MB of tensors to the full
+0150 |    baseline and gave 2/16 direct facts, 0/8 natural QA; reduced models also
+0151 |    lost conversation. The planned expansion was retired. Difference: this
+0152 |    candidate is an explicit external store and does not train or compress a
+0153 |    conversational backbone. It makes no claim of better conversation or lower
+0154 |    model VRAM.
+0155 | 5. ideas010_013/REPORT_010.md and MEMORY_AUDIT.json. The structured learned
+0156 |    commit checker reached about 90–93% exact records; a conventional versioned
+0157 |    store was 100% across three million synthetic events. No semantic writer or
+0158 |    reasoning-driven revision was implemented. Difference: the current
+0159 |    primitive invalidates multi-hop derived consequences through dependencies;
+0160 |    it still does not learn language-level commits, so the fixed-store result
+0161 |    remains a stronger control and no learned advantage is claimed.
+0162 | 6. ideas010_013/REPORT_011.md and PAIRED_LANGUAGE_AUDIT.json. The checksum
+0163 |    detector on an unchanged 1.5B Qwen model failed to outperform ordinary
+0164 |    uncertainty/probe controls and retained all 3.087 GB of FP16 model weights.
+0165 |    Difference: that study detects inference answer errors; this one stores
+0166 |    persistent external claims. Both expose that a weak learned correctness
+0167 |    signal is not a durable-memory mechanism.
+0168 | 
+0169 | PRIMARY LITERATURE AND NOVELTY LIMIT
+0170 | - de Kleer, J. (1986), “An assumption-based TMS,” Artificial Intelligence
+0171 |   28(2), 127–162, DOI 10.1016/0004-3702(86)90080-9. It represents assumptions
+0172 |   and justifications to support belief maintenance; this is direct classic
+0173 |   prior art for dependency-aware retraction.
+0174 | - Gupta, A., Mumick, I. S., & Subrahmanian, V. S. (1993), “Maintaining views
+0175 |   incrementally,” SIGMOD Record 22(2), 157–166, DOI 10.1145/170036.170066.
+0176 |   It describes incremental updates and DRed for recursive views. This screen
+0177 |   uses a simpler acyclic case, so it is not an algorithmic novelty claim.
+0178 | - Ji et al. (2026), “Infini Memory: Maintainable Topic Documents for Long-Term
+0179 |   LLM Agent Memory,” arXiv:2606.10677v1. It proposes buffered, topic-structured
+0180 |   memory and iterative evidence retrieval; with GPT-5 mini it reports 64.7%
+0181 |   aggregate MemoryAgentBench score and 35% multi-hop selective forgetting vs
+0182 |   81% single-hop. Its authors identify cross-document consistency as a limit.
+0183 |   This CPU test neither reproduces that benchmark nor compares answer quality.
+0184 | - Behrouz, Zhong & Mirrokni (2025), “Titans: Learning to Memorize at Test
+0185 |   Time,” arXiv:2501.00663. Neural fast-weight sequence memory is adjacent but
+0186 |   does not supply this test's claim-level source/proof retraction.
+0187 | 
+0188 | PROPOSED — CREDIBLE GENERAL-MODEL PATH
+0189 | The next question is whether a language model can write into and use a revised
+0190 | belief ledger without stale or unsupported answers. With language/hybrid and
+0191 | evaluation lanes, define a preregistered multi-session test with human-readable
+0192 | facts, source confidence, paraphrases, contradiction updates and multi-hop
+0193 | questions. Compare the same local language model, tokenizer, decoding,
+0194 | context/KV limit and call budget with (a) append-only text plus strong retrieval,
+0195 | (b) topic-document consolidation, and (c) proof-dependency revision. Split by
+0196 | entities/templates and hide all updated facts until the session writer sees
+0197 | them. Measure extraction precision/recall, update correctness, answer accuracy,
+0198 | stale-answer rate, abstention, per-answer tokens/tool calls/latency, persisted
+0199 | original text and index bytes, host RAM and peak VRAM from cold load through
+0200 | answer. Only if this passes can the lane claim language-grounded revisable
+0201 | memory; a general model additionally needs broad conversation, reasoning and
+0202 | transfer under matched resources.
+0203 | 
+0204 | ARTIFACTS AND INTEGRITY
+0205 | - Protocol: 00_PROTOCOL.txt
+0206 | - Source: 01_revision_ledger.py
+0207 | - Measured aggregate/per-seed output: 01_results.json
+0208 | - Raw graph/rule fixtures and event writes: 01_raw/
+0209 | - Python: 3.13.7; PSUtil 7.0.0; Windows CPU; no GPU or remote model.
+0210 | - Source SHA-256: 307139239BB583EC3EEE0B93D01025646B1A5A186544EB7305524A0601482792
+0211 | - Results SHA-256: DD79EEE6C271E0A9C85A01474CD5D5443DBADD6964596C11ED24942296C77D2C
+0212 | 
+0213 | Goal remains active. This is a narrow mechanism result, not an AI breakthrough.

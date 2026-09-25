@@ -1,0 +1,77 @@
+R01 — Exact sparse corrections to a cheap language prior
+
+EVIDENCE STATUS: CONFIRMED LOCAL LANGUAGE RESULT; STRONGER-PRIOR SPEED GATE FAILED
+
+A token-specific sparse correction improved byte prediction while reducing training time against a tested dense correction.
+
+THE IDEA
+Let a cheap predictor handle common patterns. Spend neural computation on a
+small, context-selected set of vocabulary corrections. Reuse a dense correction
+across a block, while allowing sparse token-specific changes within the block.
+This addresses the inability of one block-wide prediction to answer different
+queries that otherwise receive identical priors.
+
+IMPLEMENTATION DETAIL WORTH PRESERVING
+For q_i(v) = alpha_i*u(v) + s_i(v), with sparse s_i, and block correction b_g:
+  Z_i = alpha_i * sum_v u(v)*exp(b_g(v))
+        + sum_sparse s_i(v)*exp(b_g(v)).
+For an additional tilt d_i supported on S_i:
+  Z_i = Z_static_i + sum_(v in S_i) q_i(v)*exp(b_g(v))*expm1(d_i(v)).
+These identities give the exact normalizer for this restricted distribution;
+they do not make arbitrary dense Transformer logits sparse. Select S_i from
+observed context, never from the answer label. Normalize local/global signals
+separately and bound the tilt to control cancellation. Causality requires the
+block backbone to use only completed previous patches.
+
+WHAT SUCCEEDED
+Three fresh seeds; WikiText-2; 128-byte resets; 1,291,904 test bytes.
+Dense correction: 2.058281650 nats/byte; 35.952035 s train+monitor.
+Sparse tilt:      2.021741698 nats/byte; 19.561940 s train+monitor.
+The tilt had 1.775% lower mean loss and took 45.589% less time; all three
+paired test comparisons favored it. Neural parameters were similar:
+111,808 versus 112,960. The common prior occupied 398,574 bytes.
+The isolated exact forward/backward likelihood component was 5.891x faster
+at 16 sparse entries/token on one CPU thread; that excludes the backbone,
+optimizer and prior preparation. It is a different timing boundary.
+
+FOLLOW-UP THAT LIMITS THE CLAIM
+With a stronger prior, tilt CE was 1.713857491 versus dense 1.715104827 and
+prior-alone 1.733285699. Tilt still improved its prior in all three seeds, but
+wall savings versus dense were only 6.193%, below the frozen 10% requirement.
+Full BLiMP in the earlier study was 52.691% for tilt versus 52.227% for dense;
+one anaphor-agreement slice regressed. These are weak language models.
+
+PRACTICAL DETAIL
+Prior preparation consumed about 43.7% of step time. Replacing a full sort
+with top-16 insertion selection, with exact tie fallback, preserved packing,
+gradients and 28 optimizer updates bit-for-bit. Packing became 1.633x faster;
+the complete measured step became 1.121x faster. This separate profile does
+not retroactively change the failed full-training gate.
+
+HOW TO BUILD ON IT
+Implement the identity against a dense float64 reference, including duplicate
+support handling, normalization and gradients. Measure all preparation work.
+Test strong priors first. An ordinary LoRA on a standard output head cannot
+obtain this computation saving merely by reading these notes; it needs the
+distribution structure and a compatible implementation.
+
+ORIGINALITY
+The exact implementation and controlled comparison are the contribution
+candidates. Residual n-gram/neural modeling, exponential tilting and copy
+mechanisms are established. Global novelty and large-model transfer are open.
+
+SOURCE REPORTS
+  E001: evidence/E001.txt
+    Original: block_sparse_extension/RESULTS.txt
+  E002: evidence/E002.txt
+    Original: strong_prior_extension/RESULTS.txt
+  E003: evidence/E003.txt
+    Original: block_sparse_extension/21_audit.txt
+  E004: evidence/E004.txt
+    Original: strong_prior_extension/12_packing_results.txt
+
+PRIOR-WORK CONTEXT
+  P01: Residual Learning of Neural Text Generation with n-gram Language Model (Li et al., 2022)
+    https://aclanthology.org/2022.findings-emnlp.109/
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

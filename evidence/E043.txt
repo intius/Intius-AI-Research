@@ -1,0 +1,61 @@
+E043 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/cognitive_kernel_project_20260919/experiment_BD_zero_shot_hotpotqa_transfer/REPORT.md
+Original SHA-256: 95dd6a5ba73487f05359256dd211d754248907f169a84ba8e238e689e897dd76
+Original byte count: 2222
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Experiment BD — Zero-shot HotpotQA transfer
+0002 | 
+0003 | Completed privately on Kaggle on 2026-09-19.
+0004 | 
+0005 | ## Result
+0006 | 
+0007 | BD passed every preregistered transfer gate without fitting or selecting on a
+0008 | HotpotQA label. Across the three frozen BB readers:
+0009 | 
+0010 | - Mean gold-context EM/F1: 34.60% / 51.76%.
+0011 | - Mean retrieved top-1 EM/F1: 13.23% / 21.91%.
+0012 | - Mean raw top-five EM/F1: 15.63% / 25.63%.
+0013 | - Mean BC pairwise EM/F1: 16.20% / 27.22%.
+0014 | - Mean BC listwise EM/F1: 16.60% / 27.29%.
+0015 | - Mean top-five oracle EM/F1: 30.10% / 46.27%.
+0016 | 
+0017 | The primary pairwise selector improved raw selection by 1.60 F1 points in the
+0018 | mean and by 1.15–2.03 points in every seed. This is genuine zero-shot transfer:
+0019 | the rankers, feature normalization and reader weights came only from SQuAD.
+0020 | 
+0021 | ## Interpretation
+0022 | 
+0023 | The reader and selector both transfer, but absolute performance identifies the
+0024 | next bottleneck. Character TF-IDF found an answer-bearing paragraph at rank 1
+0025 | for 35.1% and within five for 72.6% of questions. Once the answer-bearing
+0026 | paragraph was supplied, frozen BB reached 51.76% F1; within retrieved top five,
+0027 | the oracle reached 46.27%, while pairwise selection reached only 27.22%.
+0028 | Therefore cross-passage ranking—not basic extractive ability—is the largest
+0029 | immediate recoverable gap on this domain.
+0030 | 
+0031 | Only 5.20% of fixed-vocabulary tokens were out of vocabulary. Reader feature
+0032 | extraction peaked at 185,296,896 allocated CUDA bytes and the complete run took
+0033 | 86 seconds.
+0034 | 
+0035 | ## Decision
+0036 | 
+0037 | Promote the claim that BB and BC have measurable cross-dataset transfer, while
+0038 | retaining `BB → BC pairwise` as the SQuAD current-best stack. Experiment BE
+0039 | must train a protected multi-domain ranker on HotpotQA training questions plus
+0040 | the frozen SQuAD feature replay, then require a material HotpotQA gain without
+0041 | forgetting BC's SQuAD performance.
+0042 | 
+0043 | ## Artifacts
+0044 | 
+0045 | - Kaggle version 1: [private compute link omitted]
+0046 | - Exact archive SHA-256:
+0047 |   `c172594eabb17a0911ed9628f0a292f602f53f3c1c60cc802f7f65041eee37dd`
+0048 | - Exact result SHA-256:
+0049 |   `a54c82a40a8e72e0413872d511d387312d03152a8b5b164247a31756417147ff`
+0050 | - Source SHA-256:
+0051 |   `c73fc2b28bf9102418eaad605c7461520ec3b670a6c2f0bbd0304e775fbd6bcc`
+0052 |

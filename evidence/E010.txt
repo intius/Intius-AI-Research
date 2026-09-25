@@ -1,0 +1,131 @@
+E010 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: abi_llm_comparison/REPORT.md
+Original SHA-256: 09f2eb09107ea2975fcf1805a948400bd3c6283edd14dee3cfbe57ac18b02d39
+Original byte count: 6595
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # ABI repairs versus original small LLMs
+0002 | 
+0003 | **Read the [plain-word diagnostic](SCALAR_REPORT.md) with this report.** The
+0004 | original output contract was a poor basis for a reasoning comparison: the0.5B
+0005 | model often returned the wrong list length, while the1.5B run was intentionally
+0006 | interrupted after repeated truncation. Unrun cases are not counted as failures.
+0007 | The simpler comparison was completed for both models, but is explicitly posthoc.
+0008 | 
+0009 | This study compares a permutation-invariant set encoder, an ordinary GRU with
+0010 | order augmentation, the frozen original ABI, and unmodified Qwen2.5-0.5B/1.5B
+0011 | instruction models. Six new neural fits completed. LLMs use full FP16 weights,
+0012 | with no extra quantization or parameter removal.
+0013 | 
+0014 | The 192 test cases cover 32 new scenes in two layouts and three tasks. ABI models
+0015 | have been specifically trained on this scene schema and receive task routing
+0016 | through a structured API. LLMs receive a definition sheet and three examples.
+0017 | These are different training advantages and output interfaces. The comparison
+0018 | measures this specialist workload; it cannot rank general intelligence.
+0019 | 
+0020 | ## Controlled-task accuracy
+0021 | 
+0022 | Exact means every requested integer is correct. Field accuracy averages within
+0023 | each case, then over cases. Neural entries average three training seeds; LLM
+0024 | entries use one fixed released checkpoint and deterministic generation.
+0025 | 
+0026 | | System | Exact all tasks | Field accuracy | Trained-layout exact | Reordered-layout exact |
+0027 | |---|---:|---:|---:|---:|
+0028 | | original | 50.69% | 73.29% | 100.00% | 1.39% |
+0029 | | set | 100.00% | 100.00% | 100.00% | 100.00% |
+0030 | | augmented | 100.00% | 100.00% | 100.00% | 100.00% |
+0031 | | qwen05 | 0.00% | 8.16% | 0.00% | 0.00% |
+0032 | 
+0033 | | System | Read exact | Compare exact | Four-operation chain exact |
+0034 | |---|---:|---:|---:|
+0035 | | original | 50.00% | 52.08% | 50.00% |
+0036 | | set | 100.00% | 100.00% | 100.00% |
+0037 | | augmented | 100.00% | 100.00% | 100.00% |
+0038 | | qwen05 | 0.00% | 0.00% | 0.00% |
+0039 | 
+0040 | | LLM | Invalid integer-list answers | Outputs at 256-token limit | Median output tokens |
+0041 | |---|---:|---:|---:|
+0042 | | qwen05 | 128/192 | 0/192 | 19.0 |
+0043 | 
+0044 | Qwen1.5B primary: interrupted after 90/192 cases, with 86 capped and 1 valid-length outputs. This partial cohort is excluded from the accuracy comparison tables. See PRIMARY_STOP_DECISION.md and PRIMARY_STOP.json.
+0045 | 
+0046 | 
+0047 | Raw outputs and token counts are preserved. The parser uses the last valid
+0048 | integer list of the right length/range, allowing explanatory prose and different
+0049 | spacing. Invalid answers score zero; token-limit flags remain separate. A capped
+0050 | answer is not evidence the model could never solve the task with a larger budget.
+0051 | These are small established LLM baselines, not a comparison against frontier LLMs.
+0052 | 
+0053 | ## Measured deployment resources
+0054 | 
+0055 | All GPU probes use the same T4 class and batch 1. Host process memory and device
+0056 | process memory are different quantities and are not silently combined. Peak host
+0057 | RAM includes framework and checkpoint-loading overhead; device occupancy includes
+0058 | CUDA overhead. ABI deployments include their encoder, shared readout, comparison
+0059 | head and all three operator networks. They do not load the reference teacher.
+0060 | 
+0061 | | System | Parameters MB | GPU process MB | Host process peak MB on GPU | GPU median response seconds |
+0062 | |---|---:|---:|---:|---:|
+0063 | | original | 0.548 | 159.38 | 780.73 | 0.000705 |
+0064 | | set | 0.522 | 157.29 | 845.53 | 0.000659 |
+0065 | | augmented | 0.548 | 159.38 | 780.80 | 0.000636 |
+0066 | | qwen05 | 988.066 | 1207.96 | 2124.82 | 0.076742 |
+0067 | | qwen15 | 3087.429 | 3454.01 | 4224.18 | 0.095976 |
+0068 | 
+0069 | ABI CPU-only probes, reported separately:
+0070 | 
+0071 | | System | Process peak MB | Median seconds |
+0072 | |---|---:|---:|
+0073 | | original | 556.69 | 0.001212 |
+0074 | | set | 555.04 | 0.000373 |
+0075 | | augmented | 556.55 | 0.001247 |
+0076 | 
+0077 | 
+0078 | LLM memory and latency rows above come from the completed plain-word runs; ABI
+0079 | runtime rows come from producing full vectors on the primary cases. The same
+0080 | complete model components are resident, but the prompts and output workloads
+0081 | differ. Treat these as resource observations, not a rigorously matched speedup.
+0082 | 
+0083 | MB means 1,000,000 bytes. LLM latency includes prefill and generation after
+0084 | tokenization. ABI latency includes constructing the token tensor and obtaining
+0085 | the fixed-size integer output. Neither measures an entire application UI. Their
+0086 | output mechanisms differ; a fixed classifier does less work than generating prose.
+0087 | VRAM ratios here apply only to this workload, not equal general capability.
+0088 | 
+0089 | The set network's invariance is supplied by known Deep Sets structure. It is
+0090 | not a newly discovered reasoning algorithm. All inputs still use four objects,
+0091 | three known fields and a finite vocabulary. Ordinary order augmentation is the
+0092 | relevant repair control, not merely the original failing GRU. A handwritten
+0093 | executor of the supplied rules solves these cases by construction; that is a
+0094 | designed specialist, not learned general intelligence.
+0095 | 
+0096 | ## General-language coverage
+0097 | 
+0098 | ABI has no free-text generation head and cannot represent the 12 general requests
+0099 | through this scene API. Its supported coverage is 0/12, separately from accuracy;
+0100 | no fabricated ABI prose is scored. Qwen outputs for all 12 requests are preserved
+0101 | in GENERAL_OUTPUTS.md and reviewed against the frozen rubrics in GENERAL_REVIEW.md.
+0102 | That small manual screen is not a public benchmark or a scalar intelligence score.
+0103 | 
+0104 | There is no legitimate single general-performance-per-MB ratio here. A conditional
+0105 | specialist advantage cannot be sold as retaining an LLM's broad abilities in a
+0106 | small model. This experiment does not achieve the user's general-model objective.
+0107 | 
+0108 | ## Provenance and integrity
+0109 | 
+0110 | See PROVENANCE.md for source revisions and FP16 serialization. MODEL_IDENTITIES.json
+0111 | contains the actual checkpoint file hashes and configs; parameter counts and
+0112 | dtypes come from loaded models. Existing pretrained weights are not duplicated
+0113 | in the new export. Every newly fitted model, dependency module, prompt and output
+0114 | is included. Source and data exclusions are audited; frozen CPU prediction replay
+0115 | checks the deployed neural models. The model pretraining budgets were not measured
+0116 | or made equal to the small new fits.
+0117 | 
+0118 | References: [Deep Sets](https://arxiv.org/abs/1703.06114),
+0119 | [Qwen0.5B](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct),
+0120 | [Qwen1.5B](https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct).
+0121 | 
+0122 | Total new fitting time: 48.35s. Plain-word/recovery driver runtime: 91.23s. The original driver was deliberately interrupted. Setup, export and audits are additional.

@@ -1,0 +1,50 @@
+R10 — Open richer operators where observed action order matters
+
+EVIDENCE STATUS: EXPLORATORY TWO-WORLD SUCCESS AGAINST MATCHED RANDOM OPENING
+
+Observed commutation violations selected useful extra matrix entries better than random selection.
+
+THE IDEA
+Begin with diagonal action matrices, which commute. Inspect complete two-action
+squares in training data. If a then b and b then a reach different observed
+endpoints, allow off-diagonal entries for the involved actions before fitting.
+Keep the simpler representation for actions without observed violations.
+
+WHAT SUCCEEDED
+Two structured noncommuting worlds; 2,000 updates per arm. Adaptive opening and
+same-count random opening each had 624 active matrix entries, versus 96 for
+diagonal and 1,152 for fully dense. Adaptive opening scored 66.24% on held-out
+edges versus random 41.88% and dense 33.25%. Both-members-correct on
+opposite-order pairs was 42.19% versus random 19.53% and dense 34.96%.
+The trigger selected actions 4-7 from observed training squares; those indices
+were outputs of the test, not supplied hidden action labels.
+
+IMPORTANT COUNTEREVIDENCE
+Fixed diagonal scored 90.61% on held-out edges but 0% on opposite-order pairs.
+Adaptive opening therefore did not dominate every metric. An engineered
+empirical commuting-square closure control scored 100% on both metrics.
+All state identities were already known; these are missing-edge and composition
+tests, not generalization to unseen identities. Only two worlds were tested.
+
+HOW TO BUILD ON IT
+Use falsified structural assumptions to choose where capacity is added, and
+compare against equally sized random opening. Keep both ordinary prediction
+and the exact counterfactual that triggered expansion in the evaluation.
+The trigger here was programmed, not learned, and ran before fitting; online
+architecture growth, context-dependent rules and irreversible actions remain
+untested. An analogous selective LoRA allocation would be a new experiment.
+
+ORIGINALITY
+The training-square trigger combined with selective matrix opening is an
+unresolved originality candidate. Noncommutative relation matrices and
+algebra-compatible representations have close prior work.
+
+SOURCE REPORTS
+  E023: evidence/E023.txt
+    Original: !!!Current/novel_micro_sprint_20260919_1610/REPORT.md
+
+PRIOR-WORK CONTEXT
+  P09: A Non-commutative Bilinear Model for Answering Path Queries in Knowledge Graphs (Hayashi and Shimbo, 2019)
+    https://arxiv.org/abs/1909.01567
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

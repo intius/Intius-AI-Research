@@ -1,0 +1,56 @@
+E036 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: capability_lab/fresh_confirmation/RESULTS.txt
+Original SHA-256: 95e87d3b7766f7992d831c504f56ae95d0ab9c0700e05b49f7d21f3faa505c69
+Original byte count: 2844
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | FROZEN PAIRED CONFIRMATION -- COMPLETE AND AUDITED
+0002 | Updated 2026-09-08T10:34:25.026953+00:00
+0003 | 
+0004 | There are256 underlying problems, each rendered twice. These are not512
+0005 | independent observations. All model weights, instructions, budgets and gates
+0006 | were frozen before scoring. Each model used ordinary full-vocabulary FP32
+0007 | inference and the same1024-token greedy allowance.
+0008 | 
+0009 | Selected model      Primary natural answers   Reformulated natural answers
+0010 | Dense epoch1        179/256 (69.92%)            175/256 (68.36%)
+0011 | Packed scan epoch2  195/256 (76.17%)            183/256 (71.48%)
+0012 | 
+0013 | Scan primary domain counts (64 each): arithmetic54, state42, lookup54, list45.
+0014 | Scan reformulated: arithmetic57, state34, lookup48, list44. The scan model
+0015 | passes the predeclared primary and reformulation gates, including at most13
+0016 | extra errors on reformulation (observed12). The dense model fails both gates.
+0017 | Scan has no formatting/truncation failures; dense has five on reformulations.
+0018 | All64 batch files, label replays and independent answer parsing were checked.
+0019 | 79 cache/reference audits passed; maximum full-logit discrepancy3.06e-5.
+0020 | 
+0021 | UNCERTAINTY AND ATTRIBUTION
+0022 | Scan minus dense: primary44 wins/28 losses, exact paired p=.07637;
+0023 | reformulated38 wins/30 losses, p=.39612. These do not establish statistically
+0024 | reliable population accuracy superiority; correcting two comparisons weakens
+0025 | that evidence further. Both renderings correct: scan152/256, dense146/256;
+0026 | paired44 wins/38 losses, p=.5811. Different selected epochs (scan2, dense1)
+0027 | and numerical training configurations also prevent attributing the observed
+0028 | score difference specifically to scan execution. This is not a matched-epoch
+0029 | causal test of a new learning algorithm.
+0030 | 
+0031 | PRACTICAL RESULT
+0032 | The601,096,192-value scan-trained model retains useful ability on this frozen
+0033 | constructed suite and passed the language guard. Its complete adaptation was
+0034 | 111.69s and111.25s in two same-seed fresh-process runs, versus266.45s for the
+0035 | dense reference. Checkpoints reproduced exactly across the two scan runs.
+0036 | This is useful, scoped execution engineering evidence. It is not100x training,
+0037 | 100x parameter efficiency, frontier equivalence, or a genuine AI breakthrough.
+0038 | 
+0039 | The main frontier-capability goal remains OPEN. The confirmation questions are
+0040 | now model-opened and cannot silently become fresh evidence for later redesigns.
+0041 | The next gated-reuse architecture is being trained under its already written
+0042 | protocol, using only the original training data and development selection.
+0043 | Any later redesigned/selected model needs independent confirmation.
+0044 | 
+0045 | Sources: frozen_paired_confirmation.result.txt; frozen_confirmation_audit.
+0046 | result.txt; fresh_confirmation/00_frozen_evaluation_protocol.txt; and the
+0047 | 64 preserved raw batch files in fresh_confirmation/primary and/reformulated.

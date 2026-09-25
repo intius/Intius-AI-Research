@@ -1,0 +1,114 @@
+READING MAP
+
+Most direct for LLM builders: R01, A01, A02, A03, A04.
+Most useful for modular reasoning/memory: R02, R03, R10, R12, R13, R14.
+Most useful for data and evaluation design: R06, R07, R08, R09, R11.
+Retrieval and exact external computation: R05, A05, A06.
+Small controlled scoring ablation: R04.
+
+These are reading routes, not a ranking across incompatible benchmarks.
+
+DISTINCTIVE LOCAL EXPERIMENTS — NOVELTY UNRESOLVED
+
+R01: Exact sparse corrections to a cheap language prior
+  A token-specific sparse correction improved byte prediction while reducing training time against a tested dense correction.
+  Status: CONFIRMED LOCAL LANGUAGE RESULT; STRONGER-PRIOR SPEED GATE FAILED
+  Read: findings/R01_exact_sparse_language_corrections.txt
+
+R02: Recover useful coordinates from what actions change
+  Learned Boolean coordinates generalized much better than raw-observation prediction within a tightly specified family.
+  Status: CONFIRMED SYNTHETIC COMPONENT; SHARP FAILURE BOUNDARY
+  Read: findings/R02_intervention_coordinates.txt
+
+R03: A neural interface must train both sides of its contract
+  Training decoders on the exact shared code repaired cross-model compatibility in controlled experiments.
+  Status: CONTROLLED INTEROPERABILITY SUCCESS; TEXT AND LONG-CHAIN LIMITS
+  Read: findings/R03_neural_interface_contracts.txt
+
+R04: Evidence cross terms helped a small composition model
+  Squaring summed responses outperformed summing squared responses at the same parameter count.
+  Status: THREE-INITIALIZATION SYNTHETIC ABLATION SUCCESS
+  Read: findings/R04_evidence_cross_terms.txt
+
+R05: Store operator shape once and recover offsets from evidence
+  Canonicalization reduced a synthetic operator library while preserving or improving composition accuracy.
+  Status: CONFIRMED COMPACT LIBRARY RESULT; NEW-RULE TRANSFER WEAK
+  Read: findings/R05_canonical_operator_libraries.txt
+
+R06: Selective contraction can stabilize a known nuisance geometry
+  A geometry-aware finite-difference objective greatly improved long rollouts on a controlled dynamics task.
+  Status: FIVE-SEED TOY SUCCESS; LANGUAGE TRANSFER FAILED
+  Read: findings/R06_selective_state_repair.txt
+
+R07: Physical path coverage mattered more than repeated easy examples
+  Distance-balanced training improved shallow transfer across graph sizes where more same-distribution data did not.
+  Status: PARTIAL SCALE-TRANSFER SUCCESS; DEEP REASONING FAILED
+  Read: findings/R07_path_coverage.txt
+
+R08: More fixed-rule state helped recall without useful inter-cell recurrence
+  A normalized frozen population curve separated extra state from communication benefits.
+  Status: PARTIAL RECALL SUCCESS; RECURRENT-REASONING ATTRIBUTION REJECTED
+  Read: findings/R08_population_vs_communication.txt
+
+R09: Useful message content did not yield reliable source-bound recall
+  Messages carried causally useful symbols, while reliable reconstruction of the complete vector remained at zero.
+  Status: PARTIAL LEARNED-COMMUNICATION SUCCESS; COMPLETE RECONSTRUCTION FAILED
+  Read: findings/R09_communication_content_binding.txt
+
+R10: Open richer operators where observed action order matters
+  Observed commutation violations selected useful extra matrix entries better than random selection.
+  Status: EXPLORATORY TWO-WORLD SUCCESS AGAINST MATCHED RANDOM OPENING
+  Read: findings/R10_selective_noncommutativity.txt
+
+R11: Zero-preserving messages resisted unsupported distractor branches
+  Removing a message network's zero-input output prevented distractor accumulation in a controlled graph task.
+  Status: EXPLORATORY COMPONENT SUCCESS; SIMPLER CONTROL MATCHED IT
+  Read: findings/R11_zero_preserving_messages.txt
+
+R12: Learned lookup can be separated from identity already built into attention
+  Independent query/key maps learned correct binding, while shared normalized maps supplied it at initialization.
+  Status: CONTROLLED ONE-HOP MATCHING SUCCESS
+  Read: findings/R12_learned_binding_controls.txt
+
+R13: Train local transitions well before judging recurrent execution
+  A width/training threshold turned weak register execution into strong depth and size transfer.
+  Status: THREE-SEED SYNTHETIC EXECUTION SUCCESS; FIXED SEMANTICS
+  Read: findings/R13_addressed_execution.txt
+
+R14: Cache-removal labels change after earlier evictions
+  A conditional removal target preserved redundant evidence that static full-cache ablations missed.
+  Status: SYNTHETIC TRAINING-TARGET SUCCESS; NO REAL KV OR VRAM RESULT
+  Read: findings/R14_conditional_cache_utility.txt
+
+
+APPLIED RESULTS — KNOWN METHODS, SPECIFIC LOCAL EVIDENCE
+
+A01: A checked four-part data mix improved a small LoRA
+  Continuing a rank-8 adapter improved a separate public subset from 27/48 to 35/48, with a generation-time cost.
+  Status: SMALL FROZEN CONFIRMATION PASSED; ESTABLISHED METHOD
+  Read: applied_results/A01_lora_data_mix.txt
+
+A02: Compilation cost dominated a short LoRA adaptation run
+  Packed scan execution reduced complete adaptation time even though its warmed update was slower.
+  Status: REPEATABLE ENGINEERING RESULT; ESTABLISHED METHOD
+  Read: applied_results/A02_short_run_compilation.txt
+
+A03: Compute-paced growth improved time to quality in a small byte LM
+  Starting with fewer active blocks allowed more cheap updates before growing to the same final network.
+  Status: ONE-SEED CORRECTED CONFIRMATION; ESTABLISHED METHOD
+  Read: applied_results/A03_compute_paced_growth.txt
+
+A04: Sequentially refit compressed nonlinear layers on their actual inputs
+  A compact nonlinear FFN layout beat two tested SVD layouts, but did not win every seed against the strongest control.
+  Status: LOCAL QUALITY/LATENCY SUCCESS; ALL-CONTROLS GATE FAILED
+  Read: applied_results/A04_nonlinear_pruning.txt
+
+A05: Improve answer selection without updating the reader
+  Small rankers improved a frozen extractive reader, with a smaller gain after transfer to another dataset.
+  Status: CROSS-DATASET COMPONENT SUCCESS; ESTABLISHED RETRIEVAL METHODS
+  Read: applied_results/A05_frozen_reader_ranking.txt
+
+A06: Incremental recomputation saved work without adding intelligence
+  Two studies preserved exact decisions while avoiding recomputation of unaffected dependencies.
+  Status: EXACT COMPONENT SPEEDUPS; GENERAL CAPABILITY UNESTABLISHED
+  Read: applied_results/A06_incremental_exact_computation.txt

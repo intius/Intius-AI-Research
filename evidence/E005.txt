@@ -1,0 +1,205 @@
+E005 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: non_llm_intervention_lab/RESULTS.txt
+Original SHA-256: 9d097961cd4ff6d1448c24ba1865b24c18d11a6a6509ac01209247d6fcfde897
+Original byte count: 12751
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | INTERVENTION COORDINATES -- NEW METHOD, COMPLETED TESTS
+0002 | 2026-09-07. All work local, without an LLM in the learned model or text endpoint.
+0003 | 
+0004 | REQUIRED GOAL
+0005 | A tool much smaller than frontier LLMs that produces comparable or better
+0006 | answers, explanations and code. The user explicitly required output quality,
+0007 | not only an internal numeric score. This full goal remains UNMET.
+0008 | 
+0009 | DECISION
+0010 | The new representation-learning mechanism passes its limited, preregistered
+0011 | test. It does NOT pass the broader assistant requirement. Retain the mathematical
+0012 | component for research; do not call this a frontier replacement or assume huge
+0013 | potential from this result. A domain-specific text renderer does not supply
+0014 | general language understanding. No claim of global novelty is established.
+0015 | 
+0016 | WHAT IS NEW RELATIVE TO OUR RETIRED LIBRARY PATH
+0017 | The model infers coordinate functions from action-induced differences, then
+0018 | learns sparse conditional rules and an observation decoder. It is not choosing
+0019 | among the old 48 transformations or a stored solution-fragment library. It
+0020 | learns the coefficients of its representation and dynamics from observations.
+0021 | Finite-field algebra, system identification and invariant learning are known
+0022 | areas; originality of the precise estimator has not been established.
+0023 | 
+0024 | FORMULATION
+0025 | For observation y, learn q_i(y) as a low-degree Boolean polynomial. For each
+0026 | observed action a, differences constrain all coordinates simultaneously:
+0027 |   q_i(y_next) XOR q_i(y) = 1 only if a=i and a change occurred.
+0028 | The solver learns a decoder back to observations and sparse Boolean gates in
+0029 | the inferred coordinates. Ordinary regression separately fits next-state
+0030 | differences in raw observations. No true latent variables enter ordinary fitting.
+0031 | 
+0032 | STRONG PRIOR AND SCOPE
+0033 | Each action changes at most one independent Boolean coordinate. Gates have at
+0034 | most three parents; inverse observation coordinates are degree one or two.
+0035 | The benchmark uses opaque 8/12-bit observations under identity, invertible
+0036 | linear, or quadratic encodings. These are deliberately structured synthetic
+0037 | systems, not a representative general-intelligence benchmark. One model is
+0038 | trained per world/dimension; larger dimensions are not zero-shot size transfer.
+0039 | 
+0040 | MAIN CONFIRMATION
+0041 | 3 fresh seeds x 2 dimensions x 3 encoding families x 4 data budgets x 4 methods:
+0042 | 288 measured configurations. Budgets are 16,32,64,128 observed transitions/action.
+0043 | 75% of available observations fit the model; 25% select degree. DIRECT chooses
+0044 | degree 1,2,3. The candidate chooses degree 1 or 2. All methods receive identical
+0045 | observed data. A separately executed true-coordinate control is privileged.
+0046 | Both fit/selection work and inference/planning work are recorded.
+0047 | 
+0048 | Primary nonlinear-encoding result at 64 total transitions/action:
+0049 | Variables Method                Unseen-state accuracy    Fit wall (3 worlds)    Mean model JSON
+0050 |         8 direct                           60.360%             0.016108s             1960.7 B
+0051 |         8 raw_rule                         16.667%             0.003570s              195.0 B
+0052 |         8 linear_coordinate                 0.000%             0.001246s                0.0 B
+0053 |         8 coordinate                       99.268%             0.023090s              923.0 B
+0054 |        12 direct                           61.850%             0.129051s             2261.7 B
+0055 |        12 raw_rule                         16.667%             0.011798s              235.0 B
+0056 |        12 linear_coordinate                 0.000%             0.007138s                0.0 B
+0057 |        12 coordinate                      100.000%             0.096709s             1394.3 B
+0058 | 
+0059 | Mean over the six worlds: candidate 99.634%; DIRECT 61.105%;
+0060 | RAW-RULE 16.667%. Candidate gain over the strongest prespecified ordinary
+0061 | control: 38.529 percentage points.
+0062 | The >=99% mean and >=20-point gain gates pass. Not every world individually
+0063 | exceeds 99%; the worst candidate world is 97.804%.
+0064 | All means weight worlds equally; larger test-state populations are not silently
+0065 | given more influence. This is a six-world result, not a scale claim.
+0066 | 
+0067 | The candidate reached actual goals in 35/36 nonlinear-family planning tasks
+0068 | (97.222%), above the 90% gate. Plans are executed against the true
+0069 | world afterward. Every model uses zero-heuristic search and the same 8,000-state
+0070 | expansion cap. Candidate search takes place in its inferred coordinates, while
+0071 | raw models search observations. Returned hypothetical paths alone do not count.
+0072 | Training transitions are one-step; the requested plans compose learned laws.
+0073 | 
+0074 | Primary test source states are sparse/dense and are absent from ALL available
+0075 | training observations, including next states. The secondary middle-state test
+0076 | can repeat observed states because the finite state space is small. Counts and
+0077 | source overlaps were audited. No hidden test state or reference plan enters fit.
+0078 | 
+0079 | Higher data budget, same nonlinear family:
+0080 | Variables Method                Unseen-state accuracy    Fit wall (3 worlds)    Mean model JSON
+0081 |         8 direct                           72.410%             0.029019s             1958.0 B
+0082 |         8 raw_rule                         16.667%             0.005391s              195.0 B
+0083 |         8 linear_coordinate                 0.000%             0.001919s                0.0 B
+0084 |         8 coordinate                      100.000%             0.033330s              923.0 B
+0085 |        12 direct                           72.082%             0.250158s             4635.0 B
+0086 |        12 raw_rule                         16.667%             0.019571s              235.0 B
+0087 |        12 linear_coordinate                 0.000%             0.008358s                0.0 B
+0088 |        12 coordinate                      100.000%             0.178353s             1396.3 B
+0089 | 
+0090 | Identity-family control (new coordinates should not get automatic credit):
+0091 | Variables Method                Unseen-state accuracy    Fit wall (3 worlds)    Mean model JSON
+0092 |         8 direct                           81.588%             0.015539s             1764.7 B
+0093 |         8 raw_rule                        100.000%             0.003183s              350.3 B
+0094 |         8 linear_coordinate               100.000%             0.008047s              760.3 B
+0095 |         8 coordinate                      100.000%             0.024445s              760.3 B
+0096 |        12 direct                           79.149%             0.123686s             2065.0 B
+0097 |        12 raw_rule                         99.314%             0.005828s              489.3 B
+0098 |        12 linear_coordinate                99.314%             0.025196s              925.7 B
+0099 |        12 coordinate                       99.314%             0.106471s              925.7 B
+0100 | 
+0101 | ADDITIONAL STRONGER BASELINE
+0102 | After primary confirmation, ordinary regression was given the extra true-family
+0103 | prior that actions are reversible. Observed (y,a,z) yields a derived (z,a,y).
+0104 | No new oracle label is used, but the extra prior is explicit and stronger than
+0105 | the ordinary comparison. Degree selection still uses the original validation.
+0106 | Mean nonlinear-family accuracy at budget 64 rises to
+0107 | 71.099%, versus candidate 99.634%.
+0108 | This challenges the original gap rather than hiding a simple baseline improvement.
+0109 | Per-size results and all fitted models are in 17_stronger_control.json.txt.
+0110 | The privileged true-coordinate/same-gate diagnostic averages
+0111 | 100.000% on this cohort; it is not an ordinary competitor.
+0112 | 
+0113 | FAILURE BOUNDARY
+0114 | The frozen stress test raises observation degree or permits multiple-coordinate
+0115 | effects. Its candidate outcomes are:
+0116 |   cubic        n= 8 budget= 64: accuracy   0.000%; 1776/1776 abstentions.
+0117 |   cubic        n= 8 budget=128: accuracy   0.000%; 1776/1776 abstentions.
+0118 |   cubic        n=12 budget= 64: accuracy   0.000%; 5688/5688 abstentions.
+0119 |   cubic        n=12 budget=128: accuracy   0.000%; 5688/5688 abstentions.
+0120 |   multi_effect n= 8 budget= 64: accuracy   0.000%; 1776/1776 abstentions.
+0121 |   multi_effect n= 8 budget=128: accuracy   0.000%; 1776/1776 abstentions.
+0122 |   multi_effect n=12 budget= 64: accuracy   0.000%; 5688/5688 abstentions.
+0123 |   multi_effect n=12 budget=128: accuracy   0.000%; 5688/5688 abstentions.
+0124 | These are failures/abstentions, not a smaller model winning with zero bytes.
+0125 | The method is not robust to these important violations of its assumptions.
+0126 | 
+0127 | An audit initially failed a universal unseen-state assertion for the multi-effect
+0128 | stress set: two-bit changes can reach sparse/dense states during acquisition.
+0129 | Data and scores are unchanged. All test sources remain absent as training
+0130 | sources, but 6 stress worlds have some test states previously seen as NEXT
+0131 | observations. Exact counts are recorded in 13_confirmation_stress_audit.json.txt.
+0132 | Primary worlds and cubic stress retain strict non-exposure. The correction and
+0133 | old audit source are preserved in 13_stress_scope_correction.txt and the backup.
+0134 | Do not describe the multi-effect stress result as wholly unexposed-state testing.
+0135 | 
+0136 | ACTUAL TEXT AND CODE OUTPUT -- INCLUDING ITS LIMITS
+0137 | A fixed model was chosen before response checks: 63101/8/quadratic, budget 64.
+0138 | It answers technical text requests using its learned rules, renders plan steps,
+0139 | explains gate conditions, and generates standalone Python prediction code.
+0140 | No LLM parses the question, writes the answer, or judges it. The parser and
+0141 | verbalizer are hand-written, domain-specific code, not learned general language.
+0142 | 
+0143 | Results: 23/24 curated technical requests pass their factual
+0144 | functional check. The generated code matches the learned model on all
+0145 | 2048/2048 state/action pairs, but matches the ACTUAL world on only
+0146 | 2016/2048. The remaining errors are real learned-model errors.
+0147 | Executable agreement with one's own model is not truth or LLM-quality reasoning.
+0148 | Six unrelated ordinary requests were also submitted: 0/6 answered.
+0149 | That is missing capability, not a successful refusal score. Open language,
+0150 | knowledge, general coding and broad explanation requirements are not met.
+0151 | Curated wording checks do not measure unrestricted comprehension or dialogue.
+0152 | 
+0153 | Raw outputs: responses/EXAMPLE_ANSWERS.txt; full request/result records include
+0154 | the failures. Generated code: responses/learned_predictor.py.txt. The code is
+0155 | an export of learned coefficients, not a copy of the private reference simulator.
+0156 | 
+0157 | RESOURCE ACCOUNTING
+0158 | On the primary nonlinear cohort, model JSON averages
+0159 | 1158.7 bytes for the candidate, including diagnostics. Stored
+0160 | coefficient/support/truth-table numeric entry counts range 110..231.
+0161 | These are not neural-parameter counts or total resident memory. Polynomial
+0162 | features, code, training examples, solver pivots and inference caches also count.
+0163 | Feature caches have an explicit 8,192-entry cap per polynomial; none are a hidden
+0164 | knowledge source. No teacher/pretrained model or external retrieval is present.
+0165 | 
+0166 | Across the six primary candidate models, full fit/validation-selection wall:
+0167 | 0.119799s; IID+OOD inference wall:
+0168 | 0.171481s; planning wall:
+0169 | 0.106808s. These are small local measurements,
+0170 | not guaranteed runtimes or a frontier-LMM comparison. Source data generation,
+0171 | imports, output serialization and audit are outside those component timers.
+0172 | Raw polynomial inference can be faster; no universal latency win is claimed.
+0173 | 
+0174 | Measured peak working set of the additional-control process:
+0175 | 33,878,016 bytes (32.31 MiB), including
+0176 | its data, runtime, models and caches. That is NOT a measured peak for every
+0177 | candidate helper. Main and audit processes were not individually RAM-profiled.
+0178 | Earlier agent-4 concept-tool studies measured 80.30 and 72.93 MiB peaks.
+0179 | These recorded measurements do not resemble a 20%-of-16-GB memory allocation,
+0180 | but cannot identify an unrecorded historical spike from another process or time.
+0181 | At the user's check, no experiment script from this task remained running.
+0182 | 
+0183 | AUDIT
+0184 | 540 independent polynomial evaluations; 141 exact linear equations and explicit
+0185 | contradiction checks; five encodings exhaustively checked for invertibility.
+0186 | Main: 288 records, 604,800 predictions and 864 plans replayed.
+0187 | Stress: 96 records, 201,600 predictions and 576 plans replayed, with the exposure
+0188 | qualification above. Coordinate recovery and decoder reconstruction are also
+0189 | checked against private states after fitting, never used to choose the model.
+0190 | The audit is internal, not independent external replication. Raw errors remain.
+0191 | 
+0192 | STATUS
+0193 | Restricted model-learning gate: PASS. Broader output-quality requirement: NOT MET.
+0194 | Frontier equivalence: UNDEMONSTRATED. Global novelty: UNESTABLISHED.
+0195 | No general assistant or huge-potential claim follows from these controller tests.
+0196 | No background experiment or external publication is running.

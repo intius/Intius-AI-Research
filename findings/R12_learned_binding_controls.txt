@@ -1,0 +1,46 @@
+R12 — Learned lookup can be separated from identity already built into attention
+
+EVIDENCE STATUS: CONTROLLED ONE-HOP MATCHING SUCCESS
+
+Independent query/key maps learned correct binding, while shared normalized maps supplied it at initialization.
+
+THE IDEA
+Measure correct-row attention before training. Compare independent query/key
+maps, shared normalized maps and a frozen shared geometry. Endpoint correctness
+alone can hide whether training discovered lookup or merely learned a decoder.
+
+WHAT SUCCEEDED
+Experiment BM used 96 unique source-operation keys per graph. Primary arm A
+began at 0.83-1.03% correct-row attention and learned 100% correct attention and
+100% endpoints in each of four 2,048-case views: historical, unbiased,
+destination reassignment and entity renaming. Both-members pair checks also
+reached 100%. Only final destination labels supervised fitting.
+
+Shared-map B and frozen-geometry C already selected the correct row 100%
+before training, while endpoints were near chance. Their final endpoints also
+reached 100%, so learned matching cannot be credited equally to all three arms.
+Destination reassignment is especially useful: the correct answer changes
+with stored content instead of remaining a query-only association.
+
+RESOURCES AND LIMITS
+Arm A had 249,601 trainable parameters, 1,880 updates, 49.87 seconds reported
+fit time and 172.1 MB peak allocated GPU memory. The study reports one run of
+each arm, not multiple independent training seeds. The four views and paired
+cases are not independent architecture replications. This is one-hop access;
+multi-hop reasoning, procedure discovery and general knowledge were not tested.
+
+HOW TO BUILD ON IT
+Before attributing a retrieval gain to learning, save step-zero checkpoints
+and inspect attention as well as answers. Test entity renaming, destination
+reassignment, padding and fact-order invariance. These controls can diagnose
+memory modules or retrieval adapters without claiming that lookup is reasoning.
+
+ORIGINALITY
+The attribution experiment is useful local evidence. Attention-based content
+addressing is well established; no new matching principle is claimed.
+
+SOURCE REPORTS
+  E024: evidence/E024.txt
+    Original: !!!Current/cognitive_kernel_project_20260919/experiment_BM_matching_attribution/REPORT.md
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

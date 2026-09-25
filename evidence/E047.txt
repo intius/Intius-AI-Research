@@ -1,0 +1,211 @@
+E047 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: breakthrough_orchestra_20260923/agents/02_memory/02_LANGUAGE_MEMORY_RESULTS.txt
+Original SHA-256: 9b6f8c86d86914132d4cde8f3ebb44ab404bd3b48aca3e68769f2de788421557
+Original byte count: 12295
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | 02 — LANGUAGE-GROUNDED MEMORY DEVELOPMENT PROBE
+0002 | Date: 2026-09-23
+0003 | Status: OBSERVED WRITER/READER PIPELINE FAILURE; NO PCBL LANGUAGE-MEMORY ADVANCE.
+0004 | Scope: one CPU-only development dataset; PROMO-1 sealed rows were not used.
+0005 | 
+0006 | EXECUTIVE RESULT
+0007 | The pinned local MiniCPM5-1B-Q4 model produced no complete structured writer
+0008 | records under the frozen four-statement/96-token write budget. All48 writes hit
+0009 | the output cap and failed the required `events` JSON schema; the PCBL and
+0010 | same-writer structured controls therefore received zero of192 gold facts and
+0011 | zero of52 corrections. Their equal PCBL/full-recompute states are both empty
+0012 | and are not evidence of a working memory system.
+0013 | 
+0014 | The reader did not pass the supplied-memory diagnostic either. The oracle PCBL
+0015 | with gold facts answered the current city alone on8/12 cases, but gave exact
+0016 | city+source on only3/12 current questions and0/12 historical questions. No
+0017 | arm produced a fully correct current-and-historical pair. The prompt used
+0018 | `[source: T##]` literally; the model repeated that placeholder in160/168
+0019 | answers. Citation and provenance scores are invalid as a measure of whether it
+0020 | could cite evidence. The protocol also capped each answer at32 output tokens.
+0021 | 
+0022 | Decision: this is an INCONCLUSIVE end-to-end language-memory study with a
+0023 | clear writer-budget/format bottleneck and a reader-prompt confound. It is not a
+0024 | negative result for all revisable memory, not a clean evaluation of PCBL, and
+0025 | not a VRAM/capability win. The exact measured pipeline is retired; do not rerun
+0026 | it unchanged.
+0027 | 
+0028 | FROZEN TEST AND CONTROLS
+0029 | The authoritative pre-inference specification is
+0030 | 02_LANGUAGE_MEMORY_PROTOCOL.txt, with exact identifiers in
+0031 | 09_FREEZE_MANIFEST.json. The development set had12 independent fictional
+0032 | episodes,16 turn-tagged statements per episode,192 source assertions and52
+0033 | explicit corrections, including distractors. It was generated with seed
+0034 | 20260923; file SHA-256:
+0035 | 14ff978439e3e69f9178609cd600305b3a5a38c10afd5651020ab3b44350a6fe.
+0036 | 
+0037 | The fixed three-hop relation schema was person leads group; group runs project;
+0038 | project is located in city. Questions asked for a current city and a
+0039 | pre-correction historical city, each with a source turn. Entity anchoring and
+0040 | the relation-composition rule were supplied. This does not test learned
+0041 | general reasoning or open-world entity linking.
+0042 | 
+0043 | Seven backends used the same pinned model and the same common writer calls:
+0044 | full transcript, BM25+recency, exact entity-linked topic documents,
+0045 | same-writer append-only facts, same-writer full recomputation, incremental
+0046 | PCBL, and oracle PCBL. Reader prompts were token-counted through the pinned
+0047 | llama.cpp tokenizer and padded to the longest arm for each paired question;
+0048 | all pairs matched exactly, with target lengths232–242 tokens. The evidence cap
+0049 | was128 tokens, and each response cap was32 tokens. The 384-token writer value
+0050 | was a maximum, not filler padding; observed writer inputs were278–313 tokens.
+0051 | 
+0052 | OBSERVED — WRITER
+0053 | - Physical calls:48 writer calls, four per episode. Every call generated the
+0054 |   maximum96 tokens and ended with finish_reason=`length`.
+0055 | - Exact output:0/48 schema-valid `events` arrays;0/192 valid normalized fact
+0056 |   rows;0/52 exact correction rows. Every call therefore failed the preregistered
+0057 |   ≥90% writer floor.
+0058 | - Raw response audit: all48 outputs began with a Markdown JSON fence. Many used
+0059 |   a top-level `turns` list or emitted separate JSON objects rather than one
+0060 |   `events` object. The first partial rows also show field-semantic errors such
+0061 |   as treating a sentence phrase as the subject, retaining suffixes such as
+0062 |   “group” in entity values, and using “heads” or “operates” instead of the
+0063 |   required canonical relation. No regex salvage or post-hoc relabeling was
+0064 |   applied.
+0065 | - V3 writer input was14,100 tokens total. V3 writer output was4,608 tokens
+0066 |   total; every call exhausted its96-token cap. Mean writer generation time was
+0067 |   3.94 seconds per call; total writer generation time was189.27 seconds.
+0068 | 
+0069 | OBSERVED — READER AND STATE
+0070 | 
+0071 | | Memory backend | Current city only | Historical city only | Current city+source | Historical city+source | Complete pairs | Stale current |
+0072 | |---|---:|---:|---:|---:|---:|---:|
+0073 | | Full transcript | 2/12 | 1/12 | 0/12 | 0/12 | 0/12 | 0/12 |
+0074 | | BM25+recency | 0/12 | 2/12 | 0/12 | 0/12 | 0/12 | 2/12 |
+0075 | | Topic documents | 7/12 | 6/12 | 0/12 | 0/12 | 0/12 | 1/12 |
+0076 | | Append-only facts | 0/12 | 0/12 | 0/12 | 0/12 | 0/12 | 0/12 |
+0077 | | Full recomputation | 0/12 | 0/12 | 0/12 | 0/12 | 0/12 | 0/12 |
+0078 | | Incremental PCBL | 0/12 | 0/12 | 0/12 | 0/12 | 0/12 | 0/12 |
+0079 | | Oracle PCBL | 8/12 | 0/12 | 3/12 | 0/12 | 0/12 | 0/12 |
+0080 | 
+0081 | The raw transcript/BM25/topic answers are descriptive only because the
+0082 | literal `T##` prompt bug invalidated source citations. The gold-fact oracle
+0083 | removes the writer failure and still missed every historical city; the reader
+0084 | protocol therefore failed its preregistered11/12 oracle pair gate.
+0085 | 
+0086 | All48 chunk-level parsed-PCBL/full-recompute parity comparisons matched, but
+0087 | the parsed states contained zero facts. All48 oracle-PCBL/gold-full-recompute
+0088 | comparisons matched on the supplied rules and gold events. This verifies only
+0089 | that the small exact implementations agree on the supplied fixtures; it is
+0090 | not learned acquisition or a PCBL advantage.
+0091 | 
+0092 | OBSERVED — RESOURCES
+0093 | - Checkpoint: MiniCPM5-1B-Q4_K_M.gguf,688,065,920 bytes, SHA-256
+0094 |   81b64d05a23b17b34c475f42b3e72fbde62d4b92cc34541f7a8031d0752deafa.
+0095 | - Runtime: llama.cpp b10809, commit5266f24da; installed runtime files total
+0096 |   46,723,869 bytes; llama-server.exe SHA-256
+0097 |   cb29f66008d4d73cce17cab2c2569ab318eb244b0b2ca2a15024b44d90dfcd3f.
+0098 | - Server RSS peak:2,072,674,304 bytes. Controller RSS peak:37,023,744 bytes.
+0099 |   Their arithmetic sum is2,109,698,048 bytes; the peaks were sampled
+0100 |   independently and may not be simultaneous. These are local Windows process
+0101 |   measurements, not a portable minimum.
+0102 | - CPU only, six threads, one slot, context576, prompt cache disabled and
+0103 |   server bound to127.0.0.1. Physical VRAM allocation:0 bytes. Training compute:0.
+0104 | - Cold-load-through-shutdown wall time:434.52 seconds. llama-server CPU time:
+0105 |   2,511.47 thread-seconds. The experiment used216 model calls:48 shared writer
+0106 |   calls and168 answer calls. The shared writer input/output cost was14,100 /
+0107 |   4,608 tokens. Each of the seven arms had24 reader calls and5,752 prompt
+0108 |   tokens; paired prompts were exact length matches. Aggregate physical calls
+0109 |   produced7,210 completion tokens.
+0110 | - A raw transcript/BM25/topic deployment path could skip the shared writer:
+0111 |   24 reader calls and5,752 prompt tokens per arm, with the same measured reader
+0112 |   outputs. That path is shown separately from the common-writer comparison.
+0113 | - Serialized stores across12 cases: transcript23,223 bytes; BM25 index124,035;
+0114 |   topic documents57,845; append-only facts24,003; full-recompute log24,783;
+0115 |   learned PCBL24,891; oracle PCBL392,271. The learned stores held no parsed
+0116 |   assertions and must not be interpreted as a compact successful memory.
+0117 | - V3 model/template/tokenizer check: the local server's rendered smoke prompt
+0118 |   and `/tokenize` count both equaled20; the streaming path returned the exact
+0119 |   requested prompt-token count. Preflight files used zero memory cases.
+0120 | 
+0121 | INFERRED — WHAT FAILED
+0122 | The batch writer did not fit the expected structured output into96 tokens. It
+0123 | also did not follow the requested `events` schema or relation canonicalization.
+0124 | The specific cause is not isolated: output truncation, JSON instruction
+0125 | following, model capacity, template quality and relation/entity extraction all
+0126 | remain possible. Since every writer call hit the cap, the test cannot establish
+0127 | whether MiniCPM5 would parse the same facts with enough output space or an
+0128 | atomic constrained writer.
+0129 | 
+0130 | The reader's source placeholder was a protocol defect: it wrote `T##` as
+0131 | literal example text, and160/168 answers repeated it. The next reader protocol
+0132 | must request an actual turn identifier, explicitly say not to output the
+0133 | placeholder, and include a concrete non-target example or a structured
+0134 | response check before scoring citations. The oracle historical failure means
+0135 | the reader still needs its own fresh development test after writer success.
+0136 | 
+0137 | The identical empty learned PCBL/full state is a degenerate parity check. The
+0138 | zero update operation counts and approximately equal empty-store bytes do not
+0139 | show an efficiency gain. The raw text controls' city-only scores show limited
+0140 | partial recall on this generated corpus but no complete factual answers.
+0141 | 
+0142 | LOCAL HISTORY AND LITERATURE BOUNDARY
+0143 | - H30 retrieval/readers (cognitive_kernel_project_20260916 AN–BI): local
+0144 |   retrieval and extractive QA components have been tested extensively. This
+0145 |   development probe adds cross-session corrections but did not successfully
+0146 |   write claims.
+0147 | - H31/BJ/BK/BL: learned traversal and one-hop/multi-hop fact access failed
+0148 |   strong shortcut/counterfactual controls. V3's entity/path rule was supplied;
+0149 |   no learned-traversal claim is made.
+0150 | - H36 knowledge web:91.69% training memorization and6.40% held-out fact
+0151 |   generalization. V3 was a closed synthetic writer test, not OOD acquisition.
+0152 | - H43 attached memory: learned attached memory damaged conversational ability
+0153 |   and added parameter storage; V3 used an external store and makes no model
+0154 |   compression claim.
+0155 | - IDEA010 versioned memory: the exact conventional store reached100% on its
+0156 |   structured stream and beat learned commit checkers. V3's writer never
+0157 |   produced records, so it cannot claim better memory correctness.
+0158 | - Infini Memory, Ji et al. (2026), “Maintainable Topic Documents for Long-Term
+0159 |   LLM Agent Memory,” arXiv:2606.10677. It reports81% single-hop vs35% multi-hop
+0160 |   selective forgetting with GPT-5-mini; V3 is neither a replication nor a
+0161 |   memory benchmark pass.
+0162 | - Dependency maintenance has classic prior art: de Kleer (1986), “An
+0163 |   assumption-based TMS,” Artificial Intelligence28(2),127–162,
+0164 |   DOI10.1016/0004-3702(86)90080-9; Gupta, Mumick & Subrahmanian (1993),
+0165 |   “Maintaining views incrementally,” SIGMOD Record22(2),157–166,
+0166 |   DOI10.1145/170036.170066. No global novelty claim.
+0167 | 
+0168 | PROPOSED — NEXT DISTINCT QUESTION
+0169 | Do atomic transaction writes with constrained JSON decoding let the pinned
+0170 | local model acquire exact facts and corrections under a realistic per-event
+0171 | token budget? Use a new generated seed and new entity strings, leaving PROMO-1
+0172 | sealed. Compare two matched writer arms on every single event: (1) ordinary
+0173 | one-event JSON prompting and (2) llama.cpp JSON-schema constrained decoding.
+0174 | Only one assertion is generated per call; both arms use the same input, model,
+0175 | greedy policy, maximum completion tokens and per-event source-turn budget.
+0176 | The earlier four-event free-form V3 writer is a historical control, not rerun.
+0177 | 
+0178 | Score JSON validity, exact triple precision/recall, relation canonicalization,
+0179 | source-turn accuracy, correction operation/supersedes accuracy, valid
+0180 | assertions per input/completion token and CPU seconds. Feed both parsed streams
+0181 | through PCBL and full recomputation offline; require exact state parity on
+0182 | current/historical facts. Advancement gate: ≥90% exact fact rows and ≥90% exact
+0183 | correction/source rows on fresh development entities; below that, stop
+0184 | language-memory integration and do not run reader or PROMO-1 promotion.
+0185 | 
+0186 | ARTIFACTS AND INTEGRITY
+0187 | - Authoritative frozen protocol: 02_LANGUAGE_MEMORY_PROTOCOL.txt
+0188 | - Pre-inference freeze manifest: 09_FREEZE_MANIFEST.json
+0189 | - Frozen development data: 07_dialogues_seed_20260923.json
+0190 | - Code: 07_generate_dialogues.py and 08_language_memory_probe.py
+0191 | - Raw writer outputs: 08_writer_call_log.jsonl
+0192 | - Raw reader outputs: 08_answer_call_log.jsonl
+0193 | - Per-case details: 08_case_results.json
+0194 | - Aggregate metrics: 08_metrics_summary.json
+0195 | - Complete result bundle: 08_language_memory_results.json
+0196 | - Complete result SHA-256: EC011A656494E39089A4A83AAD2720F0987762B0910EB256BBF4393DC547D9B5
+0197 | - Freeze manifest SHA-256: 9C83B2640D2692B45A0C3AB8FAB06632137BD3493F68C0FFAEB7651CA61C0005
+0198 | - V3 protocol SHA-256: 9CCF763426F4731D954D3C5F67FE931B2792D42A8526D1ECD7F7CD87F5748105
+0199 | 
+0200 | The main /goal remains active. V3 does not establish a useful learned writer,
+0201 | language-grounded memory, broad reasoning or low-VRAM advantage. The proposed
+0202 | atomic writer is a separate, preregisterable next question.

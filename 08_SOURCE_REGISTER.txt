@@ -1,0 +1,287 @@
+SOURCE REGISTER
+Prepared 2026-09-25. Paths are relative to the original !WorldIsNotReady archive.
+The bundled snapshots make the reports readable without that archive.
+Original implementation/checkpoint paths inside reports are historical references,
+not claims that their targets are distributed in this text-only release.
+
+E001 | cards R01
+  Original: block_sparse_extension/RESULTS.txt
+  SHA-256: 01c4f149dd9191d26d3395dd0d461c3390bc2133073949b83cd3e002a17e0704
+  Bytes: 6412
+  Bundled: evidence/E001.txt
+
+E002 | cards R01
+  Original: strong_prior_extension/RESULTS.txt
+  SHA-256: e9452554c649f6f7b59d7c0d198204a94a9ae60df3dd39e79b01d55fc5abed0f
+  Bytes: 7605
+  Bundled: evidence/E002.txt
+
+E003 | cards R01
+  Original: block_sparse_extension/21_audit.txt
+  SHA-256: ea1aae49a087506a91db57ca7e7dbf016dcbb834b74b31370c11eaac4084745a
+  Bytes: 1517
+  Bundled: evidence/E003.txt
+
+E004 | cards R01
+  Original: strong_prior_extension/12_packing_results.txt
+  SHA-256: 5c0b561daf5867db2a86aaefc7098e403e0bdc56690085d8607acb412837158b
+  Bytes: 8439
+  Bundled: evidence/E004.txt
+
+E005 | cards R02
+  Original: non_llm_intervention_lab/RESULTS.txt
+  SHA-256: 9d097961cd4ff6d1448c24ba1865b24c18d11a6a6509ac01209247d6fcfde897
+  Bytes: 12751
+  Bundled: evidence/E005.txt
+
+E006 | cards R02
+  Original: non_llm_intervention_lab/confirmation/summary.json.txt
+  SHA-256: 8b03eb68f085c7b0632c6dc9886bac7983fbe921cdad4d87ae33170cf5de98e2
+  Bytes: 41602
+  Bundled: evidence/E006.txt
+
+E007 | cards R03
+  Original: idea_tests_004_005/REPORT_004.md
+  SHA-256: e4cce8fbaea623917824ad753865d9f6a6a9a4aa24bd6ab0a28c5c293f7bcb38
+  Bytes: 4382
+  Bundled: evidence/E007.txt
+
+E008 | cards R03
+  Original: neural_abi_stage2/REPORT.md
+  SHA-256: e24450b9fb48e21a695270831599547d40d1bf899ad393b9a1bf75fa6ae450ef
+  Bytes: 9715
+  Bundled: evidence/E008.txt
+
+E009 | cards R03
+  Original: neural_abi_stage2/STRESS_REPORT.md
+  SHA-256: 23c7c73a6b869665c5debc0065baa0c0914019769a24c2d22442f7199af691f5
+  Bytes: 3235
+  Bundled: evidence/E009.txt
+
+E010 | cards R03
+  Original: abi_llm_comparison/REPORT.md
+  SHA-256: 09f2eb09107ea2975fcf1805a948400bd3c6283edd14dee3cfbe57ac18b02d39
+  Bytes: 6595
+  Bundled: evidence/E010.txt
+
+E011 | cards R03
+  Original: abi_llm_comparison/SCALAR_REPORT.md
+  SHA-256: b27c9d9d2aea8d2cba97371e203d720925c16f36b3f2bc2713ef8fa0458f71b9
+  Bytes: 1394
+  Bundled: evidence/E011.txt
+
+E012 | cards R04, R05
+  Original: quantum_composition_20260909/RESULTS.md
+  SHA-256: bae043ed5cbf7d84541d5763da04fe3519c22a865cc9127df99cd18219155410
+  Bytes: 8189
+  Bundled: evidence/E012.txt
+
+E013 | cards R04
+  Original: quantum_composition_20260909/MECHANISMS.md
+  SHA-256: 1f3e985e6027d0780abb126796eafd366fa59c858780e9d4e47c2f98216fd6a1
+  Bytes: 3851
+  Bundled: evidence/E013.txt
+
+E014 | cards R05
+  Original: composition_quality_20260909/RESULTS.md
+  SHA-256: b646ebcd67717520d3859cb2201f2f7a5d5a2d537794bda57bbdf9ab5db64e3d
+  Bytes: 6762
+  Bundled: evidence/E014.txt
+
+E015 | cards R06
+  Original: 35_research_assessment.txt
+  SHA-256: c0ea84f731d5afb9e351842653de5030d6956a21c46ca6c01f18bf0445442fde
+  Bytes: 8923
+  Bundled: evidence/E015.txt
+
+E016 | cards R06
+  Original: 21_toy_findings.txt
+  SHA-256: 59a7d998edb5c5a3b8dfc3d19ed9a6f4b3dc9884d531e8ff80c5c8a94cde6003
+  Bytes: 6116
+  Bundled: evidence/E016.txt
+
+E017 | cards R07
+  Original: !!!Current/further_testing/experiment_E_data_vs_distance_20260915/RESULTS.md
+  SHA-256: f284bb26f02f33e39bf8782dc098e7057454ef89208dac14fbf2cd3945ce5567
+  Bytes: 3775
+  Bundled: evidence/E017.txt
+
+E018 | cards R07
+  Original: !!!Current/further_testing/experiment_E_data_vs_distance_20260915/INTERPRETATION.md
+  SHA-256: 8ab0face70479ac6efa112978518b24167716114f3fa44e8f3218791bf81f61f
+  Bytes: 4903
+  Bundled: evidence/E018.txt
+
+E019 | cards R08
+  Original: !!!Current/further_testing/strict_frozen_B_scaling_20260915/RESULTS.md
+  SHA-256: 4032e85828eeb4c2f6da9cfc72220504bc9b71e23ee7cc2fa5102a3c023547e7
+  Bytes: 11403
+  Bundled: evidence/E019.txt
+
+E020 | cards R08
+  Original: !!!Current/further_testing/simplified_state_comparison_20260915/RESULTS.md
+  SHA-256: a2935357902810f719492611972df8a7626856aa22a55229b9fdd3e6233dc530
+  Bytes: 2934
+  Bundled: evidence/E020.txt
+
+E021 | cards R09
+  Original: !!!Current/further_testing/experiment_I_emergent_communication_20260915/RESULTS.md
+  SHA-256: b9969405c44d18cf71d47397d9f8f90892b591874a17f08969c5be0ad43c1041
+  Bytes: 2780
+  Bundled: evidence/E021.txt
+
+E022 | cards R09
+  Original: !!!Current/further_testing/experiment_J_reliable_emergent_communication_20260915/RESULTS.md
+  SHA-256: b1337b828a66bf3bfdd13863b4747f650a364c3ed5904442a07dfc5e47147524
+  Bytes: 15682
+  Bundled: evidence/E022.txt
+
+E023 | cards R10, R11
+  Original: !!!Current/novel_micro_sprint_20260919_1610/REPORT.md
+  SHA-256: 16ed737149ff65779931aa3a3c86a6b8e234718e67d4db43aa5e5005f5d7a02d
+  Bytes: 23063
+  Bundled: evidence/E023.txt
+
+E024 | cards R12
+  Original: !!!Current/cognitive_kernel_project_20260919/experiment_BM_matching_attribution/REPORT.md
+  SHA-256: ed27f6ea7ba6577a72991c4d36d765a42d08af64fbf80637277de0f3fcf019b7
+  Bytes: 7624
+  Bundled: evidence/E024.txt
+
+E025 | cards R13
+  Original: !!!Current/cognitive_kernel_project_20260916/experiment_AC_width_horizon_scaling/REPORT.md
+  SHA-256: eb8c6c40da7d14d2b5633a4cde285a2732439531cec1f2a90a9121a6fef48f56
+  Bytes: 4580
+  Bundled: evidence/E025.txt
+
+E026 | cards R13
+  Original: !!!Current/cognitive_kernel_project_20260916/experiment_AD_semantic_adaptation/REPORT.md
+  SHA-256: d40c56830717156fe38c410426e2bf47d9b9ddb452865ec76677b987e711594d
+  Bytes: 3478
+  Bundled: evidence/E026.txt
+
+E027 | cards R13
+  Original: !!!Current/cognitive_kernel_project_20260916/experiment_AH_exact_primitive_learned_routing/REPORT.md
+  SHA-256: 97b1013b01e5ab2b53555b581fa24e5f0cf8a1b2fb9b08f6f2607ffe5fbe52fa
+  Bytes: 1306
+  Bundled: evidence/E027.txt
+
+E028 | cards R13
+  Original: !!!Current/cognitive_kernel_project_20260916/experiment_AI_robust_semantic_solver/REPORT.md
+  SHA-256: f290c5a2aa5eb5802916468fd89c5d91cf439db40629a7723508b3fc92299170
+  Bytes: 1416
+  Bundled: evidence/E028.txt
+
+E029 | cards R13
+  Original: !!!Current/cognitive_kernel_project_20260916/experiment_AJ_unknown_semantics/REPORT.md
+  SHA-256: fb419e2cf41e1580501a2004d8ae167083c873611cc6c48a373a50927716e9fd
+  Bytes: 721
+  Bundled: evidence/E029.txt
+
+E030 | cards R14
+  Original: breakthrough_orchestra_20260923/agents/07_reasoning/04_KV_TOY_RESULT.txt
+  SHA-256: 8f8726f13d83fdbdf00e68881b0418a7b69d063cfbae176e81ab1092db88cc93
+  Bytes: 6367
+  Bundled: evidence/E030.txt
+
+E031 | cards A01
+  Original: godly_3b_20260923/RESULTS.md
+  SHA-256: a123d03d069c9430a6b12b7908b51c4545c7b85d5e77e2c2a166be8864b36155
+  Bytes: 17037
+  Bundled: evidence/E031.txt
+
+E032 | cards A01
+  Original: godly_3b_20260923/STAGE2_FREEZE.md
+  SHA-256: c951eec043dba19aa4b2f11a2cab4fcb7c84c636bc5ae86219f051e64ca47ff7
+  Bytes: 5247
+  Bundled: evidence/E032.txt
+
+E033 | cards A01
+  Original: godly_3b_20260923/CONFIRMATION_FREEZE.md
+  SHA-256: 3f9c4519501cff351571e53617040333e48eddebd2639befd6280dc6b53683e4
+  Bytes: 2426
+  Bundled: evidence/E033.txt
+
+E034 | cards A01
+  Original: godly_3b_20260923/CONFIRMATION_ANALYSIS.json
+  SHA-256: 29287077c687f00f655335902c0a0f2c18226aed5624ef2d8b936a50df6ac253
+  Bytes: 2735
+  Bundled: evidence/E034.txt
+
+E035 | cards A02
+  Original: capability_lab/scanned_backbone/RESULTS.txt
+  SHA-256: 4b938c5f9e9d3d54cd77254c809f96401aa226d397481a737146a427ce8511e5
+  Bytes: 2173
+  Bundled: evidence/E035.txt
+
+E036 | cards A02
+  Original: capability_lab/fresh_confirmation/RESULTS.txt
+  SHA-256: 95e87d3b7766f7992d831c504f56ae95d0ab9c0700e05b49f7d21f3faa505c69
+  Bytes: 2844
+  Bundled: evidence/E036.txt
+
+E037 | cards A03
+  Original: training_efficiency/RESULTS.txt
+  SHA-256: c5c6a0b1b1aaf79ffed7130e81a87cd092aba091762d8e322a14f2d6b8016c72
+  Bytes: 9431
+  Bundled: evidence/E037.txt
+
+E038 | cards A04
+  Original: pareto_pruning_lab/FINDINGS.txt
+  SHA-256: f3411bdf5f0b820823cc3989f3789847da54589ecc512a091b9d4d64453eca0e
+  Bytes: 4189
+  Bundled: evidence/E038.txt
+
+E039 | cards A04
+  Original: pareto_pruning_lab/sequential_followup/RESULTS.txt
+  SHA-256: 7cc419e80cc2690c03aa5c80b9f116b288972c6007711c1e6ea06f625beaff2b
+  Bytes: 5304
+  Bundled: evidence/E039.txt
+
+E040 | cards A04
+  Original: pretrained_compaction_lab/recovery/RESULTS.txt
+  SHA-256: 98b19cd4ff33a992bb663b70693d5149269a8500c885b3ac2f5c5a26b9e9eb23
+  Bytes: 3142
+  Bundled: evidence/E040.txt
+
+E041 | cards A05
+  Original: !!!Current/cognitive_kernel_project_20260919/experiment_BB_glove_char_bidaf_reader/REPORT.md
+  SHA-256: 157583fda1ee111feb793154d54426c2411569da073955f038fbf3bf852fb490
+  Bytes: 3089
+  Bundled: evidence/E041.txt
+
+E042 | cards A05
+  Original: !!!Current/cognitive_kernel_project_20260919/experiment_BC_protected_bb_reranker/REPORT.md
+  SHA-256: 57c76254209204c4a2de732f16926a1205c04f109268ae1070f36285059e4904
+  Bytes: 2103
+  Bundled: evidence/E042.txt
+
+E043 | cards A05
+  Original: !!!Current/cognitive_kernel_project_20260919/experiment_BD_zero_shot_hotpotqa_transfer/REPORT.md
+  SHA-256: 95dd6a5ba73487f05359256dd211d754248907f169a84ba8e238e689e897dd76
+  Bytes: 2222
+  Bundled: evidence/E043.txt
+
+E044 | cards A05
+  Original: !!!Current/cognitive_kernel_project_20260919/experiment_BE_multidomain_protected_ranker/REPORT.md
+  SHA-256: cfb223da57cff0934852499a81316490e45ea67394d600a39cd7f8e98a1c7db1
+  Bytes: 2194
+  Bundled: evidence/E044.txt
+
+E045 | cards A06
+  Original: non_llm_continuation_lab/RESULTS.txt
+  SHA-256: c6b5fb8fe9085343c67fd29a305b09930bf6a21191aab81fd2962620d320754c
+  Bytes: 13235
+  Bundled: evidence/E045.txt
+
+E046 | cards A06
+  Original: breakthrough_orchestra_20260923/agents/02_memory/01_REVISION_PROPAGATION_RESULTS.txt
+  SHA-256: b5cc553fa7869cec0dbcdc691c3f93680d701b8b0ae4c58b71a566c091818f38
+  Bytes: 13494
+  Bundled: evidence/E046.txt
+
+E047 | cards A06
+  Original: breakthrough_orchestra_20260923/agents/02_memory/02_LANGUAGE_MEMORY_RESULTS.txt
+  SHA-256: 9b6f8c86d86914132d4cde8f3ebb44ab404bd3b48aca3e68769f2de788421557
+  Bytes: 12295
+  Bundled: evidence/E047.txt

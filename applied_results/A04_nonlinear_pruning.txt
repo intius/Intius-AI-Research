@@ -1,0 +1,49 @@
+A04 — Sequentially refit compressed nonlinear layers on their actual inputs
+
+EVIDENCE STATUS: LOCAL QUALITY/LATENCY SUCCESS; ALL-CONTROLS GATE FAILED
+
+A compact nonlinear FFN layout beat two tested SVD layouts, but did not win every seed against the strongest control.
+
+THE USEFUL DETAIL
+Select complementary FFN neurons and allocate widths globally. After
+compressing earlier layers, fit the next layer against the states the
+compressed model actually produces. Target the teacher next state minus
+the compressed state after attention. No teacher or correction branch is
+retained at inference. Give the low-rank control the same sequential refit.
+
+WHAT SUCCEEDED
+Fresh cohort B: 128 disjoint articles, three recovery seeds, 500 updates.
+Every arm had 587,232 parameters and 560,256 projection MACs/token.
+  Uniform SVD:       CE 1.8962126; batch-1/8 latency 8.719/26.728 ms.
+  Sequential SVD:    CE 1.8829742; batch-1/8 latency 8.728/26.638 ms.
+  Sequential prune:  CE 1.8817407; batch-1/8 latency 7.938/23.691 ms.
+Pruning beat these two controls in every quality seed. Against sequential
+SVD, loss reduction was only 0.0655%, while CPU latency fell about 9.06%
+and 11.06%. Latency was eager FP32 full-window inference at context 64,
+not cached autoregressive GPU decoding.
+
+LIMITS
+Optimized budgeted SVD scored 1.8824691; pruning lost one of three quality
+seeds to it, so the strict all-controls gate failed. Preparation plus timed
+recovery was 63.19 seconds for pruning versus uniform SVD 61.01 seconds.
+All arms descended from one small, undertrained 1.21M-byte-model teacher.
+A later Qwen3-0.6B compaction study beat tested low-rank layouts but did not
+retain original commonsense performance; toy results do not establish broad
+pretrained-model retention.
+
+HOW TO USE THIS
+Compare nonlinear feature removal with optimized low-rank and continued-dense
+controls at identical storage/work budgets. Refit using compressed upstream
+states. Report preprocessing, recovery and real inference separately.
+Pruning and reconstruction are established; this is a measured local design
+comparison rather than a new compression principle.
+
+SOURCE REPORTS
+  E038: evidence/E038.txt
+    Original: pareto_pruning_lab/FINDINGS.txt
+  E039: evidence/E039.txt
+    Original: pareto_pruning_lab/sequential_followup/RESULTS.txt
+  E040: evidence/E040.txt
+    Original: pretrained_compaction_lab/recovery/RESULTS.txt
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

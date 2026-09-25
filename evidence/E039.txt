@@ -1,0 +1,108 @@
+E039 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: pareto_pruning_lab/sequential_followup/RESULTS.txt
+Original SHA-256: 7cc419e80cc2690c03aa5c80b9f116b288972c6007711c1e6ea06f625beaff2b
+Original byte count: 5304
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | SEQUENTIAL NONLINEAR PRUNING: INDEPENDENT COHORT B
+0002 | 
+0003 | Dominates every named low-rank control on all primary axes: False.
+0004 | Primary axes: new-document CE, all stored parameter/weight bytes,
+0005 | projection work, and actual CPU full-window latency at batches1/8.
+0006 | 
+0007 | Method               Parameters   Fresh CE    Grammar accuracy
+0008 | svd_uniform            587,232   1.8962126    50.796%
+0009 | svd_budget             587,232   1.8824691    50.373%
+0010 | svd_sequential         587,232   1.8829742    50.473%
+0011 | prune_sequential       587,232   1.8817407    51.542%
+0012 | 
+0013 | Results average three recovery seeds. CE is nats per byte; lower is
+0014 | better. Grammar is a separate new1,340-pair diagnostic and is not
+0015 | silently merged into the primary text-loss/size/latency Pareto claim.
+0016 | 
+0017 | Against svd_uniform:
+0018 |   CE change -0.76320%; paired difference -0.01447187.
+0019 |   95% document interval [-0.01515270, -0.01374858]; all seed wins=True.
+0020 |   Declared primary Pareto dominance: True.
+0021 |   Grammar change +0.746 percentage points.
+0022 |   Batch1: 7.938ms vs 8.719ms; median ratio 0.9103.
+0023 |     Paired geometric ratio95% interval [0.8600, 0.9614].
+0024 |   Batch8: 23.691ms vs 26.728ms; median ratio 0.8864.
+0025 |     Paired geometric ratio95% interval [0.8438, 0.9019].
+0026 |   Compression+timed-recovery wall ratio: 1.0357.
+0027 | 
+0028 | Against svd_budget:
+0029 |   CE change -0.03869%; paired difference -0.00072840.
+0030 |   95% document interval [-0.00135392, -0.00009088]; all seed wins=False.
+0031 |   Declared primary Pareto dominance: False.
+0032 |   Grammar change +1.169 percentage points.
+0033 |   Batch1: 7.938ms vs 8.829ms; median ratio 0.8990.
+0034 |     Paired geometric ratio95% interval [0.8826, 0.9716].
+0035 |   Batch8: 23.691ms vs 26.029ms; median ratio 0.9102.
+0036 |     Paired geometric ratio95% interval [0.8952, 0.9439].
+0037 |   Compression+timed-recovery wall ratio: 1.0325.
+0038 | 
+0039 | Against svd_sequential:
+0040 |   CE change -0.06551%; paired difference -0.00123349.
+0041 |   95% document interval [-0.00190025, -0.00055776]; all seed wins=True.
+0042 |   Declared primary Pareto dominance: True.
+0043 |   Grammar change +1.070 percentage points.
+0044 |   Batch1: 7.938ms vs 8.728ms; median ratio 0.9094.
+0045 |     Paired geometric ratio95% interval [0.9022, 0.9804].
+0046 |   Batch8: 23.691ms vs 26.638ms; median ratio 0.8894.
+0047 |     Paired geometric ratio95% interval [0.8829, 0.9277].
+0048 |   Compression+timed-recovery wall ratio: 0.9576.
+0049 | 
+0050 | What the follow-up changed
+0051 | The first study beat uniform SVD but failed strict superiority over
+0052 | budgeted SVD on cohortA. That outcome remains in ../RESULTS.txt.
+0053 | This separate prospective follow-up spends the full708-neuron budget
+0054 | and corrects later-layer inputs after earlier layers are compressed.
+0055 | Learned architecture widths: [140, 19, 15, 11, 10, 16, 35, 53, 67, 83, 107, 152].
+0056 | Each output regression targets the original teacher next state minus
+0057 | the actual compressed state after attention. The SVD control receives
+0058 | the same procedure by refitting its output factor. No runtime state
+0059 | corrector, teacher or extra inference branch is retained.
+0060 | 
+0061 | All four model families have587,232 learned FP32 weights,2,348,928
+0062 | weight bytes, and560,256 projection MACs per token. All retain the
+0063 | same12-layer attention path and6,144 bytes of rebuilt RoPE buffers.
+0064 | The architectural difference is nonlinear feature capacity and actual
+0065 | operator/activation cost, not hidden weights or a larger compute budget.
+0066 | 
+0067 | Evidence and scope
+0068 | The two-arm pilot selected the candidate using validation only. Six
+0069 | new500-update models were trained; six original same-seed/update SVD
+0070 | checkpoints were retained as additional controls. No test-selected
+0071 | checkpoint was substituted. Both old and new inference models were
+0072 | evaluated on the same fresh cohortB and timed in the same process.
+0073 | CohortB:128 article titles absent from all WikiText2 partitions and
+0074 | cohortA,513,344 scored bytes. New grammar excludes both earlier subsets.
+0075 | Regularized layer-fit objectives and full-forward state consistency
+0076 | passed. All12 checkpoint counts/hashes and validation scores were
+0077 | independently replayed, plus four complete new articles per model.
+0078 | The audit also checks all960 timing records and recomputes decisions.
+0079 | 
+0080 | Latency is FP32 eager CPU inference on64-byte windows, not GPU or
+0081 | cached autoregressive decoding. Reported preparation/recovery intervals
+0082 | exclude shared calibration, optimizer construction, monitoring and
+0083 | earlier teacher training/research. They are not a free-training claim.
+0084 | Three data seeds share one small, undertrained byte-level teacher.
+0085 | A local Pareto win does not establish dominance over all low-rank
+0086 | algorithms, training scales, hardware or general reasoning capabilities.
+0087 | Grammar differences remain visible above, whether favorable or not.
+0088 | 
+0089 | Files
+0090 | 00_protocol.txt                  Separate rules frozen before this follow-up.
+0091 | 01_runtime.py.txt                Fine allocation and sequential reconstruction.
+0092 | 02_experiment.py.txt             Paired training; no new test access.
+0093 | 03_data.py.txt /evaluation_data/  Fresh cohortB and provenance.
+0094 | 04_evaluate.py.txt                All controls, quality and timings.
+0095 | 05_audit.py.txt /06_audit.json.txt Independent verification.
+0096 | evaluation/summary.json.txt      Exact metrics and comparisons.
+0097 | confirm/checkpoints/             Six additional actual trained checkpoints.
+0098 | 
+0099 | All work remains local. Other agents' files and prior results were preserved.

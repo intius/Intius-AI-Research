@@ -1,0 +1,178 @@
+SCOPE AND SELECTION
+Prepared 2026-09-25.
+
+Method: whole-tree filename inventory, automated report discovery/content
+screening, historical mechanism register, and targeted reading of selected
+reports plus later corrections. 460 report/status/summary-like text files
+under 150,000 bytes were discovered and loaded by the automated inventory.
+This is not a claim of detailed human-style reading of every one of those
+files or every raw example, source line, checkpoint and archive member.
+
+Detailed source snapshots selected for the release are in 08_SOURCE_REGISTER.
+Top-level research areas were screened through their reports or the existing
+mechanism-history register. Coverage depth therefore varies by area.
+
+Excluded from traversal: dependency runtimes, site-packages, node_modules,
+.git, virtual environments and Python caches. Binary checkpoints and
+archives were inventoried by filename but not exhaustively unpacked. In
+particular !!!Current.rar was not used to assume additional distinct results.
+Large aggregate TXT histories were navigation/history support, not dumped
+into the release. Source scripts and raw benchmarks remain outside it.
+
+Selection requires a measured positive signal, a useful specific detail,
+enough source context to assess it, and an honest description of later
+limitations. R cards target distinctive empirical observations. A cards
+are explicitly optional established-method case studies useful to builders.
+Nothing here certifies that an idea is publicly unknown.
+
+AREA DISPOSITION (paths relative to original archive)
+
+!!!Current
+  Multiple later report chains selected in R07-R13 and A05; earlier wins checked against successors. Duplicated stages are not extra experiments.
+24_lm_smoke_checkpoints
+  Checkpoint-only evidence for the root selective-repair chain; summarized in R06, weights excluded.
+26_lm_screen_checkpoints
+  Checkpoint-only evidence for the root selective-repair chain; summarized in R06, weights excluded.
+32_strength_checkpoints
+  Checkpoint-only evidence for the root selective-repair chain; summarized in R06, weights excluded.
+abi_llm_comparison
+  Selected as R03 follow-up; exact specialist and general-language scope kept separate.
+abstraction_refinement_20260911
+  Report/register screened; no sufficiently supported distinctive capability win selected. Implementation checks alone are not a new model success.
+ai_sparse_likelihood_round3
+  Narrative-only headline ratios were not independently reproduced; the independent rebuild and measured extension are R01.
+bitnet_b158_20260910
+  Precision comparisons retained in source archive; established methods, weak broad-task scores and no distinctive confirmed capability advantage selected.
+block_sparse_extension
+  Selected report chain included; see reading map and source register.
+breakthrough_benchmarks_20260914
+  Benchmark/baseline or failed promotion evidence; no broad new-model success selected. Format and budget failures do not isolate reasoning ability.
+breakthrough_orchestra_20260923
+  Selected report chain included; see reading map and source register.
+capability_lab
+  Selected report chain included; see reading map and source register.
+coding_100m_01a078f2
+  Coding add-ons/grafts/repair/workspace reports screened; no robust distinctive gain. Sparse-likelihood overlap deduplicated against R01; incomplete runs not successes.
+compiled_organs_stage2
+  Construction prerequisite failed; isolated runtime correctness does not make the generated algorithms correct.
+composition_quality_20260909
+  Selected report chain included; see reading map and source register.
+conscious_ai_20260914
+  Confirmation did not establish distinct hard-binding advantage; physical/theory proposals do not establish consciousness. Not selected as model-building success.
+constraint_fields_20260911
+  Protocols/proposals are not measured successes. No matching qualifying result selected.
+context_efficiency
+  Fast statistical baselines have substantial prior art and weak broad-language evidence. Relevant stronger-baseline lesson retained in R01; generic headline speed ratios omitted.
+dual_breakthrough_20260914
+  ASC and PCT did not pass their capability gates; initial supplied-semantics result was superseded.
+executable_concept_machine
+  History register and result chains show supplied-primitives components, weak grounding or interrupted preparation. No distinctive robust success selected beyond related chosen components.
+foundation_search_20260921
+  Used as a mechanism-history and supersession register, not as a new result.
+godly_3b_20260923
+  Selected report chain included; see reading map and source register.
+gradient_compiler
+  Report/register screened; no sufficiently supported distinctive capability win selected. Implementation checks alone are not a new model success.
+hyperquantization_20260919
+  Compression gains versus weaker controls did not establish broad retention/new mechanisms. Stronger selected pruning evidence is A04; incomplete/unvalidated headline layouts omitted.
+idea_proposals
+  Protocols/proposals are not measured successes. No matching qualifying result selected.
+idea_results
+  Duplicate human-readable mirrors of idea campaign reports; not counted as additional evidence.
+idea_tests_004_005
+  Selected report chain included; see reading map and source register.
+idea_tests_20260921
+  Reports/register screened. No qualifying general candidate advantage; narrow calibration positives and low-memory associations did not beat competent controls. Related useful cache/interface lessons selected elsewhere.
+ideas006_009_language
+  Reports/register screened. No qualifying general candidate advantage; narrow calibration positives and low-memory associations did not beat competent controls. Related useful cache/interface lessons selected elsewhere.
+ideas010_013
+  Reports/register screened. No qualifying general candidate advantage; narrow calibration positives and low-memory associations did not beat competent controls. Related useful cache/interface lessons selected elsewhere.
+ideas014_016
+  Reports/register screened. No qualifying general candidate advantage; narrow calibration positives and low-memory associations did not beat competent controls. Related useful cache/interface lessons selected elsewhere.
+judge_reviews
+  Secondary rankings/review support; used for navigation, not independent measurements.
+latent_channel_field
+  Report/register screened; no sufficiently supported distinctive capability win selected. Implementation checks alone are not a new model success.
+logic_lm_tool_20260915
+  Earlier specialist/router/stateful stages, also mirrored under !!!Current. Later matched controls qualify apparent gains; not counted twice.
+mathworld_20260921
+  Reported/register-tracked successors retired without useful broad transfer; no qualifying success selected.
+minicpm5_1b_review_20260911
+  External model review, not a locally established novel method or independent qualifying success.
+model_room
+  Application/runtime/private chat material, outside the research-findings release. Conversation contents not bundled.
+neural_abi_stage2
+  Selected report chain included; see reading map and source register.
+neural_tool_solver_20260914
+  Earlier specialist/router/stateful stages, also mirrored under !!!Current. Later matched controls qualify apparent gains; not counted twice.
+non_llm_concept_tool
+  History register and result chains show supplied-primitives components, weak grounding or interrupted preparation. No distinctive robust success selected beyond related chosen components.
+non_llm_continuation_lab
+  Selected report chain included; see reading map and source register.
+non_llm_foundations_20260912
+  Register screened; adaptation positives had failed transfer; constraint reuse lost to controls; later learning prerequisites incomplete or failed. Numerical checks alone excluded.
+non_llm_grounded_reasoning
+  History register and result chains show supplied-primitives components, weak grounding or interrupted preparation. No distinctive robust success selected beyond related chosen components.
+non_llm_intervention_lab
+  Selected report chain included; see reading map and source register.
+nonllm_knowledge_agent_20260923
+  Established graph-store/QA infrastructure and tests, not a novel general foundation. No corpus or private record redistribution.
+novel_five_20260911
+  Report/register screened; no sufficiently supported distinctive capability win selected. Implementation checks alone are not a new model success.
+novel_mechanisms
+  Report/register screened; no sufficiently supported distinctive capability win selected. Implementation checks alone are not a new model success.
+parameter_efficiency_lab
+  Compression gains versus weaker controls did not establish broad retention/new mechanisms. Stronger selected pruning evidence is A04; incomplete/unvalidated headline layouts omitted.
+pareto_pruning_lab
+  Selected report chain included; see reading map and source register.
+pc_frontier_20260913
+  Benchmark/baseline or failed promotion evidence; no broad new-model success selected. Format and budget failures do not isolate reasoning ability.
+precision_debate_20260910
+  Precision comparisons retained in source archive; established methods, weak broad-task scores and no distinctive confirmed capability advantage selected.
+precision_sweep_9way_20260910
+  Precision comparisons retained in source archive; established methods, weak broad-task scores and no distinctive confirmed capability advantage selected.
+pretrained_compaction_lab
+  Selected report chain included; see reading map and source register.
+qald_kgqa_frontend_20260923
+  Established graph-store/QA infrastructure and tests, not a novel general foundation. No corpus or private record redistribution.
+quantum_composition_20260909
+  Selected report chain included; see reading map and source register.
+radical_efficiency
+  Fast statistical baselines have substantial prior art and weak broad-language evidence. Relevant stronger-baseline lesson retained in R01; generic headline speed ratios omitted.
+rankings_support
+  Secondary rankings/review support; used for navigation, not independent measurements.
+relational_grammar_20260921
+  Reported/register-tracked successors retired without useful broad transfer; no qualifying success selected.
+semantic_coevolution_20260921
+  Reported/register-tracked successors retired without useful broad transfer; no qualifying success selected.
+six_language_models_20260910
+  Specialty effects and failed transfer in small from-scratch models; no stronger distinctive general success selected. Redundant error-correction routes failed together on important operations.
+stateful_dendritic_tool_20260915
+  Earlier specialist/router/stateful stages, also mirrored under !!!Current. Later matched controls qualify apparent gains; not counted twice.
+strong_prior_extension
+  Selected report chain included; see reading map and source register.
+ten_hypotheses_20260911
+  Report/register screened; no sufficiently supported distinctive capability win selected. Implementation checks alone are not a new model success.
+ten_mb_solver_20260914
+  Earlier specialist/router/stateful stages, also mirrored under !!!Current. Later matched controls qualify apparent gains; not counted twice.
+thousand_dendritic_tool_20260915
+  Earlier specialist/router/stateful stages, also mirrored under !!!Current. Later matched controls qualify apparent gains; not counted twice.
+topological_braid_20260911
+  Report/register screened; no sufficiently supported distinctive capability win selected. Implementation checks alone are not a new model success.
+training_efficiency
+  Selected report chain included; see reading map and source register.
+triad_research_20260914
+  Benchmark/baseline or failed promotion evidence; no broad new-model success selected. Format and budget failures do not isolate reasoning ability.
+wikidata_nonllm_baseline_20260923
+  Established graph-store/QA infrastructure and tests, not a novel general foundation. No corpus or private record redistribution.
+
+ROOT-LEVEL MATERIAL
+35_research_assessment.txt and 21_toy_findings.txt support R06. Historical
+START_HERE, rankings, dashboard, handoffs and aggregate snapshots were used
+as navigation, then checked against later reports where relevant. They are
+not current operational instructions or separate successful experiments.
+
+This release is a curated snapshot, not an immutable freeze of the whole
+live workspace. Selected source bytes were checked again during packaging.
+No training, benchmark-generation run, remote compute or publication was
+started. Web browsing was limited to generic primary-source prior-work checks.

@@ -1,0 +1,160 @@
+E024 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/cognitive_kernel_project_20260919/experiment_BM_matching_attribution/REPORT.md
+Original SHA-256: ed27f6ea7ba6577a72991c4d36d765a42d08af64fbf80637277de0f3fcf019b7
+Original byte count: 7624
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Experiment BM — Learned matching versus an identity-matching prior
+0002 | 
+0003 | ## Decision
+0004 | 
+0005 | **Primary arm A passed every preregistered one-hop gate. Retain it only as a
+0006 | learned one-hop binding component. Do not launch multi-hop training and do not
+0007 | open BK confirmation.**
+0008 | 
+0009 | All three arms reached 100% final endpoint accuracy and 100% both-members
+0010 | correctness on all four diagnostic views. Their scientific meanings differ:
+0011 | 
+0012 | - **A independently learned matching.** Its correct-row attention began near
+0013 |   chance (0.83–1.03%) and reached 100% on every view using final destination
+0014 |   labels only.
+0015 | - **B began with an architectural matching prior.** Its shared normalized
+0016 |   query/key map selected the correct row 100% before training. Training sharpened
+0017 |   attention, but did not establish discovery of the matching rule.
+0018 | - **C kept that matching geometry frozen.** Its geometry hash never changed,
+0019 |   while endpoint accuracy rose from chance to 100%. This isolates learned
+0020 |   temperature/content/answer decoding under an engineered row-selection prior.
+0021 | 
+0022 | This is a strong memory-access component result, not novel reasoning, a joint
+0023 | reasoner, or evidence of general intelligence.
+0024 | 
+0025 | ## Mandatory implementation checks
+0026 | 
+0027 | All checks completed before the real update budget:
+0028 | 
+0029 | - all 60,000 training labels and 8,192 diagnostic labels replayed exactly;
+0030 | - every graph had 96 unique `(source, operation)` keys;
+0031 | - pair members stayed adjacent and shared the same graph;
+0032 | - no graph in any diagnostic view overlapped training;
+0033 | - all three common-module initialization hashes matched within the Kaggle run;
+0034 | - B/C initial logits matched exactly;
+0035 | - intended address/content gradients were present in A/B and C's frozen
+0036 |   geometry received none;
+0037 | - a discarded probe update left C geometry hash-identical;
+0038 | - step-zero checkpoints were saved before real training; and
+0039 | - padding, masked garbage, fact permutation, variable batch size and batch
+0040 |   reordering all preserved predictions. Final maximum logit differences were
+0041 |   `2.86e-6` for A and `3.81e-6` for B/C, below the frozen `1e-5` tolerance.
+0042 | 
+0043 | The frozen training/data hashes reproduced locally and on Kaggle:
+0044 | 
+0045 | - training: `63dac0c66e30dfea2ba5868ec4636bd6153dad28826344dff172bcd593111bfe`;
+0046 | - historical: `e3e9651ac23f479856464077d7b28dbbb836fccd2ec88de7954aee8d65b484c2`;
+0047 | - unbiased: `6896f0ee076fe4baca240b822e981b34bc68a94ae1768e613326de3b4aafabb9`;
+0048 | - destination reassignment: `ff3e494fa6a4dabbdc4f17b9fd5006f201075471b853e2c2374b2e47c491af14`;
+0049 | - entity renaming: `9cb064be171cd942f81c4feaf3c76f0912c0d05a8c017a520dd7aab50becd465`.
+0050 | 
+0051 | ## Step-zero measurements
+0052 | 
+0053 | Endpoint/attention percentages are shown as `endpoint / correct-row argmax`.
+0054 | B and C are identical at initialization.
+0055 | 
+0056 | | Arm | Historical | Unbiased | Destination reassignment | Entity renaming | Initial beta |
+0057 | |---|---:|---:|---:|---:|---:|
+0058 | | A independent | 1.71 / 0.83 | 1.81 / 0.93 | 1.42 / 0.93 | 1.07 / 1.03 | 10.0 |
+0059 | | B shared | 1.46 / 100 | 1.56 / 100 | 1.61 / 100 | 1.07 / 100 | 10.0 |
+0060 | | C shared frozen | 1.46 / 100 | 1.56 / 100 | 1.61 / 100 | 1.07 / 100 | 10.0 |
+0061 | 
+0062 | Initial correct-row mass for A was 0.97–1.08%, essentially uniform over 96
+0063 | facts. For B/C it was 80.68–81.07%. Thus B/C's row selection is explicitly an
+0064 | architectural identity-matching prior, not learned behavior.
+0065 | 
+0066 | ## Final diagnostic measurements
+0067 | 
+0068 | Every row below has **2,048/2,048 endpoints**, **512/512 start pairs**,
+0069 | **512/512 operation pairs**, and **2,048/2,048 correct attention argmaxes**.
+0070 | 
+0071 | | Arm | View | Endpoint | Both start | Both operation | Correct-row mass | Entropy |
+0072 | |---|---|---:|---:|---:|---:|---:|
+0073 | | A | historical | 100% | 100% | 100% | 93.768% | 0.3803 |
+0074 | | A | unbiased | 100% | 100% | 100% | 94.092% | 0.3640 |
+0075 | | A | destination reassignment | 100% | 100% | 100% | 94.092% | 0.3640 |
+0076 | | A | entity renaming | 100% | 100% | 100% | 94.133% | 0.3618 |
+0077 | | B | historical | 100% | 100% | 100% | 99.073% | 0.0878 |
+0078 | | B | unbiased | 100% | 100% | 100% | 99.067% | 0.0882 |
+0079 | | B | destination reassignment | 100% | 100% | 100% | 99.067% | 0.0882 |
+0080 | | B | entity renaming | 100% | 100% | 100% | 99.070% | 0.0879 |
+0081 | | C | historical | 100% | 100% | 100% | 82.964% | 0.9482 |
+0082 | | C | unbiased | 100% | 100% | 100% | 82.588% | 0.9636 |
+0083 | | C | destination reassignment | 100% | 100% | 100% | 82.588% | 0.9636 |
+0084 | | C | entity renaming | 100% | 100% | 100% | 82.881% | 0.9531 |
+0085 | 
+0086 | The fixed 2,048-case training subset was also 100% for all arms. Final learned
+0087 | temperatures were 10.2148 (A), 9.9489 (B), and 10.2996 (C).
+0088 | 
+0089 | Destination-reassignment performance establishes that final answers follow the
+0090 | stored destination content rather than a query-only association. Entity-
+0091 | renaming performance establishes consistent use of arbitrary entity identities
+0092 | within each graph.
+0093 | 
+0094 | ## Training, parameters and compute
+0095 | 
+0096 | | Arm | Active | Trainable | Frozen | Loss epoch 1 → 8 | Train time | Peak allocated / reserved | Median latency |
+0097 | |---|---:|---:|---:|---:|---:|---:|---:|
+0098 | | A | 249,601 | 249,601 | 0 | 0.6205 → 0.0001165 | 49.87 s | 172.1 / 226.5 MB | 0.01222 ms/case |
+0099 | | B | 216,577 | 216,577 | 0 | 0.2934 → 0.0000937 | 49.85 s | 171.7 / 218.1 MB | 0.01278 ms/case |
+0100 | | C | 216,577 | 178,945 | 37,632 | 0.3176 → 0.0000917 | 31.40 s | 91.0 / 136.3 MB | 0.01283 ms/case |
+0101 | 
+0102 | Each arm used exactly 1,880 updates with the identical examples and batch
+0103 | orders. Full per-update loss curves and first/last gradient-group summaries are
+0104 | preserved in `TRAINING_CURVES.json`.
+0105 | 
+0106 | ## Attribution
+0107 | 
+0108 | Arm A is the key positive result: it started without correct-row access and
+0109 | learned a reliable source-operation binding from final endpoint loss. Because
+0110 | its attention and endpoints both transfer perfectly to unbiased sampling,
+0111 | destination reassignment and consistent entity renaming, this is evidence for
+0112 | learned neural matching plus learned content decoding.
+0113 | 
+0114 | B and C do not independently establish learned matching. Both select the
+0115 | correct row before training because identical normalized mappings are applied
+0116 | to identical source-operation tuples. C proves that, once this prior supplies
+0117 | the row, the common module can learn to decode arbitrary destination content.
+0118 | B sharpens attention geometry, but B and C have a zero-point endpoint gap on
+0119 | every view. Under the frozen rule this establishes no material endpoint benefit
+0120 | from training B's shared geometry in this screen.
+0121 | 
+0122 | BL remains the historical control at 1.8555% endpoint accuracy. BM changes the
+0123 | complete addressing/content module, so BM versus BL does not isolate one layer,
+0124 | normalization choice, or contamination effect.
+0125 | 
+0126 | ## Claim boundary
+0127 | 
+0128 | BM demonstrates one-hop associative memory access. It does not test multi-hop
+0129 | state reuse, procedure learning, arithmetic integration, broad knowledge,
+0130 | continual learning, or general reasoning. Successful one-hop lookup is not
+0131 | novel reasoning. The result is returned to the orchestrator without selecting
+0132 | or launching a subsequent experiment.
+0133 | 
+0134 | ## Execution and integrity
+0135 | 
+0136 | - Private Kaggle version: `351097635`
+0137 | - Frozen source SHA-256:
+0138 |   `6ce13a4d829bfe03dec5c24355b7c29c57cf8c69e9e9deefce357f627651f3d0`
+0139 | - Archive SHA-256:
+0140 |   `5a6e23b40b3b0789365748b0fd6bd78f3bb68871c7f07b567337ae2dc21a64b5`
+0141 | - Results SHA-256:
+0142 |   `80b31d0bf2a5d2b9c8d4a83aa54f092eb13e41e3c52d94add2c3f4edd47aba09`
+0143 | - Preflight SHA-256:
+0144 |   `bd184c9c72820e6f0e5e69605882ab0c9f4524c1123e2d2b506e83387cc75df1`
+0145 | - Training-curves SHA-256:
+0146 |   `1942df1cd9f6c35bc57c292895cddeeca6a1a89e06f530b0a549ee84f32f5c40`
+0147 | - Manifest SHA-256:
+0148 |   `9673fb89fee73779bec46ee4b6382301c0cd45d4f325e6bf00d19cc1ea47fbad`
+0149 | - Manifest verification: 10 entries, 0 mismatches.
+0150 | 
+0151 | Hash verification establishes integrity, not a broader reasoning claim.

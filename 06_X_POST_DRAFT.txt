@@ -1,0 +1,37 @@
+X POST DRAFT — USE AFTER YOU PUBLISH THE FOLDER
+
+I put together 20 research notes on small models, LoRA training, sparse
+likelihoods, memory and modular reasoning. Each includes measured results,
+controls, failure boundaries and sources. Useful experiments, not
+world-first claims. [repo link]
+
+OPTIONAL THREAD
+
+1/ I extracted the useful successes from my research archive into readable
+text notes. Some are partial wins. Every finding keeps its baselines and
+failed follow-ups, so you can see what is actually supported. [repo link]
+
+2/ Sparse token corrections improved a small byte LM's loss by 1.78% while
+taking 45.59% less training time than its dense correction control. With a
+stronger prior, time savings fell to 6.19%. Both results are included. R01.
+
+3/ Learned intervention coordinates reached 99.63% prediction accuracy in
+six constrained Boolean worlds, versus 71.10% for a strengthened regression
+control. They failed when the assumptions changed. A component, not a general AI. R02.
+
+4/ A neural interface worked much better when decoders trained on the exact
+shared code. Later tests exposed input-order failures and long-chain errors.
+The notes include the mechanism, successful swaps and those boundaries. R03.
+
+5/ A rank-8 LoRA continuation improved a separate frozen 48-question subset
+from 27/48 to 35/48. It also used about twice the generation time. The data
+mix, controls and failed larger follow-up are documented. A01.
+
+6/ Other notes cover data coverage, learned message binding, exact incremental
+computation and evaluation traps. These are research knowledge, not model
+weights or a promise of better reasoning from training on the notes. [repo link]
+
+Edit the voice and insert your real repository link. No post has been sent.
+The 20 notes are 14 distinctive local experiments plus 6 applied case studies;
+this is not a count of 20 novel algorithms. Detailed numbers and sources are
+in the corresponding cards.

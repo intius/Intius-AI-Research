@@ -1,0 +1,79 @@
+E013 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: quantum_composition_20260909/MECHANISMS.md
+Original SHA-256: 1f3e985e6027d0780abb126796eafd366fa59c858780e9d4e47c2f98216fd6a1
+Original byte count: 3851
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # What the experimental computations do
+0002 | 
+0003 | All computation in this round is classical. The task supplies examples of an
+0004 | unknown function, and the structured models predict its missing table entries.
+0005 | A supplied interpreter then composes predicted functions. Learning the table
+0006 | and learning an interpreter are different difficulties; direct sequence models
+0007 | must do more of the latter themselves.
+0008 | 
+0009 | ## Interference without quadratic storage
+0010 | 
+0011 | For a proposed input/output pair (x,y), each observed pair (s,t) retrieves a
+0012 | learned kernel response k(x-s,y-t), with differences taken modulo eleven.
+0013 | The original relation model averages responses, mixes four channels, and
+0014 | applies softmax. The real-amplitude variant squares each channel's average
+0015 | before combining channels and normalizing. Squaring gives
+0016 | 
+0017 |     (sum_i k_i)^2 = sum_i k_i^2 + 2 sum_{i<j} k_i k_j.
+0018 | 
+0019 | The cross terms couple the evidence pairs without storing separate parameters
+0020 | for every pair. Their benefit is a testable representational hypothesis; it is
+0021 | not new physics or an exponential computational resource. The complex variant
+0022 | uses two real coordinates and square magnitude. The incoherent ablation sums
+0023 | squared responses before pooling, removing cross terms. The gate variant
+0024 | learns a context-dependent blend of the two intensities.
+0025 | 
+0026 | The original relation and real-amplitude models each have 4,520 learned real
+0027 | values. Complex coherent and complex incoherent models each have 5,004.
+0028 | The gate adds parameters (8,005 total); its comparison is not parameter-matched.
+0029 | The selected real candidate's originally designated incoherent control has two
+0030 | coordinates rather than one. If that candidate wins development selection,
+0031 | an exact one-coordinate ablation is needed to isolate interference itself.
+0032 | 
+0033 | ## Tensor chains
+0034 | 
+0035 | An operator's eleven evidence tokens select small matrices. Their ordered
+0036 | product carries an eight-dimensional latent state, normalized during the
+0037 | contraction. A readout predicts the eleven-by-eleven transition table. The
+0038 | softmax version, real Born version and complex Born version compare readout
+0039 | and representation choices. The complex version has substantially more real
+0040 | numbers; equal bond dimension is not equal parameter count.
+0041 | 
+0042 | ## Reusing neural parameters
+0043 | 
+0044 | Shared refinement repeatedly applies one attention block to evidence, either
+0045 | with or without feedback from its errors on observed transitions. Ridge and
+0046 | delta fast-weight models fit a small temporary associative memory from the
+0047 | current examples; this costs inference work and temporary memory. Generated
+0048 | low-rank operators construct transition factors from evidence. The routed
+0049 | expert model currently evaluates all four experts and selects one; its code
+0050 | does not demonstrate reduced sparse-compute cost.
+0051 | 
+0052 | The direct sequence controls use a small causal Transformer, four applications
+0053 | of a shared block, or four learned scratch tokens. They operate on synthetic
+0054 | tokens and are not natural-language LLMs. Repeating a block increases compute;
+0055 | extra depth is not free capacity.
+0056 | 
+0057 | ## Symbolic methods
+0058 | 
+0059 | Finite-field interpolation infers a polynomial from current observations.
+0060 | Five distinct examples determine every degree-at-most-four polynomial over
+0061 | the supplied field. A high cubic or quartic score therefore credits this known
+0062 | mathematical prior. Segmented inference searches simple piecewise affine rules.
+0063 | Library repair uses a symbolic prediction when no learned rule matches all
+0064 | examples; mixture variants compare predictions on held-out demonstrations.
+0065 | Joint inference keeps one hypothesis for an operator across repeated calls,
+0066 | enumerating small joint spaces and sampling larger ones.
+0067 | 
+0068 | These are bounded inference algorithms. Low learned-state size excludes the
+0069 | algorithms, mathematical priors, inputs and runtime memory. Success here does
+0070 | not establish compression of broad language knowledge or coding ability.

@@ -1,0 +1,20 @@
+E033 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: godly_3b_20260923/CONFIRMATION_FREEZE.md
+Original SHA-256: 3f9c4519501cff351571e53617040333e48eddebd2639befd6280dc6b53683e4
+Original byte count: 2426
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Post-selection public confirmation — frozen before inference
+0002 | 
+0003 | The first 24-case public subset helped select Stage 2, so its paired p-value is descriptive for that subset. This next check fixes **48 different public test questions** before generating any answers: 24 MMLU-Pro (four per biology, computer science, history, law, math, physics) and 24 GSM8K. `confirmation_public48.json` was built from the already pinned dataset revisions using selection seed `54671`, with suite SHA-256 `e6df59a919dc3747e2c4d741c4d82aafcf2c28925be509663e7bce64a5f2105b`. It has zero exact ID/prompt overlap with the earlier 24 public cases and zero exact prompt overlap with the 1,024 Stage 2 training rows.
+0004 | 
+0005 | Compare the unchanged Stage 1 adapter (`adapter_candidate/step_0256`) and selected Stage 2 adapter (`adapter_stage2/step_0256`) on the same private Colab T4, pinned Nanbeige base revision and Transformers 4.45.1. Use each case's 512-token cap, native thinking mode, the existing `run_sampled_control` implementation (temperature 0.6, top-p 0.95, top-k 20), and seed base `73091` for both arms. Run Stage 1 first, then Stage 2; save each prompt, raw generation, strict answer, seed, time, output tokens and peak allocated GPU memory before moving to the next case. No training, prompt changes, checkpoint selection or decoding changes may use these answers.
+0006 | 
+0007 | Frozen source SHA-256: `confirmation_eval.py` = `42b1c74043389ecafb423375382afd5c81f545671d1cc3084d9febe605a7fbbb`; `confirmation_public48.json` = `363143f3f46d05edfc169034f4d34e1cae6aba13302c51cfdf88f6c88670e4a2`.
+0008 | 
+0009 | The private VM regenerated the same 48 cases from pinned source/data and matched the suite digest exactly. Its LF-serialized JSON file SHA-256 is `edef720db3567dbd5ac9960604884e642785b667419587a3251ae010a456c6b4`; the local Windows CRLF file normalizes to this same hash.
+0010 | 
+0011 | Stage 2's earlier gain receives provisional independent support if it scores at least **four more of the 48** cases than Stage 1 and does not lose more than two in either 24-case axis. Report the exact paired McNemar p-value, paired bootstrap interval, latency and memory regardless of this gate. A failure does not erase the earlier observed score; it limits the claim. Even a pass is a small released-data confirmation, not a broad state-of-the-art or 100B comparison. Both models may have seen some public examples during pretraining, which this study cannot establish or exclude.

@@ -1,0 +1,134 @@
+E002 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: strong_prior_extension/RESULTS.txt
+Original SHA-256: e9452554c649f6f7b59d7c0d198204a94a9ae60df3dd39e79b01d55fc5abed0f
+Original byte count: 7605
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | STRONG PRIOR CORRECTION, EXACT PACKING AND COMMON QUALITY RANKINGS
+0002 | Completed 2026-09-07T16:44:17.171795+00:00. All new work is local in workspace/strong_prior_extension.
+0003 | 
+0004 | The neural correction adds a small reproducible gain to a strong prior.
+0005 | Its combined confirmation gate FAILED because wall savings were below 10%.
+0006 | A separate exact preparation optimization improves measured step speed.
+0007 | The common document comparison still favors an earlier shallow neural model.
+0008 | The frontier-capability goal remains OPEN.
+0009 | 
+0010 | FROZEN THREE-SEED RESULTS
+0011 | WikiText2 full test, 128-byte resets, 1,291,904 scored bytes. CE is nats/byte.
+0012 | Model                          Test CE      Train+monitor mean   With prior fit
+0013 | Strong prior alone             1.733285699    no neural updates   2.604983 s fit/cal
+0014 | Strong prior + dense            1.715104827       37.513496 s      40.118479 s
+0015 | Strong prior + sparse tilt      1.713857491       35.190158 s      37.795141 s
+0016 | Weak prior + sparse tilt        1.998310523       20.619962 s      20.771004 s
+0017 | 
+0018 | Strong tilt lowers the strong prior's mean test loss by 1.121% and
+0019 | wins against that prior in all three seeds. The paired loss reduction is
+0020 | 0.019428 nats/byte; the conditional block-bootstrap 95% interval is
+0021 | [-0.019946, -0.018935] for tilt minus prior. This is conditional on the fixed
+0022 | corpus, prior and trained models, not independent architecture replication.
+0023 | Relative to strong dense, wall time falls 6.193% and process CPU 13.436%.
+0024 | Mean test loss is only 0.073% lower than dense;
+0025 | tilt does not beat dense in every seed. The 10% wall gate remains FAILED.
+0026 | 
+0027 | The pilot used validation only and passed its admission gate. Fresh confirmation
+0028 | used new seeds and saved all nine final checkpoints before official test scores.
+0029 | Every checkpoint replayed the complete fixed validation sample with error zero.
+0030 | Prior data: first 3M training bytes; cache calibration: next 131,072 bytes.
+0031 | Neural pool: the remaining 7,820,490 training bytes. Each run draws 614,400
+0032 | target-byte presentations in 600 updates. No validation/test labels fit the prior.
+0033 | The total research cost includes pilots, setup, evaluation and analysis too.
+0034 | 
+0035 | STORAGE AND TIMING
+0036 | Strong prior arrays: 440,068 bytes. Dense: 112,960 neural parameters; tilt:
+0037 | 111,808. Strong tilt stores 887,300 bytes of neural FP32 weights plus prior
+0038 | arrays, before scalar metadata, regenerated RoPE buffers, interpreter and
+0039 | dynamic cache/activation memory. This is not an enormous parameter reduction.
+0040 | Runtime setup/warmup, saving and full-test scoring are separate from the table.
+0041 | The 2.605-second prior figure includes its calibration and is charged to both
+0042 | strong methods. The weak prior fit was 0.151 s and its arrays occupy 467,157
+0043 | bytes. Different priors explain most of the strong-versus-weak quality gain.
+0044 | 
+0045 | GRAMMAR DIAGNOSTIC
+0046 | Fixed 1,340-pair BLiMP sample, 20 from each paradigm, seed 10192. First final
+0047 | neural seed only; not the whole BLiMP benchmark or a model-selection target.
+0048 | Raw preference accuracy:
+0049 |   prior_strong       52.015%
+0050 |   dense_strong       51.418%
+0051 |   tilt_strong        52.985%
+0052 |   tilt_weak          52.164%
+0053 | These results still do not establish strong grammar or general intelligence.
+0054 | They must not outrank another model measured on the full 67,000-pair benchmark.
+0055 | 
+0056 | COMPUTATION BOTTLENECK AND EXACT OPTIMIZATION
+0057 | The separate paired profile puts prior packing at approximately
+0058 | 43.7% of the sparse model's step time.
+0059 | Replace full vocabulary sorting with top-16 insertion selection. Fall back to
+0060 | the original sorter for every tie that could change selected order/membership.
+0061 | 32,768 real tokens and explicit tie cases gave identical packed probabilities,
+0062 | candidate IDs and gradients. Both optimizers ended with identical weights after
+0063 | 28 matched updates; maximum difference zero. About 15.75% of checked rows used
+0064 | the tie fallback. Earlier model/source/results files were preserved.
+0065 | Paired median packing speedup: 1.633x.
+0066 | Paired median full-step speedup: 1.121x.
+0067 | These are separate component/step timings, not a remeasurement of the whole
+0068 | 600-update confirmation. They do not relabel its failed gate. Short process
+0069 | CPU measurements have coarse clock resolution; wall timings carry this profile.
+0070 | No 100x training, measured energy reduction or accelerator result is claimed.
+0071 | 
+0072 | COMMON HELD-OUT DOCUMENT SCORECARD
+0073 | Same 128 WikiText103 articles, 522,176 bytes, 64-byte resets for every row.
+0074 | Articles/crops come from the pruning study and exclude WikiText2 articles and
+0075 | long overlapping paragraphs under its documented filter. All our models were
+0076 | already frozen. This is a common scoring comparison across different training
+0077 | and state budgets, not an equal-compute learning-rule experiment.
+0078 | Rank Model                              CE          Models
+0079 |  1. Full 2-layer neural                1.555977    1
+0080 |  2. Full-data backoff/cache            1.637568    3
+0081 |  3. Earlier sparse logistic            1.645547    3
+0082 |  4. Earlier fingerprint count          1.672011    3
+0083 |  5. Strong prior + sparse tilt         1.730479    3
+0084 |  6. Strong prior + dense correction    1.733023    3
+0085 |  7. Strong prior alone                 1.750116    1
+0086 |  8. Budgeted SVD compression           1.875404    3
+0087 |  9. Budgeted neuron pruning            1.875754    3
+0088 | 10. Uniform SVD compression            1.890266    3
+0089 | 11. Weak prior + sparse tilt           2.002417    3
+0090 | 
+0091 | Twenty model results were scored here; nine pruning-study results were imported
+0092 | with identical document hashes and independently recomputed weighted means.
+0093 | The strongest shallow neural reference stays ahead. Strong tilt improves its
+0094 | own prior on these documents too, but has not earned an overall quality lead.
+0095 | 
+0096 | IMPLEMENTATION FAILURE RETAINED
+0097 | The first common-document script completed 14 model evaluations and then used
+0098 | the nonexistent filename wikitext2_count_6201.txt. The actual fingerprint count
+0099 | checkpoint is named tagged and requires 05_strong_controls.py.txt. The original
+0100 | script and partial measurements remain intact. 17_finish_common_documents.py.txt
+0101 | checks and preserves the 14 completed results, then finishes the remaining
+0102 | families with their original stored strength/scale settings. No model was
+0103 | retrained, changed, or selected in this correction.
+0104 | 
+0105 | FILES
+0106 | 00_protocol.txt                 Fixed prior, pilot and confirmation rules.
+0107 | 01_runtime.py.txt               Strong prior/cache packing and correctness checks.
+0108 | 02_experiment.py.txt            Original pilot/confirmation trainer.
+0109 | 03_pilot.txt / 03_checkpoints/   Pilot and both common priors.
+0110 | 04_signed_stress_results.txt    Explicit negative sparse-weight checks.
+0111 | 05_confirmation.txt            All final timing, test and gate records.
+0112 | 05_checkpoints/                All nine final trained neural states.
+0113 | 07_grammar_and_audit.txt        Grammar pairs, checkpoint replays and interval.
+0114 | 10_profile.txt                 Paired timing components.
+0115 | 11_packing_optimization.py.txt  Exact candidate-selection optimization.
+0116 | 12_packing_results.txt          Equality checks and paired step measurements.
+0117 | 14_common_document_protocol.txt Common scoring rules.
+0118 | 16_common_documents.txt         Preserved partial result before loader failure.
+0119 | 18_common_documents_complete.txt All 29 completed model/document outcomes.
+0120 | 20_completion_audit.txt         Consolidated arithmetic/provenance audit.
+0121 | 
+0122 | Residual n-gram/neural models and cache methods have substantial prior art:
+0123 | https://aclanthology.org/2022.findings-emnlp.109/
+0124 | https://arxiv.org/abs/1612.04426
+0125 | No general novelty or frontier-equivalence claim is made.

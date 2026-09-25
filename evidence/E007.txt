@@ -1,0 +1,92 @@
+E007 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: idea_tests_004_005/REPORT_004.md
+Original SHA-256: e4cce8fbaea623917824ad753865d9f6a6a9a4aa24bd6ab0a28c5c293f7bcb38
+Original byte count: 4382
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Idea 004 — Neural ABI: controlled compatibility result
+0002 | 
+0003 | The original coordinate-penalty implementation failed its compatibility gate.
+0004 | One explicitly declared follow-up additionally trained decoders on exact protocol
+0005 | messages. It **passed** the compatibility gate. Both results are preserved.
+0006 | Scores below are 1 minus mean variance-normalized squared error across eight numerical outputs. They are not percentages of questions answered correctly, intelligence scores, or measures of general capability.
+0007 | 
+0008 | | Configuration | Native score | Cross-component score |
+0009 | |---|---:|---:|
+0010 | | Ordinary independent models, no adapter | 0.998882 | -6.711860 |
+0011 | | Ordinary models, affine adapter per pair | — | 0.985618 |
+0012 | | Shared port penalty, original | 0.995853 | 0.862559 |
+0013 | | Decoder-conformance follow-up | 0.998494 | 0.998502 |
+0014 | | Follow-up, permuted coordinates | — | -0.909559 |
+0015 | 
+0016 | ## Interpretation
+0017 | 
+0018 | This tests independently trained encoder/head combinations without a learned
+0019 | pair-specific adapter, using a deliberately supplied semantic protocol. Each lab
+0020 | has its own sensor rotation, fitting data and ordinary model weights. The shared
+0021 | code encodes four state coordinates; it does not supply the eight answer outputs.
+0022 | The three architecture designs are dense, residual and gated MLPs. This is not a
+0023 | demonstration across language, vision and robotics foundation models.
+0024 | 
+0025 | The original heads' mean score on exact public codes is
+0026 | 0.869646, compared with
+0027 | 0.995853 on their own ports and
+0028 | 0.870689 after removing
+0029 | the nominally unused 12-dimensional subspace. These diagnostics assess dependence
+0030 | on private deviations; they do not prove which individual coordinates encode
+0031 | which learned computations. The corrected training gives each decoder examples
+0032 | of the exact agreed code, closing that unsupervised part of the contract.
+0033 | 
+0034 | The follow-up's expanded-domain cross score is
+0035 | 0.969575. This diagnostic samples [-1.3,1.3]
+0036 | and includes some in-domain points. No language/OOD universality claim follows.
+0037 | 
+0038 | ## Replication units and cost
+0039 | 
+0040 | Three independent training seeds; six directed swaps per seed share trained
+0041 | components and are not 18 independent training replications. Cross scores by seed:
+0042 | 
+0043 | - Seed 401: original 0.841581; conformance 0.998244.
+0044 | - Seed 402: original 0.897439; conformance 0.998637.
+0045 | - Seed 403: original 0.848656; conformance 0.998625.
+0046 | 
+0047 | Original: 18 fits, 1600 updates each; total reported fitting time
+0048 | 68.56s. Extension: 9 fits, same update count,
+0049 | 42.29s. The extension adds a head-only
+0050 | forward/backward on exact protocol messages; it is not compute-identical to the
+0051 | original. All models start randomly; no pretrained LLM or quantization is used.
+0052 | The public code uses 256 bytes in float32, the sensor rotation 64 bytes per lab,
+0053 | and each port message 64 bytes. An affine adapter is 17 x 16 float32 values = 1,088 bytes,
+0054 | plus file/runtime overhead, and needs 256 calibration states per pair.
+0055 | 
+0056 | | Deployment | Parameter bytes | CPU process peak MB | Batch1 latency ms |
+0057 | |---|---:|---:|---:|
+0058 | | abi_native | 61,792 | 543.12 | 0.1229 |
+0059 | | abi_pair | 61,792 | 543.15 | 0.1364 |
+0060 | | dense | 36,640 | 543.37 | 0.0741 |
+0061 | | gru | 56,608 | 547.63 | 0.3554 |
+0062 | | residual | 36,640 | 544.51 | 0.1062 |
+0063 | 
+0064 | 
+0065 | The ABI pair memory probe assembles a dense encoder and residual decoder from
+0066 | the original standard arm. The corrected arm has the same tensor shapes but was
+0067 | not separately measured. Inference discards unused parts of both source models.
+0068 | ABI does not inherently reduce the parameter size of this composed model.
+0069 | 
+0070 | ## Limits and prior art
+0071 | 
+0072 | This is engineered numerical interoperability. No conversational ability,
+0073 | advanced mathematics, learned universal semantics, general-model RAM advantage
+0074 | or ability to connect arbitrary third-party models was demonstrated. The shared
+0075 | semantic code is supplied by the experimenter. The correction was selected after
+0076 | the first result, and its positive evidence needs independent follow-up.
+0077 | Zero-shot stitching already exists in
+0078 | [Relative Representations](https://arxiv.org/abs/2209.15430); this pilot does not
+0079 | establish worldwide novelty.
+0080 | 
+0081 | See PROTOCOL.md, PROTOCOL_004_EXTENSION.md, artifacts/abi/RESULTS.json and
+0082 | artifacts/abi_contract/RESULTS.json. AUDIT.json independently recomputes all saved
+0083 | metric rows. Full source, arrays and checkpoints are in the verified archive.

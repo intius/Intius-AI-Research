@@ -1,0 +1,100 @@
+E012 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: quantum_composition_20260909/RESULTS.md
+Original SHA-256: bae043ed5cbf7d84541d5763da04fe3519c22a865cc9127df99cd18219155410
+Original byte count: 8189
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Completed second compact-reasoning campaign
+0002 | 
+0003 | **31 configurations this round:** twenty neural prototypes and ten non-LLM methods in the screen, followed by one exact parameter-matched neural ablation.
+0004 | Six screen controls repeat earlier definitions; initialization repeats and repeated evaluations are not additional configurations.
+0005 | 
+0006 | All code was built locally; training and full testing ran on the private [private compute account] CPU Colab VM. No pretrained weights, model APIs, Astra calls or quantum hardware were used.
+0007 | 
+0008 | ## Strongest confirmed family
+0009 | 
+0010 | The development-selected symbolic/library mixture with persistent hypotheses scored **82.67%** on the latest fresh primary set, versus **62.94%** for the previous canonical library. That is **+19.73 percentage points** and **53.2% fewer errors** on these synthetic worlds.
+0011 | 
+0012 | Both retain **21,280 bytes of learned numeric state**. The added polynomial inference and evidence checks are supplied algorithms and cost computation. This is not a measurement of compressing a general LLM. The adjusted paired p-value for this comparison is 5.51e-93.
+0013 | 
+0014 | Latest confirmation seed: 2026090933; 2,048 primary worlds. Main screen seed: 2026090931; 4,352 worlds across six original and five stress slices.
+0015 | 
+0016 | ## Main screen: quality and inference cost
+0017 | 
+0018 | | Method | Primary accuracy | Learned numeric state | Batch throughput, ms/case |
+0019 | | --- | ---: | ---: | ---: |
+0020 | | canonical_marginal_control | 64.21% | 21,280 B | 1.474 |
+0021 | | raw_uncapped_control | 61.33% | 129,523 B | 0.968 |
+0022 | | lagrange_min_degree | 69.24% | 0 B | 2.280 |
+0023 | | segmented_affine_mdl | 79.35% | 0 B | 5.614 |
+0024 | | symbol_library_fallback | 83.74% | 21,280 B | 3.717 |
+0025 | | symbol_library_evidence_mixture | 84.13% | 21,280 B | 25.661 |
+0026 | | symbol_library_persistent | 83.94% | 21,280 B | 26.282 |
+0027 | | relation_mixture_control | 27.54% | 18,080 B | 0.235 |
+0028 | | born_real_interference | 33.45% | 18,080 B | 0.304 |
+0029 | | born_complex_interference | 34.62% | 20,016 B | 1.419 |
+0030 | | born_decoherence_gate | 34.13% | 32,020 B | 0.993 |
+0031 | | tensor_chain_softmax | 20.46% | 38,148 B | 0.051 |
+0032 | | tensor_chain_born | 20.65% | 37,664 B | 0.047 |
+0033 | | tensor_chain_complex_born | 19.53% | 75,328 B | 0.090 |
+0034 | | causal_transformer_control | 9.03% | 418,748 B | 0.469 |
+0035 | | recurrent_causal_transformer | 8.30% | 284,860 B | 1.149 |
+0036 | | scratchpad_causal_transformer | 8.30% | 419,772 B | 0.710 |
+0037 | 
+0038 | The marginal symbolic mixture slightly outscored the persistent version in the screen. Persistence therefore does not explain the large gain over the original library. Much of that gain comes from adding a correct polynomial prior after the earlier cubic-rule failure was observed.
+0039 | 
+0040 | Numeric state excludes algorithms, fixed mathematical priors, interpreter/runtime, evidence, and temporary inference arrays. Pure symbolic methods can have zero trained values while still containing substantial prior information and computation. Batched timings include all eleven screen slices; they are not single-request latency, FLOPs or energy measurements.
+0041 | 
+0042 | On the latest confirmation set, cubic accuracy rises from 18.16% to 100%, contributing +20.46 points to the four-slice average. Ordinary and long-rule regressions offset 0.73 points, leaving the +19.73-point net gain. Thus the large headline improvement comes from the added polynomial capability, not broad improvement across the task families.
+0043 | 
+0044 | ## Did interference itself help?
+0045 | 
+0046 | On the third fresh set, three initializations of the coherent model averaged **33.54%**, versus **27.47%** for the exact one-coordinate incoherent control: **+6.07 points**.
+0047 | 
+0048 | Both have **4,520 trainable real values / 18,080 bytes** and start each paired run from the same weights. The ablation changes summing squared responses to squaring summed responses, introducing evidence cross terms. It retains the context mixer, supplied execution, anchoring, examples, batch order, update budget and selection procedure.
+0049 | 
+0050 | | Initialization | Interference | Matched incoherent control | Adjusted paired p |
+0051 | | --- | ---: | ---: | ---: |
+0052 | | 2026090920 | 33.64% | 28.52% | 3.705e-07 |
+0053 | | 2026091021 | 33.84% | 25.98% | 1.974e-16 |
+0054 | | 2026091122 | 33.15% | 27.93% | 7.019e-08 |
+0055 | 
+0056 | The three runs share the same test worlds. Their results are not pooled as three independent copies of the benchmark. Three initialization seeds are a limited replication, not a general scaling result.
+0057 | 
+0058 | The complex and real tensor-chain variants did not establish a useful advantage in this screen. Complex amplitudes are ordinary pairs of real numbers here. These experiments test representational choices; no quantum computational advantage or new physical principle is established.
+0059 | 
+0060 | ## Failures that limit the result
+0061 | 
+0062 | | Method | Quartic | Composed rules | Partial state renaming | Random tables | Corrupted evidence |
+0063 | | --- | ---: | ---: | ---: | ---: | ---: |
+0064 | | canonical_marginal_control | 26.95% | 57.03% | 20.31% | 19.92% | 46.48% |
+0065 | | symbol_library_fallback | 96.09% | 60.16% | 18.36% | 19.14% | 17.97% |
+0066 | | symbol_library_evidence_mixture | 35.55% | 58.20% | 19.53% | 20.31% | 46.48% |
+0067 | | symbol_library_persistent | 36.72% | 58.98% | 19.92% | 20.31% | 46.09% |
+0068 | | born_real_interference | 33.20% | 37.50% | 20.70% | 26.17% | 32.81% |
+0069 | 
+0070 | Five examples determine a degree-at-most-four polynomial over the supplied finite field. High cubic/quartic performance from interpolation is therefore credited to a handwritten mathematical prior. Cubic rules were absent from training but development-visible in this round. They are not an untouched out-of-distribution test.
+0071 | 
+0072 | Most structured methods solve complete-evidence execution by the supplied interpreter. Those two diagnostic slices are excluded from primary accuracy. Direct sequence models must learn more of the execution algorithm and stayed weak under this budget; they are synthetic-token architecture probes, not general language models.
+0073 | 
+0074 | Equal updates do not establish equal compute or convergence. Neural training used one seed per architecture in the screen, with selected repeats only. Poor results do not establish that an architecture cannot work at larger scale or with different training.
+0075 | 
+0076 | ## Reproducibility and artifacts
+0077 | 
+0078 | The main screen and its first confirmation took 1770.16 seconds in the VM process. The matched ablation added 196.79 seconds.
+0079 | VM: 2 CPUs, two numerical threads, PyTorch 2.11.0+cpu, no GPU. Recorded process peak RSS was 414.1 MiB; this is not a per-model working-memory measurement.
+0080 | 
+0081 | Nine integrity checks and all thirty smoke configurations passed. The smoke-seed overlap was caught before full fitting, documented, and the evaluation seed replaced. Local auditing verifies disjoint public inputs (including both smoke runs), reexecutes ground-truth programs, recomputes every saved score and paired comparison, recounts learned values, and replays eight ordinary cases from every evaluated checkpoint using local PyTorch.
+0082 | 
+0083 | - [All 30 screen results](workspace/quantum_composition_20260909/runs/vm-round2-20260909/artifacts/runs/screen/comparison.csv)
+0084 | - [Three-seed confirmation](workspace/quantum_composition_20260909/runs/vm-round2-20260909/artifacts/runs/confirmation/comparison.csv)
+0085 | - [Exact matched-control results](workspace/quantum_composition_20260909/runs/vm-round2-20260909/artifacts/runs/coherence-ablation/comparison.csv)
+0086 | - [Screen figure](workspace/quantum_composition_20260909/runs/vm-round2-20260909/artifacts/figures/round2_heatmap.png)
+0087 | - [Frozen source, checkpoints and per-case data](workspace/quantum_composition_20260909/runs/vm-round2-20260909/quantum-composition-round2.zip)
+0088 | - [Mechanisms and interpretation](workspace/quantum_composition_20260909/MECHANISMS.md)
+0089 | - [Prior art and unresolved novelty](workspace/quantum_composition_20260909/NOVELTY.md)
+0090 | 
+0091 | **Measured Astra improvements: none. Terminal-Bench trials: zero. Codex activation: disabled.** The campaign found a useful small-model mechanism on a narrow synthetic task; it has not demonstrated an AI breakthrough, broad coding improvement, or 1B/100B equivalence.

@@ -1,0 +1,51 @@
+R06 — Selective contraction can stabilize a known nuisance geometry
+
+EVIDENCE STATUS: FIVE-SEED TOY SUCCESS; LANGUAGE TRANSFER FAILED
+
+A geometry-aware finite-difference objective greatly improved long rollouts on a controlled dynamics task.
+
+THE IDEA
+Suppress state errors in directions known to be harmless while retaining
+directions that carry the task's information. Train a shared transition with
+ordinary prediction loss plus a perturbation-size-normalized secant loss.
+
+WHAT SUCCEEDED
+The task tracked two rotating circles: phase carried information, radial
+motion was nuisance, and exact nuisance geometry was supplied in training.
+Every neural model had 4,868 parameters. Five fresh confirmation seeds gave
+64-step autonomous-rollout MSE:
+  RMS normalization:             0.406534
+  Random-direction regularizer:  0.142391
+  Four-step BPTT:                0.227320
+  Eight-step BPTT, half batch:    0.147260
+  Selective repair:              0.029152
+  Exact geometry oracle:         0.017158
+Selective repair reduced MSE by 80.20% relative to eight-step BPTT and won
+every paired seed. One-step MSE worsened 5.19%, within the 25% gate.
+Estimated matrix work was about 4.2% higher, not exactly equal wall compute.
+
+THE IMPORTANT FAILED TRANSFER
+On Tiny Shakespeare, teacher-verified low-sensitivity directions did not make
+the recurrent student better: test CE was 1.908269 versus ordinary recurrent
+distillation 1.908258. A stronger regularizer reduced local sensitivity 92.07%
+but worsened validation CE 1.40%. Improving an internal stability metric did
+not improve language prediction. The dense distilled student was stronger.
+
+HOW TO BUILD ON IT
+Use this objective only when nuisance geometry and long-horizon instability
+are defensible task properties. Compare random-direction and longer-BPTT
+controls, track clean one-step loss, and evaluate full rollouts. Low teacher
+sensitivity alone does not justify assuming a direction is disposable.
+
+ORIGINALITY
+The successful toy recipe and failed language transfer are the contribution
+candidate. Weight reuse, distillation, Jacobian constraints and denoising
+are established; no new universal learning principle was verified.
+
+SOURCE REPORTS
+  E015: evidence/E015.txt
+    Original: 35_research_assessment.txt
+  E016: evidence/E016.txt
+    Original: 21_toy_findings.txt
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

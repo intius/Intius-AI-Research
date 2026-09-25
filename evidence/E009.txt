@@ -1,0 +1,75 @@
+E009 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: neural_abi_stage2/STRESS_REPORT.md
+Original SHA-256: 23c7c73a6b869665c5debc0065baa0c0914019769a24c2d22442f7199af691f5
+Original byte count: 3235
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Frozen stress diagnostics — main results preserved
+0002 | 
+0003 | These evaluations were selected after seeing near-perfect main-study performance.
+0004 | No model or operator was trained further. All 51 checkpoint file hashes remained
+0005 | unchanged. They are posthoc probes, not a new prospective confirmation dataset.
+0006 | 
+0007 | ## Label-preserving description reordering
+0008 | 
+0009 | Each client originally saw one fixed object order. This probe presents exactly
+0010 | the same named objects and properties in either of the other two orders. The
+0011 | correct state labels remain unchanged. Models use their own heads here, isolating
+0012 | input-layout sensitivity from cross-model swapping.
+0013 | 
+0014 | | Client | Arm | Trained-order field accuracy | Other-order field accuracy | Other-order whole-state exact |
+0015 | |---|---|---:|---:|---:|
+0016 | | mlp | native | 99.92% | 24.85% | 0.00% |
+0017 | | mlp | abi | 100.00% | 24.84% | 0.00% |
+0018 | | gru | native | 99.99% | 46.70% | 0.05% |
+0019 | | gru | abi | 99.99% | 38.12% | 0.00% |
+0020 | | transformer | native | 99.96% | 24.85% | 0.00% |
+0021 | | transformer | abi | 100.00% | 24.84% | 0.00% |
+0022 | 
+0023 | 
+0024 | Low accuracy after reordering means the client relied on its fitted presentation
+0025 | layout, even though it worked on new state combinations. It is evidence against
+0026 | claiming general text understanding from the main results. An interface cannot
+0027 | repair an encoder that sends an incorrect interpretation of its input.
+0028 | 
+0029 | ## Different learned protocol versions
+0030 | 
+0031 | Same dimensionality is insufficient to establish the same latent meaning.
+0032 | Each independent reference seed defines a different learned standard. Here an
+0033 | encoder from one version is connected to another version's MLP head.
+0034 | 
+0035 | | Sender architecture | Cross-version field accuracy | Whole-state exact |
+0036 | |---|---:|---:|
+0037 | | mlp | 24.26% | 0.00% |
+0038 | | gru | 24.27% | 0.00% |
+0039 | | transformer | 24.33% | 0.00% |
+0040 | 
+0041 | 
+0042 | These are intentionally incompatible standards. Failure does not invalidate the
+0043 | same-version interface result, but it shows that the learned reference must be
+0044 | identified and shared exactly. Port dimension alone is not a communication contract.
+0045 | This study does not solve backward-compatible evolution of a learned standard.
+0046 | 
+0047 | ## Long closed-loop sequences
+0048 | 
+0049 | All three actual text encoders, three seeds, 128 cases per suite. Exact-reference
+0050 | starts are excluded from this table and remain available in raw results. The 128
+0051 | operation paths are new, but their intermediate states were not excluded from
+0052 | training in advance, unlike the main study's paths. Do not infer fully disjoint
+0053 | trajectory generalization from this diagnostic.
+0054 | 
+0055 | | Suite | Operators | Steps | Field accuracy | Whole-state exact | Changed-field accuracy |
+0056 | |---|---|---:|---:|---:|---:|
+0057 | | iid | clean | 32 | 99.83% | 98.26% | 99.86% |
+0058 | | iid | clean | 128 | 93.20% | 42.45% | 97.11% |
+0059 | | iid | noise | 32 | 99.83% | 98.18% | 99.91% |
+0060 | | iid | noise | 128 | 94.42% | 48.78% | 99.73% |
+0061 | | combination | clean | 32 | 99.64% | 96.35% | 99.67% |
+0062 | | combination | clean | 128 | 93.40% | 45.83% | 97.91% |
+0063 | | combination | noise | 32 | 99.67% | 96.53% | 99.83% |
+0064 | | combination | noise | 128 | 94.37% | 48.78% | 99.64% |
+0065 | 
+0066 | Frozen stress process time: 8.50s. No additional fits. Full metrics and predictions are under artifacts/stress/.

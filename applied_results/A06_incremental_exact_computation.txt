@@ -1,0 +1,53 @@
+A06 — Incremental recomputation saved work without adding intelligence
+
+EVIDENCE STATUS: EXACT COMPONENT SPEEDUPS; GENERAL CAPABILITY UNESTABLISHED
+
+Two studies preserved exact decisions while avoiding recomputation of unaffected dependencies.
+
+STUDY 1: CONTINUATION TABLES
+A finite-state solver propagated possible final answers backward through a
+program. After an observation, it updated affected rows and stopped through
+unchanged rows instead of rebuilding everything.
+Six fresh seeds, 48 worlds, 384 tasks/method:
+  Full rebuild: 1.394092 seconds planning; 178,388 backward rows.
+  Incremental:  0.887869 seconds planning;  59,458 backward rows.
+All 384 trajectories and certificate-table hashes matched. Planning fell
+36.312%, with reported paired world-bootstrap interval 33.724-38.785%.
+Both returned 372 correct, zero wrong and 12 abstentions, making 4,043 oracle
+calls. Direct execution made the SAME calls and took only 0.009021 seconds.
+The incremental optimization worked; the broader query-saving gate failed.
+
+An earlier 289-function-prior compiler reduced planning 24.624% relative to
+an equivalent exact answer-aware scan, but ordinary entropy querying used
+fewer probes. Outside the supplied rule family, the compiled method returned
+nine wrong answers despite finite-class certificates. A certificate is only
+as broad as its assumptions.
+
+STUDY 2: REVISION PROPAGATION
+In a separate synthetic acyclic knowledge graph with 20,000 propositions,
+about 26,500 supplied rules and 60 scheduled edits per seed, incremental
+reverse-dependency propagation matched full recomputation after every edit.
+Across three seeds, median update-latency speedup was 44.75x and median
+rule-check reduction 10,284.5x. Persistent layout cost 1.238x the control.
+Median affected fraction was only 0.01%; the 95th percentile was 53-69%, so
+tail latency approached full recomputation. Seven of 180 writes were
+idempotent, a disclosed protocol deviation.
+The later language writer produced no schema-valid events under its frozen
+budget. Thus the graph result did not become a working language-memory result.
+
+HOW TO USE THIS
+Cache exact dependency information when edits are sparse, but measure large
+revision tails, deletion/correction correctness and additional index memory.
+Compare with direct execution, not only a deliberately complete rebuild.
+Abstract interpretation, truth maintenance and incremental views are known;
+these are bounded implementation measurements.
+
+SOURCE REPORTS
+  E045: evidence/E045.txt
+    Original: non_llm_continuation_lab/RESULTS.txt
+  E046: evidence/E046.txt
+    Original: breakthrough_orchestra_20260923/agents/02_memory/01_REVISION_PROPAGATION_RESULTS.txt
+  E047: evidence/E047.txt
+    Original: breakthrough_orchestra_20260923/agents/02_memory/02_LANGUAGE_MEMORY_RESULTS.txt
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

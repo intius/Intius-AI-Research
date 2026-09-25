@@ -1,0 +1,38 @@
+A02 — Compilation cost dominated a short LoRA adaptation run
+
+EVIDENCE STATUS: REPEATABLE ENGINEERING RESULT; ESTABLISHED METHOD
+
+Packed scan execution reduced complete adaptation time even though its warmed update was slower.
+
+WHAT WORKED
+A Qwen3-0.6B model with rank-8 LoRA and 601,096,192 total stored values
+completed 512 exact-objective updates in 111.694 seconds; a same-seed
+fresh-process repeat took 111.251 seconds and reproduced checkpoints byte
+for byte. The dense compiled reference took 266.449 seconds: a 2.390x
+complete-run ratio. Warm scan updates were about 116 ms versus dense 74 ms.
+The short-run benefit came from reduced compilation/setup, not faster steps.
+
+QUALITY AND NUMERICAL LIMITS
+Selected development scores were scan 60/64 and dense 61/64. Scan's language
+guard CE increased 1.3104% versus its original backbone, within the 5% gate.
+On frozen 256-problem confirmation: scan/dense primary 195/179 and reformulated
+183/175. Paired p-values 0.07637 and 0.39612 did not establish population-level
+accuracy superiority. The two renderings are the same 256 underlying problems.
+Different selected epochs and numerical settings also limit attribution.
+An eight-update parameter-replay tolerance failed: 6.0644e-5 versus 5e-5.
+Thus scan and dense were not demonstrated bit-identical optimizer trajectories.
+
+HOW TO USE THIS
+For short adapter jobs, benchmark load, compilation, optimizer preparation,
+training, saving and warm steps separately. Compare identical stopping rules
+and actual saved quality. Do not extrapolate a short-job setup gain to long
+pretraining. Scan packing is established execution engineering; it does not
+compress away the 596M-parameter pretrained backbone.
+
+SOURCE REPORTS
+  E035: evidence/E035.txt
+    Original: capability_lab/scanned_backbone/RESULTS.txt
+  E036: evidence/E036.txt
+    Original: capability_lab/fresh_confirmation/RESULTS.txt
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

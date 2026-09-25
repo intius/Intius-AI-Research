@@ -1,0 +1,183 @@
+E008 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: neural_abi_stage2/REPORT.md
+Original SHA-256: e24450b9fb48e21a695270831599547d40d1bf899ad393b9a1bf75fa6ae450ef
+Original byte count: 9715
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Neural ABI stage 2 — learned standard and modular transfer
+0002 | 
+0003 | 
+0004 | **Read with the [frozen stress results](STRESS_REPORT.md).** The controlled gates
+0005 | pass, but reordered descriptions reduce ABI accuracy to 25–38%, and 128-step chains
+0006 | retain only about 49% whole-state correctness. The main scores do not establish
+0007 | general text understanding or long-chain reliability.
+0008 | 
+0009 | This follow-up replaces the supplied four-number linear protocol with a learned
+0010 | 24-dimensional code, uses controlled-text MLP/GRU/Transformer clients, attaches
+0011 | a new capability after encoders freeze, and tests repeated port-to-port transfers.
+0012 | All results below are actual categorical accuracies, not the previous regression
+0013 | score. They are not directly comparable to stage 1's 0.9985 score.
+0014 | 
+0015 | The standard is learned by a reference autoencoder, then frozen and shared as
+0016 | a training target. Clients have independent ordinary weights and disjoint fitting
+0017 | states. The experimenter still supplies the categorical world, word meanings,
+0018 | training labels, loss and standard-defining procedure. This is reference-based
+0019 | interoperability, not spontaneous agreement between independently learned semantics.
+0020 | 
+0021 | ## Prerequisite and cross-architecture compatibility
+0022 | 
+0023 | | Test | Fresh field accuracy | Held-out combinations field accuracy | Fresh whole-state exact | Held-out whole-state exact |
+0024 | |---|---:|---:|---:|---:|
+0025 | | Frozen reference reconstruction | 100.00% | 100.00% | 100.00% | 99.97% |
+0026 | | Ordinary models, own components | 99.97% | 99.94% | 99.65% | 99.38% |
+0027 | | ABI, own components | 99.99% | 100.00% | 99.93% | 99.97% |
+0028 | | Ordinary models, swapped without alignment | 24.14% | 24.37% | 0.00% | 0.00% |
+0029 | | ABI, swapped without adapters | 100.00% | 100.00% | 99.97% | 99.96% |
+0030 | | Posthoc nonlinear alignment to standard | 98.22% | 98.19% | 81.01% | 80.76% |
+0031 | | ABI, permuted coordinates | 28.80% | 28.31% | 0.00% | 0.00% |
+0032 | 
+0033 | 
+0034 | Reference competence gate: **True**.
+0035 | Fresh compatibility gate: **True**;
+0036 | held-out-combination gate: **True**.
+0037 | Whole-state correctness requires all 12 fields correct and therefore reveals errors
+0038 | that a high average per-field score can hide.
+0039 | 
+0040 | The posthoc adapter is a separate nonlinear 24->128->24 model per encoder,
+0041 | trained after freezing on 1,024 calibration states for 800 updates. It adds 25,184
+0042 | parameter bytes per deployed encoder. ABI clients receive public-code supervision
+0043 | throughout their 8,192-state fitting set and additionally train heads on clean code.
+0044 | Thus these approaches have different supervision and compute budgets; this is not
+0045 | a claim that ABI intrinsically beats every equally resourced alignment method.
+0046 | Only three independent seed groups were trained. Directed swaps share models and
+0047 | are not independent replications.
+0048 | 
+0049 | ## Frozen encoder, newly attached capability
+0050 | 
+0051 | The new head answers eight binary comparisons about already represented object
+0052 | properties. No encoder is updated, and checkpoint hashes match before and after
+0053 | late-head/operator training. This is a new function of existing information,
+0054 | not a newly represented concept, domain, language or factual knowledge.
+0055 | 
+0056 | | Input to new head | Fresh question accuracy | Held-out question accuracy | Fresh all 8 correct | Held-out all 8 correct |
+0057 | |---|---:|---:|---:|---:|
+0058 | | oracle | 99.99% | 99.98% | 99.90% | 99.87% |
+0059 | | abi | 99.99% | 99.98% | 99.91% | 99.83% |
+0060 | | adapter | 98.04% | 97.74% | 86.19% | 84.51% |
+0061 | 
+0062 | Late-head gates: {'iid': True, 'combination': True}.
+0063 | 
+0064 | ## Multi-step communication
+0065 | 
+0066 | Three independent modules learn object swapping, color cycling and material
+0067 | rotation. They train only on isolated one-step reference-code pairs. At evaluation,
+0068 | predicted codes feed subsequent modules, with no ground-truth repair between steps.
+0069 | All operator choices are supplied by the test program; this is not learned planning.
+0070 | "Noise" means Gaussian input noise during fitting, not extra target information.
+0071 | 
+0072 | The table below includes only actual text-encoder starts. Exact reference-code
+0073 | starts are reported separately as a diagnostic, rather than boosting deployment
+0074 | averages. The raw runner also retains its original mixed-start summary.
+0075 | 
+0076 | | Suite | Operator training | Steps | Field accuracy | Whole-state exact | Changed-field accuracy |
+0077 | |---|---|---:|---:|---:|---:|
+0078 | | iid | clean | 1 | 100.00% | 99.98% | 99.99% |
+0079 | | iid | clean | 4 | 99.99% | 99.91% | 100.00% |
+0080 | | iid | clean | 8 | 99.98% | 99.78% | 99.99% |
+0081 | | iid | noise | 1 | 100.00% | 99.98% | 99.99% |
+0082 | | iid | noise | 4 | 99.99% | 99.91% | 100.00% |
+0083 | | iid | noise | 8 | 99.98% | 99.80% | 99.99% |
+0084 | | combination | clean | 1 | 99.99% | 99.87% | 99.99% |
+0085 | | combination | clean | 4 | 100.00% | 99.96% | 100.00% |
+0086 | | combination | clean | 8 | 100.00% | 100.00% | 100.00% |
+0087 | | combination | noise | 1 | 99.99% | 99.91% | 100.00% |
+0088 | | combination | noise | 4 | 100.00% | 99.96% | 100.00% |
+0089 | | combination | noise | 8 | 100.00% | 100.00% | 100.00% |
+0090 | 
+0091 | Four-step deployment gates: {'iid': {'clean': True, 'noise': True}, 'combination': {'clean': True, 'noise': True}}.
+0092 | 
+0093 | Eight-step reference-code-start diagnostic:
+0094 | 
+0095 | | Suite | Clean operators | Noise-trained operators |
+0096 | |---|---:|---:|
+0097 | | iid | 99.99% | 99.99% |
+0098 | | combination | 100.00% | 100.00% |
+0099 | 
+0100 | 
+0101 | The exact 12-byte categorical-state protocol and supplied operations solve these
+0102 | tests 100% by construction. The learned 24-float neural packet uses 96 bytes before
+0103 | any model overhead, eight times more than the byte-per-field representation.
+0104 | Because four values fit in two bits, the theoretical packed state is only 3 bytes;
+0105 | the 12-byte control is deliberately a simple uncompressed format. Neither is a
+0106 | general language model, but they prevent treating this experiment as evidence
+0107 | that neural messages are inherently the smallest useful communication format.
+0108 | 
+0109 | ## Variation by seed and architecture
+0110 | 
+0111 | | Seed | Text encoder | Fresh cross-head field accuracy | Held-out cross-head field accuracy | Fresh 8-step noise field accuracy | Held-out 8-step noise field accuracy |
+0112 | |---|---|---:|---:|---:|---:|
+0113 | | 711 | mlp | 100.00% | 100.00% | 100.00% | 100.00% |
+0114 | | 711 | gru | 100.00% | 100.00% | 100.00% | 100.00% |
+0115 | | 711 | transformer | 100.00% | 100.00% | 100.00% | 100.00% |
+0116 | | 712 | mlp | 100.00% | 100.00% | 99.97% | 100.00% |
+0117 | | 712 | gru | 100.00% | 100.00% | 99.95% | 100.00% |
+0118 | | 712 | transformer | 100.00% | 100.00% | 99.97% | 100.00% |
+0119 | | 713 | mlp | 99.99% | 99.99% | 99.98% | 100.00% |
+0120 | | 713 | gru | 99.99% | 99.98% | 99.98% | 100.00% |
+0121 | | 713 | transformer | 100.00% | 100.00% | 100.00% | 100.00% |
+0122 | 
+0123 | ## Resource accounting
+0124 | 
+0125 | | Client | Deployment | Parameter bytes | CPU process peak MB | CPU median batch 1 ms | GPU process MB | GPU host peak MB |
+0126 | |---|---|---:|---:|---:|---:|---:|
+0127 | | mlp | native | 489,760 | 545.50 | 0.224 | 157.29 | 698.93 |
+0128 | | mlp | abi | 763,456 | 546.23 | 0.560 | 157.29 | 723.37 |
+0129 | | gru | native | 187,424 | 548.65 | 1.174 | 159.38 | 745.05 |
+0130 | | gru | abi | 461,120 | 548.75 | 1.465 | 159.38 | 769.81 |
+0131 | | transformer | native | 387,616 | 552.81 | 0.928 | 157.29 | 748.38 |
+0132 | | transformer | abi | 661,312 | 552.92 | 1.305 | 157.29 | 755.06 |
+0133 | 
+0134 | 
+0135 | Native runtime probes perform one state readout. ABI probes include a text client,
+0136 | its head, three noise-trained operator networks and four supplied operation calls.
+0137 | They do more work, so the latency ratio is not an efficiency comparison on the
+0138 | same capability. Memory probes use each client's own head; scored chains use the
+0139 | MLP lab head, which has identical tensor shapes. The teacher is not loaded in
+0140 | either deployment. Probe results use seed 711, batch 1; MB means 1,000,000 bytes.
+0141 | Full-process high-water marks include Python/PyTorch and checkpoint loading.
+0142 | CUDA tensor allocated/reserved counters are preserved separately in runtime JSONs.
+0143 | 
+0144 | The frozen reference has 75,040 parameter bytes plus 192 normalization-buffer bytes.
+0145 | Vocabulary/tokenization code, reference checkpoints, schemas and all learned module
+0146 | weights are separately archived. Each late head adds 87,104 parameter bytes if
+0147 | retained. Each operator adds 91,232 parameter bytes. A deployed collection's cost
+0148 | is the sum of its loaded components and working state, not merely a 96-byte port.
+0149 | 
+0150 | There were 51 fits across three seeds. Sum of per-fit timed work:
+0151 | 230.31s. Whole training/evaluation process:
+0152 | 242.04s, sampled peak RSS
+0153 | 1357.68MB. Setup, export, audits and fresh
+0154 | deployment-probe processes are additional. Adapters and noise controls are counted.
+0155 | 
+0156 | ## Claim boundary and evidence
+0157 | 
+0158 | This is a controlled compositional scene domain with a fixed vocabulary and a
+0159 | shared learned reference. It does not establish natural conversation, advanced
+0160 | reasoning, a universal neural standard, automatic creation of new representational
+0161 | concepts, growing protocol vocabulary or a general performance-per-RAM advantage.
+0162 | No source weights from an existing LLM were quantized or compressed.
+0163 | 
+0164 | The substantive test is whether the original interface result survives a learned
+0165 | code, different client architectures, a later head and repeated neural transfers.
+0166 | Keep the successful and failed gates distinct. These known building blocks are
+0167 | not claimed unprecedented; the earlier literature review includes
+0168 | [zero-shot latent communication](https://arxiv.org/abs/2209.15430).
+0169 | 
+0170 | PROTOCOL.md was frozen before launch. ANALYSIS_NOTES.md clarified deployment-only
+0171 | chain reporting before any training results were inspected. AUDIT.json verifies
+0172 | data separation including intermediate paths, independently reconstructs labels
+0173 | and recomputes every metric. REPLAY.json records a frozen CPU replay. Full source,
+0174 | states, predictions, fitting curves and checkpoints are in the verified archive.

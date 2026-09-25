@@ -1,0 +1,84 @@
+E021 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/further_testing/experiment_I_emergent_communication_20260915/RESULTS.md
+Original SHA-256: b9969405c44d18cf71d47397d9f8f90892b591874a17f08969c5be0ad43c1041
+Original byte count: 2780
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Experiment I: emergent communication result
+0002 | 
+0003 | Preregistered communication criteria met: **False**.
+0004 | 
+0005 | ## Frozen normal performance
+0006 | 
+0007 | | Cells | Rounds | Symbol % | Full-vector/cell % | Consensus symbol % | Consensus full-vector % |
+0008 | |---|---|---|---|---|---|
+0009 | | 20 | 0 | 14.92 | 0.00 | 17.62 | 0.00 |
+0010 | | 20 | 1 | 18.60 | 0.00 | 22.05 | 0.00 |
+0011 | | 20 | 2 | 23.37 | 0.00 | 24.94 | 0.00 |
+0012 | | 20 | 4 | 25.57 | 0.00 | 25.61 | 0.00 |
+0013 | | 20 | 8 | 23.18 | 0.00 | 23.28 | 0.00 |
+0014 | | 20 | 16 | 19.84 | 0.00 | 19.90 | 0.00 |
+0015 | | 64 | 0 | 12.58 | 0.00 | 11.95 | 0.00 |
+0016 | | 64 | 1 | 15.46 | 0.00 | 16.86 | 0.00 |
+0017 | | 64 | 2 | 19.22 | 0.00 | 20.53 | 0.00 |
+0018 | | 64 | 4 | 21.65 | 0.00 | 21.84 | 0.00 |
+0019 | | 64 | 8 | 19.94 | 0.00 | 20.06 | 0.00 |
+0020 | | 64 | 16 | 17.91 | 0.00 | 17.79 | 0.00 |
+0021 | 
+0022 | ## Four-round controls
+0023 | 
+0024 | | Cells | Condition | Symbol % | Full-vector/cell % | Consensus symbol % |
+0025 | |---|---|---|---|---|
+0026 | | 20 | normal | 25.57 | 0.00 | 25.61 |
+0027 | | 20 | no_messages | 15.66 | 0.00 | 14.90 |
+0028 | | 20 | cross_episode_shuffle | 13.80 | 0.00 | 13.81 |
+0029 | | 20 | state_erased | 18.60 | 0.00 | 22.05 |
+0030 | | 20 | uniform_gates | 25.03 | 0.00 | 24.82 |
+0031 | | 20 | address_removed | 21.70 | 0.00 | 21.74 |
+0032 | | 64 | normal | 21.65 | 0.00 | 21.84 |
+0033 | | 64 | no_messages | 13.68 | 0.00 | 13.18 |
+0034 | | 64 | cross_episode_shuffle | 12.56 | 0.00 | 12.32 |
+0035 | | 64 | state_erased | 15.46 | 0.00 | 16.86 |
+0036 | | 64 | uniform_gates | 14.85 | 0.00 | 14.69 |
+0037 | | 64 | address_removed | 14.81 | 0.00 | 14.69 |
+0038 | 
+0039 | ## Learned message probes
+0040 | 
+0041 | | Cells | Symbol probe % | Sender-slot probe % |
+0042 | |---|---|---|
+0043 | | 20 | 56.29 | 8.36 |
+0044 | | 64 | 76.68 | 9.80 |
+0045 | 
+0046 | ## Message/gate structure
+0047 | 
+0048 | | Cells | Mean gate | Target gate | Distractor gate | Message norm | Effective rank |
+0049 | |---|---|---|---|---|---|
+0050 | | 20 | 0.7463 | 0.7463 | n/a | 2.184 | 6.98 |
+0051 | | 64 | 0.4621 | 0.8473 | 0.2871 | 1.168 | 5.01 |
+0052 | 
+0053 | ## Causal source removal
+0054 | 
+0055 | | Cells | Own-slot drop pp | Other-slot drop pp | Specificity pp |
+0056 | |---|---|---|---|
+0057 | | 20 | 12.021 | -0.346 | +12.367 |
+0058 | | 64 | 8.759 | -0.263 | +9.022 |
+0059 | 
+0060 | ## Criterion audit
+0061 | 
+0062 | - 20_symbol_accuracy_above_90: **False**
+0063 | - 20_messages_causal_30pp: **False**
+0064 | - 20_episode_binding_causal_30pp: **False**
+0065 | - 64_symbol_accuracy_above_90: **False**
+0066 | - 64_messages_causal_30pp: **False**
+0067 | - 64_episode_binding_causal_30pp: **False**
+0068 | - message_probe_decodes_symbol_above_70: **False**
+0069 | - source_removal_slot_specific: **True**
+0070 | 
+0071 | ## Interpretation
+0072 | 
+0073 | The only supervised objective was reconstruction of the 20 private symbols at every cell. Message and gate meanings were not specified. Probe accuracy and slot-specific removal are used to infer what the learned protocol carries; no semantic interpretation is assigned without those measurements.
+0074 | 
+0075 | Evaluation runtime: 4.49s; peak RSS: 286.6 MiB; VRAM: 0.

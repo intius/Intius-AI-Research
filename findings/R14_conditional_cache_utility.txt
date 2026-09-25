@@ -1,0 +1,44 @@
+R14 — Cache-removal labels change after earlier evictions
+
+EVIDENCE STATUS: SYNTHETIC TRAINING-TARGET SUCCESS; NO REAL KV OR VRAM RESULT
+
+A conditional removal target preserved redundant evidence that static full-cache ablations missed.
+
+THE IDEA
+A block may be dispensable while its duplicate remains and essential after
+that duplicate is evicted. Labels computed only against the full cache can
+therefore be inappropriate for a sequence of removal decisions.
+
+WHAT SUCCEEDED
+The toy had eight logical blocks: two copies of evidence A, two of B and four
+distractors. The fixed reader needed both A and B for A XOR B. At a two-block
+cap, a selector trained on current-state removal harm retained both evidence
+groups in 1,000/1,000 held-out episodes. Static full-cache labels, attention
+and recency retained the required pair in 0/1,000; random retained it in
+138/1,000. The matched-row static-label replay control also failed, isolating
+the changed labels within this toy. An exact group-count program also got
+1,000/1,000, without learning.
+
+COSTS THAT MATTER
+Conditional supervision needed 8,448 ablations versus 2,048 static ablations,
+4.125x as many. Sequential eviction required 33 tiny scoring calls per item.
+Each learned selector had ten parameters, and group/category information was
+supplied. This was a standard-library CPU simulation, not real LLM attention
+or K/V tensors. A 75% block-count reduction is not a measured VRAM saving.
+
+HOW TO BUILD ON IT
+Test redundancy-aware removal targets on actual model state before adopting
+a learned cache policy. Include a simple group-count/diversity baseline,
+charge label generation and selection overhead, and measure whole-answer
+quality. The archive did not establish that the sequential policy scales.
+
+ORIGINALITY
+The controlled label failure is the useful observation. State-dependent
+marginal utility and learned cache retention are established directions;
+global novelty and a practical LLM advantage are unestablished.
+
+SOURCE REPORTS
+  E030: evidence/E030.txt
+    Original: breakthrough_orchestra_20260923/agents/07_reasoning/04_KV_TOY_RESULT.txt
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

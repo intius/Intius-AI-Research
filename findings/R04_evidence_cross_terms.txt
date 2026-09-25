@@ -1,0 +1,50 @@
+R04 — Evidence cross terms helped a small composition model
+
+EVIDENCE STATUS: THREE-INITIALIZATION SYNTHETIC ABLATION SUCCESS
+
+Squaring summed responses outperformed summing squared responses at the same parameter count.
+
+THE IDEA
+Allow evidence contributions to interact before converting them to nonnegative
+scores. The matched ablation changes sum_j a_j^2 into (sum_j a_j)^2. The latter
+contains pairwise cross terms. This is ordinary real-valued computation.
+
+WHAT SUCCEEDED
+On a fresh synthetic composition set, three paired initializations averaged
+33.54% for the coherent model versus 27.47% for the incoherent control:
++6.07 percentage points. Per-seed comparisons were 33.64/28.52,
+33.84/25.98 and 33.15/27.93. Both models had 4,520 trained real values and
+18,080 parameter bytes, and began each paired run with identical weights.
+Context mixing, anchoring, supplied execution, batches and update budget were
+retained. The three models shared the same test worlds.
+
+LIMITS
+Absolute accuracy remained low. Strong symbolic/library controls were much
+better. Complex-number and tensor-chain variants did not establish a useful
+advantage. No quantum hardware, quantum speedup, natural-language advantage
+or general-reasoning claim follows. The whole campaign's 414.1 MiB process
+peak is not the individual coherent model's footprint.
+
+HOW TO BUILD ON IT
+Test cross terms as a narrowly specified scoring choice with an exact
+parameter-matched control. Preserve the sign and normalization conventions
+from the implementation. Compare against ordinary quadratic/bilinear features,
+and run stronger converged neural controls before claiming an architecture
+improvement. An application inside attention or a LoRA is untested here.
+
+ORIGINALITY
+The matched local observation is worth retaining. Squared-amplitude models
+and multiplicative interactions are known; the report's quantum terminology
+does not establish a new physical or computational principle.
+
+SOURCE REPORTS
+  E012: evidence/E012.txt
+    Original: quantum_composition_20260909/RESULTS.md
+  E013: evidence/E013.txt
+    Original: quantum_composition_20260909/MECHANISMS.md
+
+PRIOR-WORK CONTEXT
+  P05: Introducing Non-Linear Activations into Quantum Generative Models (2022)
+    https://arxiv.org/abs/2205.14506
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

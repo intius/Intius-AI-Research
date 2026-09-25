@@ -1,0 +1,28 @@
+REUSE AND ATTRIBUTION
+
+Suggested descriptive title:
+Intius AI Research: Selected Local Research Findings, 2026-09-25.
+
+The research notes were synthesized with AI assistance from the owner's
+local experiment archive. Numerical observations come from the cited local
+reports. They have not been peer reviewed or externally replicated by this
+curation. Author identity and a final publication citation are for the owner
+to supply; no author names or institutional affiliations were invented.
+
+This release contains explanatory text, selected report snapshots and source
+identifiers. It does not include pretrained weights, adapters, copied training
+corpora, benchmark questions, private conversations or infrastructure logs.
+Selected report metadata has been sanitized: local absolute paths, private
+notebook links and private compute/account identifiers are replaced. Scientific
+measurements and public scholarly references are retained. Source SHA-256s
+identify the original bytes; packaged snapshots have different hashes.
+
+No new license has been assigned on the owner's behalf. A public repository
+intended for training reuse should state the owner's chosen terms for these
+notes. Referenced third-party code, model weights and datasets retain their
+own terms; this collection does not grant rights to those separate artifacts.
+Public-source links in the LoRA recipe are attribution and provenance, not
+redistribution of the datasets.
+
+The selected findings are an editorial synthesis. Application suggestions
+are explicitly prospective and do not add experiments to the evidence record.

@@ -1,0 +1,199 @@
+E023 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/novel_micro_sprint_20260919_1610/REPORT.md
+Original SHA-256: 16ed737149ff65779931aa3a3c86a6b8e234718e67d4db43aa5e5005f5d7a02d
+Original byte count: 23063
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Local exploratory sprint: four mechanisms, no breakthrough claim
+0002 | 
+0003 | Date: 2026-09-19. Requested window: approximately 16:10–16:40 UTC.
+0004 | 
+0005 | **Outcome:** this sprint found learned behavior and useful component-level controls, but **no demonstrated new general reasoning mechanism and no result that outperforms all competent controls**. The most interesting remaining observation is that training-data evidence about action order helps select which neural operators should be allowed to be noncommutative. That selection beats equally sized random opening in both tested worlds, but an engineered algebraic learner solves the same worlds completely.
+0006 | 
+0007 | The feasible objective was measurable learned reasoning and adaptation. These experiments do not test subjective consciousness and establish neither consciousness nor AGI. They investigate alternatives to an LLM core; they do not establish that LLMs cannot reason.
+0008 | 
+0009 | All work is local in:
+0010 | 
+0011 | `workspace/!!!Current\novel_micro_sprint_20260919_1610`
+0012 | 
+0013 | Existing project reports, checkpoints, experiments, and canonical goals were left unchanged. No BM checkpoint was reused. No downloads, installations, paid compute, publishing, uploads, or external messages occurred. Public primary-source pages were read for prior-work checks.
+0014 | 
+0015 | ## 1. Counterfactual consistency as a guard on active experiments
+0016 | 
+0017 | **Hypothesis.** A learner choosing its next observation should distrust an imagined experiment if its two hypothetical outcomes fail to recombine into its current prediction. This could prevent a model from seeking misleadingly confident imagined futures.
+0018 | 
+0019 | The learned component is a 64-input, two-hidden-layer MLP mapping an observation mask and signed observed values to probabilities for a 32-entry Boolean truth table. It trains from scratch on 6,000 distinct tables sampled from small Boolean circuits. At inference it sees only the observations it has acquired. It has no program candidates, hidden circuit, or target table.
+0020 | 
+0021 | Let `p = f(D)`, `p0 = f(D ∪ {(q,0)})`, and `p1 = f(D ∪ {(q,1)})`. The candidate score is:
+0022 | 
+0023 | ```
+0024 | reach(q) = p(q)(1-p(q)) mean_u[(p1(u)-p0(u))²]
+0025 | incoherence(q) = mean_u[((1-p(q))p0(u)+p(q)p1(u)-p(u))²]
+0026 | guarded(q) = reach(q) / (1 + 100 incoherence(q))
+0027 | ```
+0028 | 
+0029 | The means exclude already observed entries and the proposed query itself. Acquisition formulas are **engineered policies over learned predictions**, not trained acquisition policies. The coefficient 100 was fixed for this screen; no sweep was run.
+0030 | 
+0031 | Controls were random sampling, the same model's ordinary uncertainty sampling, expected entropy reduction (EER), unguarded reach, and a finite episodic-memory baseline using the closest compatible training tables. All neural policies use the same fitted predictor and budget of 12 observed entries. Evaluation concerns the remaining 20 entries.
+0032 | 
+0033 | Two model seeds, 384 unseen tables per suite; the same tables are reused across model seeds. Counts pooled over seeds therefore represent model–example evaluations, not 768 independently sampled worlds.
+0034 | 
+0035 | | Policy, ordinary trained predictor | IID correct / unobserved entries | Generator-shift correct / unobserved entries |
+0036 | |---|---:|---:|
+0037 | | Random | 10,530 / 15,360 (68.55%) | 10,203 / 15,360 (66.43%) |
+0038 | | Uncertainty | 11,160 / 15,360 (72.66%) | 10,854 / 15,360 (70.66%) |
+0039 | | EER | 10,729 / 15,360 (69.85%) | 10,387 / 15,360 (67.62%) |
+0040 | | Reach | 11,182 / 15,360 (72.80%) | 10,875 / 15,360 (70.80%) |
+0041 | | Guarded reach | 11,167 / 15,360 (72.70%) | 10,834 / 15,360 (70.53%) |
+0042 | | Episodic memory, one deterministic run | 5,430 / 7,680 (70.70%) | 5,505 / 7,680 (71.68%) |
+0043 | 
+0044 | Frozen initial predictors were approximately 50% accurate. Thus the predictor learns an episodic prior, but the proposed guard does not improve materially over uncertainty. Complete remaining-table recovery is rare: uncertainty recovers 1/768 IID and 3/768 shifted model–episodes; guarded reach recovers 1/768 and 5/768. Those tiny differences do not establish procedure induction.
+0045 | 
+0046 | A second predictor arm adds a branch prediction loss plus a recombination-consistency loss. Its results are also weak/mixed and are retained in `active_results.json`. This arm is **confounded**: it receives additional branch supervision as well as consistency regularization. Its results cannot isolate a consistency-learning benefit. It was not promoted or repaired through a tuning ladder.
+0047 | 
+0048 | The hypothetical policies evaluate both outcomes for 32 candidates, rather than one ordinary predictor pass. Measured complete IID evaluation took about 0.051 s for uncertainty versus 0.281 s for guarded reach, roughly 5.5× slower in this tiny batched setting. There is no useful return on that extra computation here.
+0049 | 
+0050 | **Prior/novelty verdict.** Expected future error reduction dates at least to [Roy and McCallum (2001)](https://groups.csail.mit.edu/rrg/papers/icml01.pdf). Learned active acquisition also has direct precedent in [ALINE](https://www.huangdaolang.com/aline/); predictive martingale ideas occur in [Martingale Posterior Neural Processes](https://arxiv.org/abs/2304.09431). The narrow guard formula is an exploratory combination, not established global novelty. Its empirical usefulness failed this test.
+0051 | 
+0052 | The shifted generator uses 8–14 construction operations instead of 2–6. This is a **sampling-distribution shift**, not verified functional-depth transfer: generated circuits may contain unused intermediates or simplify. Exact table overlap across training and both test suites is zero.
+0053 | 
+0054 | ## 2. Counterfactual-null subtraction in learned graph propagation
+0055 | 
+0056 | **Hypothesis.** Subtracting the message a network would emit with no supporting state can prevent unsupported graph branches from accumulating spurious evidence:
+0057 | 
+0058 | ```
+0059 | message(h, relation) = φ(h, relation) - φ(0, relation)
+0060 | ```
+0061 | 
+0062 | The candidate uses ordinary graph adjacency averaging, with and without RMS normalization. The graph is a directed chain with unanchored leaves pointing into its nodes. Relation bits determine whether a source value should be preserved or flipped. Only final endpoint values supervise training. The MLP message function, anchor vector, and output vector are learned; the graph computation schedule, null subtraction, adjacency aggregation, and optional normalization are programmed.
+0063 | 
+0064 | This is **one relevant chain with irrelevant incoming branches**, not competing supported hypotheses or arbitrary fact traversal. Graph incidence and the queried node are visible inputs. No relevant-edge indices or intermediate values supervise the network. The generator randomizes edge order; tests also permute node identities.
+0065 | 
+0066 | Five initial arms × two seeds, followed by two targeted controls × two seeds; 1,200 updates per arm, batch 64, training depths 1–4. Plain, plain+RMS, subtraction, and subtraction+RMS learned 100% endpoints through depth 32 at the original distractor density in both seeds. The original gate's seed 0 reached 97.07% at depth 32; its exact-zero correction reached 96.48%. Hence long-depth success is not a candidate-specific improvement.
+0067 | 
+0068 | The informative stress increases incoming unanchored distractors from one to four per chain edge at depth 16:
+0069 | 
+0070 | | Update | Correct / cases, two seeds |
+0071 | |---|---:|
+0072 | | Plain MLP message | 608 / 1,024 (59.38%) |
+0073 | | Plain MLP + RMS | 516 / 1,024 (50.39%) |
+0074 | | Null subtraction | 1,024 / 1,024 (100%) |
+0075 | | Null subtraction + RMS | 1,024 / 1,024 (100%) |
+0076 | | Exact-zero magnitude gate + RMS | 1,015 / 1,024 (99.12%) |
+0077 | | **Bias-free learned linear relation map + RMS** | **1,024 / 1,024 (100%)** |
+0078 | 
+0079 | The linear control learns `W_relation h`; it does not initialize parity coefficients. It matches subtraction on all endpoint, same-world internal-edge-flip, anchor-flip, and relabeling evaluations. It supplies the same zero-in/zero-out property with a simpler update.
+0080 | 
+0081 | Initial subtraction+RMS scores were 55/128 and 64/128 on the increased-distractor condition. Final learned scores are 512/512 each. Same-world counterfactual pairs change the answer and require the internal relation or anchor; these pass for both the candidate and the linear control. Thus relation semantics are learned, while distractor rejection is explained by the architectural null property.
+0082 | 
+0083 | **Audit corrections retained:** the original magnitude gate added epsilon before a square root and therefore was not exactly zero at zero. Its results remain labeled `gate_norm`; corrected results are `gateexact_norm`. The original `erase` control zeroed the final readout state and is invalid evidence for learned retention. It remains in the original JSON for transparency. The corrected control clears inferred state only between rounds, restores the anchor, and preserves the last readout: subtraction+RMS keeps one-hop performance at 512/512 in both seeds, while the depth-16 stress falls to 260/512 in each. This valid ablation shows a need for retained intermediate state under the programmed graph schedule; it does not prove a newly discovered algorithm.
+0084 | 
+0085 | The original forward signature accepted an unused target argument. It never read that argument. The final source removes it entirely. Evaluation now uses the visible node count plus two as its iteration budget, rather than the generated path depth plus two. The saved subtraction and linear-control checkpoints reproduce their complete original metric dictionaries with both changes, so their results need neither target arguments nor hidden path-depth information at inference.
+0086 | 
+0087 | **Prior/novelty verdict.** Neural message passing, algorithmic extrapolation, and learned belief propagation are established directions; see [Neural Algorithmic Reasoning](https://arxiv.org/abs/2105.02761), [Belief Propagation Neural Networks](https://proceedings.neurips.cc/paper/2020/file/07217414eb3fbe24d4e5b6cafb91ca18-Paper.pdf), and [Neural Enhanced Belief Propagation](https://proceedings.mlr.press/v130/garcia-satorras21a/garcia-satorras21a.pdf). This screen supports a useful zero-preserving engineering invariant, not a novel reasoning mechanism. The simpler matched control explains the gain.
+0088 | 
+0089 | ## 3. Learning action-consistent coordinates from sparse transitions
+0090 | 
+0091 | **Hypothesis.** A model may recover reusable internal coordinates from relations among observed states even when state identities are opaque and one action changes several underlying factors.
+0092 | 
+0093 | For 64 opaque state IDs and eight actions, learn 16-dimensional state codes `h(s)=tanh(z_s)` and action multipliers `a(r)=tanh(v_r)` by fitting:
+0094 | 
+0095 | ```
+0096 | h(destination) ≈ h(source) ⊙ a(action)
+0097 | ```
+0098 | 
+0099 | Binary, balance, and covariance penalties discourage collapse. Only observed source/action/destination triples train the model. Both directions of approximately 65% of undirected action edges are observed; held-out edges and their reverses are excluded together.
+0100 | 
+0101 | The first world family is an unknown relabeling of a six-bit commuting system, with actions changing at least two hidden bits. No hidden bits, action masks, or encoder are supplied to fitting or inference. All 64 state IDs nevertheless appear in training. **This is held-out relation/composition prediction among known IDs, not transfer to unseen identities.** An embedding table cannot encode an entirely new ID by itself.
+0102 | 
+0103 | The diagonal multiplicative organization supplies a commuting algebra and a bias toward involutions. The learner does not discover that algebra. Long composition is a prescribed product of learned action codes followed by nearest-code decoding.
+0104 | 
+0105 | | Method | Commuting held-out edges, three worlds | Random noncommuting held-out edges, three worlds |
+0106 | |---|---:|---:|
+0107 | | Learned codes | 558 / 558 (100%) | 13 / 556 (2.34%) |
+0108 | | Unconstrained neural next-state model | 0 / 558 (0%) | 2 / 556 (0.36%) |
+0109 | | **Matched GF(2) empirical-constraint estimator** | **558 / 558 (100%)** | 7 / 556 (1.26%) |
+0110 | 
+0111 | Initial learned codes score 6/558 on commuting held-out edges. The ordinary neural model fits every observed edge but generalizes poorly to missing pairs. Learned codes and the GF(2) estimator both score 3,072/3,072 on depth-32 commuting compositions and pass the internal-action counterfactuals.
+0112 | 
+0113 | The matched estimator uses only equations induced by training observations: `code(source) XOR code(destination) XOR code(action)=0`. Gaussian elimination finds the empirical nullspace. It yields seven independent binary coordinates, including a gauge coordinate, and distinct codes for all 64 states in every commuting world. This is a cheap **engineered estimator with the same supplied algebra**, not a neural reasoning result. Its success explains why the learned factorization can complete this dataset.
+0114 | 
+0115 | Random noncommuting actions remain individually involutive. Their missing pairings can be information-limited even for a more expressive learner. Those scores are a stress/failure boundary, not proof that a better model ought to infer arbitrary absent pairings. The learned code model collapses in two such worlds; the GF(2) estimator collapses all states to one code. The penalty terms are therefore not a general guarantee against representational collapse.
+0116 | 
+0117 | **Prior/novelty verdict.** Diagonal relation embeddings and composition are very close to [DistMult](https://arxiv.org/abs/1412.6575). Their inability to represent operation order is explicitly addressed by [Hayashi and Shimbo's noncommutative path-query model](https://arxiv.org/abs/1909.01567). Binary/whitening constraints are the candidate addition here, not multiplication itself. Neither a unique capability nor a novel architecture is established.
+0118 | 
+0119 | ## 4. Opening noncommuting operators only where observations require them
+0120 | 
+0121 | **Hypothesis.** A learner should change its computation organization when observed experiments disprove a simplifying algebraic assumption, while retaining that assumption elsewhere.
+0122 | 
+0123 | From **training edges only**, inspect complete two-action squares. If executing `a,b` and `b,a` from the same observed start reaches different observed endpoints, permit off-diagonal entries for the involved action matrices. Other action matrices remain diagonal. State embeddings and active matrix entries then train by next-state contrastive prediction with the same budget and mild orthogonality/involution penalties in every arm.
+0124 | 
+0125 | This is an **engineered, data-driven architecture-selection rule**, not a learned policy for inventing the test. It opens matrices before fitting; it is not a demonstrated continuous architecture-growth mechanism. Inference receives only the start ID and action sequence, and uses fitted matrices. No full-table information reaches the opening decision.
+0126 | 
+0127 | The structured noncommuting family is an opaque relabeling of a dihedral action system combined with three Boolean factors. The observation rule correctly opens actions 4–7 in both worlds; it opens none in the commuting worlds. These indices are *measured outputs of the training-data test*, not supplied labels. Adaptive matrices have 624 active entries; the same-count random-opening control also has 624, compared with 96 diagonal and 1,152 dense entries.
+0128 | 
+0129 | Two structured worlds, 2,000 training updates per arm:
+0130 | 
+0131 | | Model | Held-out edges | Both members correct on opposite-order pairs |
+0132 | |---|---:|---:|
+0133 | | Fixed diagonal | 357 / 394 (90.61%) | 0 / 512 (0%) |
+0134 | | Adaptive opening | 261 / 394 (66.24%) | 216 / 512 (42.19%) |
+0135 | | Fully dense | 131 / 394 (33.25%) | 179 / 512 (34.96%) |
+0136 | | Same-count random opening | 165 / 394 (41.88%) | 100 / 512 (19.53%) |
+0137 | | **Empirical commuting-square closure** | **394 / 394 (100%)** | **512 / 512 (100%)** |
+0138 | 
+0139 | The order pairs share the start and the multiset of two actions; only order changes, and every selected pair has different true endpoints. These are composition tests among known states; their constituent transitions are not all required to be individually held out.
+0140 | 
+0141 | Per-world adaptive held-out counts are 100/216 and 161/178, versus random 50/216 and 115/178. Thus the identity of the opened actions matters, beyond simply freeing the same number of parameters. Adaptive order-pair counts are 64/256 and 152/256, versus random 11/256 and 89/256. The advantage over dense is not consistent on the pair metric: dense gets 69/256 and 110/256.
+0142 | 
+0143 | The deceptively strong diagonal edge score illustrates why order counterfactuals are necessary: a diagonal product cannot change when its factors are reversed. Its predictions are unchanged on all 512 order pairs, so it cannot get both answers correct.
+0144 | 
+0145 | The closure baseline learns which action pairs have supported commuting observations, then applies programmed involution and commuting-square completion. It reconstructs all missing edges from training alone, with zero inconsistent inferred-edge checks. This establishes that the structured missing edges are inferable under this algebraic prior. It also defeats a unique-capability claim for the neural candidate. The parent independently reconstructed this baseline and reproduced all saved models' order-pair counts.
+0146 | 
+0147 | **Prior/novelty verdict.** Relation-matrix composition and choosing representations compatible with algebraic structure are known; the closest references include [DistMult](https://arxiv.org/abs/1412.6575), [BlockHolE](https://arxiv.org/abs/1909.01567), and [Unsupervised Learning of Algebraic Structure from Stationary Time Sequences](https://openreview.net/references/pdf?id=jNVQPdqOe7). The particular training-square trigger plus selective opening is the proposed integration. Global novelty is unresolved, and the experiment is insufficient to justify such a claim.
+0148 | 
+0149 | ## What survived and what did not
+0150 | 
+0151 | 1. **Survived as learned components:** episodic prediction improves substantially from random initialization; graph relation semantics are learned; action-consistent codes infer missing relations among known opaque IDs under an imposed algebra.
+0152 | 2. **Survived as a narrow selection result:** measured order conflicts select better action matrices to open than equal-sized random selection in two structured worlds.
+0153 | 3. **Failed as novel mechanisms:** the active guard has no material advantage; null subtraction is matched by a simpler linear null-preserving update; coordinate factorization is matched by a tiny exact same-algebra estimator; adaptive operators trail exact empirical algebra completion.
+0154 | 4. **Not demonstrated:** discovering a new algorithm without a supplied computational family, learning conditional or irreversible action laws, transfer to unseen state identities, broad task transfer, natural-language/general-knowledge competence, consciousness, or AGI.
+0155 | 
+0156 | The project should not promote these checkpoints as a successor reasoning core. The strongest results are controls that prevent misleading claims.
+0157 | 
+0158 | ## Strongest next research recommendation
+0159 | 
+0160 | Test **learning the scope of a rule and revising its representation locally when a counterexample breaks it**. The meaningful gap exposed here is not whether multiplication or message passing can execute a supplied algebra; both can. It is whether an agent can infer *where* a reusable law applies, detect when it ceases to apply, and retain earlier valid predictions while acquiring a different local law.
+0161 | 
+0162 | A concrete next candidate would begin with a compact learned action model and maintain observed paired interventions as constraints. When a predicted commutation or reversibility law fails in only some contexts, it should learn a context predicate and split only the responsible state/operation subspace. The split should be accepted only if it improves genuinely unseen counterexamples while preserving old transitions. This is a proposed research direction, not an implemented or novel result from this sprint.
+0163 | 
+0164 | The next benchmark should mix commuting, order-sensitive, and irreversible context-dependent actions, contain unseen combinations of factors, and provide observations from which the target is identifiable. Fixed group closure must cease to be a complete solver. Compare with a competent generic world model, a matched symbolic/rule-learning baseline, static dense operators, and random/context-shuffled split controls. A successful result would need transferable learned rule scope and local revision, not just a higher answer-selection score or more matrix parameters.
+0165 | 
+0166 | ## Reproduction, validation, and compute
+0167 | 
+0168 | Runtime: `[local path omitted]`; PyTorch 2.8.0 CPU; two intra-op CPU threads per process. The installed PyTorch is CPU-only. A read-only resource check found the GTX 1650 SUPER already in use; no GPU work was launched.
+0169 | 
+0170 | The sprint trained **44 tiny checkpoints**. Measured complete experimental-run wall times were 45.69 s active, 119.43 s propagation, 83.89 s propagation controls, 55.30 s coordinate discovery, 50.30 s adaptive algebra, and 9.97 s adaptive controls: **364.58 s total measured run time**. The final recorded validation pass took 24.57 s; an earlier validation pass took 12.79 s. These timings exclude design, source review, browsing, writing, and process/tool overhead, and are not benchmark-quality latency measurements. No large sweep was performed; controls were added to test specific attribution failures.
+0171 | 
+0172 | Run these files from this directory, in order:
+0173 | 
+0174 | ```
+0175 | [local path omitted] active_experiment.py --steps 2000 --seeds 2
+0176 | [local path omitted] propagation_experiment.py --steps 1200 --seeds 2
+0177 | [local path omitted] propagation_controls.py
+0178 | [local path omitted] coordinate_experiment.py
+0179 | [local path omitted] adaptive_algebra_experiment.py
+0180 | [local path omitted] adaptive_algebra_controls.py
+0181 | [local path omitted] validate_and_summarize.py
+0182 | ```
+0183 | 
+0184 | The final source never passes target labels into neural forward calls. Exact generators and full transition tables are confined to data generation, evaluator/reference files, and explicitly labeled diagnostic baselines. Candidate inference uses observed data or fitted parameters only. Algebraic estimators consume training observations only.
+0185 | 
+0186 | Validation confirmed Python parsing, disjoint Boolean truth tables, disjoint held-out transition edges including reverses, all labels matching their reference worlds, full checkpoint reproduction for the two positive propagation controls after removing the unused target argument, exact reproduction of the memory baseline after making observed-only input explicit, and zero inconsistency in algebraic closure. The original invalid erasure and epsilon-gate results remain preserved and are expressly excluded from retention/zero-preservation conclusions.
+0187 | 
+0188 | Machine-readable records are `SUMMARY.json`, `VALIDATION.json`, `active_results.json`, `propagation_results.json`, `propagation_controls.json`, `coordinate_results.json`, `adaptive_algebra_results.json`, and `adaptive_algebra_controls.json`. Per-step logs, all generated datasets, all 44 fitted checkpoints, and minimal runnable sources remain alongside them. `MANIFEST.sha256.json` records artifact hashes.
+0189 | 
+0190 | These are exploratory toy screens with few independently sampled worlds. No sealed project confirmation set was opened. Exact counts are retained to support audit rather than to imply statistical certainty or broad transfer.

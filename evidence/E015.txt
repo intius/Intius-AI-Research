@@ -1,0 +1,161 @@
+E015 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: 35_research_assessment.txt
+Original SHA-256: c0ea84f731d5afb9e351842653de5030d6956a21c46ca6c01f18bf0445442fde
+Original byte count: 8923
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | RESEARCH ASSESSMENT: BETTER CAPABILITY PER STORED PARAMETER
+0002 | 2026-09-07 local date. Work performed solo, locally.
+0003 | 
+0004 | Current conclusion
+0005 | I have not demonstrated a scientific breakthrough or a 1B model that beats
+0006 | current leaders. The work produced a reproducible positive result on a
+0007 | controlled dynamics task, followed by a failed transfer to actual text
+0008 | prediction. The tested language-model recipe is not ready for a 1B scale-up.
+0009 | 
+0010 | The tested idea
+0011 | Reuse a model's weights across computation steps, and train the shared
+0012 | transition to suppress harmless state errors while preserving information.
+0013 | Use a finite-difference loss normalized by perturbation size so internal
+0014 | error amplification is trained explicitly. Balance it with clean prediction
+0015 | supervision. Infer candidate harmless directions from a teacher, and verify
+0016 | that perturbing them barely changes the teacher's predictions.
+0017 | 
+0018 | Neither weight reuse, knowledge distillation, Jacobian matching, nor manifold
+0019 | denoising is a new principle. The source audit identifies close prior art,
+0020 | including Relaxed Recursive Transformers, Ouro, Parcae, OPRD, Flex-KD,
+0021 | Jacobian matching, and manifold-based recurrent memory. No verified novelty
+0022 | claim is made for the combined recipe. See 01_sources_and_novelty_audit.txt.
+0023 | 
+0024 | What worked in the controlled experiment
+0025 | The task tracks two rotating circles. Phase carries information; radial
+0026 | motion is nuisance. Exact nuisance geometry is available during training.
+0027 | Every neural model has 4,868 parameters. A balanced normal-direction secant
+0028 | loss plus ordinary prediction supervision passed a fresh five-seed screen.
+0029 | 
+0030 | Final confirmation, mean squared error after 64 autonomous steps:
+0031 |   RMS normalization baseline:                 0.406534
+0032 |   Random-direction regularization:            0.142391
+0033 |   Four-step full backpropagation:              0.227320
+0034 |   Eight-step full backpropagation, half batch:  0.147260
+0035 |   Selective repair:                            0.029152
+0036 |   Exact inference-time geometry oracle:        0.017158
+0037 | 
+0038 | Selective repair reduced rollout MSE by 80.20% relative to the eight-step
+0039 | backpropagation control and won every paired seed. One-step MSE rose 5.19%,
+0040 | within the prewritten 25% tolerance. Estimated matrix training work was about
+0041 | 4.2% higher than the BPTT controls; this was not exact wall-time equality.
+0042 | The exact geometric oracle remained better. No extra inference-time branch
+0043 | or trainable weights were added by the selective loss.
+0044 | 
+0045 | Three earlier formulations failed their prewritten gates. Those results were
+0046 | preserved. The successful configuration was frozen after exploratory work,
+0047 | then confirmed on new seeds with stronger controls. There were 130 complete
+0048 | toy training runs across four sequential experiments, plus excluded smoke
+0049 | checks. This is one deliberately favorable dynamics problem, not 130 separate
+0050 | language-model confirmations. See 21_toy_findings.txt and 19_results_tables.txt.
+0051 | 
+0052 | What happened on actual text
+0053 | I trained a small causal byte-level Transformer teacher on Tiny Shakespeare,
+0054 | then compressed it into dense and recurrent students. Teacher: 275,264 total
+0055 | parameters. Students: 188,992 total parameters, a 31.3415% reduction. The
+0056 | experiment included 18 student runs across three training data streams.
+0057 | All students share one teacher and initial compressed weights; teacher and
+0058 | initialization diversity remain untested.
+0059 | 
+0060 | The estimated nuisance space used the lowest 16 covariance directions in
+0061 | 64-dimensional teacher states. A whole-sequence teacher-KL test accepted
+0062 | about 97.56% of these perturbations, versus about 1.17% of isotropic ones.
+0063 | That establishes a difference in measured teacher sensitivity at the tested
+0064 | perturbation size. It does not establish universal semantic irrelevance.
+0065 | 
+0066 | Mean held-out test cross-entropy, nats per byte (smaller is better):
+0067 |   Teacher, 275264 parameters:                        1.904111
+0068 |   Dense distilled student, 188992 parameters:        1.904427
+0069 |   Recurrent student, ordinary distillation:          1.908258
+0070 |   Recurrent student, additional feature matching:    1.908214
+0071 |   Recurrent student, verified selective repair:      1.908269
+0072 | 
+0073 | Selective repair produced no meaningful prediction improvement. The primary
+0074 | language-screen gate failed: it required at least 5% lower mean test loss than
+0075 | each recurrent control and consistent seed wins. Its mean test loss was
+0076 | slightly higher than the ordinary recurrent distillation control. Repeating
+0077 | the trained recurrent core four times also did not improve over its trained
+0078 | two-pass configuration. The dense student slightly outperformed the looped
+0079 | variants on this test split.
+0080 | 
+0081 | These tiny models and this narrow corpus do not rank modern 1B systems. The
+0082 | near-preservation of teacher quality by ordinary compression is not our
+0083 | breakthrough: it uses established methods and additional student training.
+0084 | See 23_language_screen_preregistration.txt and 28_language_results_tables.txt.
+0085 | 
+0086 | Repair-strength diagnostic
+0087 | A separate validation-only diagnostic increased the repair coefficient over
+0088 | 0, 0.05, 0.5, 5, 50, starting every arm from the same saved student and using
+0089 | the same 250 additional training updates. No test scores were produced by
+0090 | this diagnostic, and it does not replace the failed screen.
+0091 | 
+0092 | Coefficient  Squared local sensitivity  Validation CE at trained R=2
+0093 |    0                  1.010738                        1.761515
+0094 |    0.05               0.992351                        1.761542
+0095 |    0.5                0.674721                        1.761575
+0096 |    5                  0.080159                        1.786223
+0097 |   50                  0.014025                        1.834503
+0098 | 
+0099 | The coefficient 5 intervention reduced measured squared sensitivity by 92.07%
+0100 | but raised validation loss 1.40%. Coefficient 50 reduced sensitivity 98.61%
+0101 | while raising loss 4.14%. The coefficient 0 control had the best R=2 validation
+0102 | loss in this sweep. The stronger interventions changed the intended internal
+0103 | metric but did not improve ordinary text prediction. This weakens the claim
+0104 | that simply imposing more contraction is the missing ingredient here.
+0105 | It does not rule out all methods, geometries, scales, or reasoning tasks.
+0106 | See 34_strength_table_and_audit.txt.
+0107 | 
+0108 | What this changes scientifically
+0109 | The useful lesson is that teacher insensitivity is insufficient as an
+0110 | optimization target. A direction can be mostly ignored by the teacher and
+0111 | still offer no useful capability gain when suppressed in the student.
+0112 | Improved internal stability must be linked to an actual task bottleneck.
+0113 | The current evidence supports selective repair for the toy system and
+0114 | rejects the tested PCA/teacher-gated text recipe as a meaningful improvement.
+0115 | 
+0116 | The 1B reference architecture
+0117 | I implemented an untrained causal reference with exactly 990,984,192 stored
+0118 | parameters: 65,536-token tied embeddings, width 2048, SwiGLU width 5632,
+0119 | grouped-query attention, 19 unique blocks, and a 15-block core that can repeat.
+0120 | At four passes it executes 64 virtual blocks. Dense projection work is about
+0121 | 3.05 times the one-pass configuration. Independent virtual-layer KV storage
+0122 | is 0.5 GiB at batch 1/context 4096/FP16, before weights and other activations.
+0123 | 
+0124 | The billion-parameter shape was instantiated only on PyTorch's meta device
+0125 | for parameter enumeration. No billion-weight checkpoint was allocated or
+0126 | trained. Behavioral checks used a 180,800-parameter random instance and passed
+0127 | causality, cached/full decoding equivalence, finite gradients, weight reuse,
+0128 | and distinct cache storage per virtual layer. This is a verified software
+0129 | scaffold, not a verified high-performing model.
+0130 | See 12_recurrent_lm_prototype.py.txt, 13_lm_prototype_validation.txt, and
+0131 | 14_one_billion_model_and_decisive_test.txt.
+0132 | 
+0133 | Evidence and reproducibility
+0134 | - All 130 toy results were checked for finiteness; their summaries and gate
+0135 |   decisions were independently recalculated from the saved records.
+0136 | - All 19 main language checkpoints were loaded, their hashes/counts/finite
+0137 |   tensors verified, and one entire held-out evaluation repeated from saved
+0138 |   weights with exactly matching recorded loss.
+0139 | - All five strength-diagnostic checkpoints were loaded and checked too.
+0140 | - Corpus and source hashes, fixed seeds, split boundaries, raw metrics,
+0141 |   negative results, and reproduction scripts are retained locally.
+0142 | - The verification is internal; no independent external replication occurred.
+0143 | - All project artifacts are text files, including text-encoded checkpoints.
+0144 | - No external training service, publication, hosting, or upload was used.
+0145 | 
+0146 | Decision
+0147 | The evidence does not support a 1B breakthrough claim or scaling this recipe
+0148 | on the basis of the toy improvement. The next credible advance must show a gain
+0149 | in real language/reasoning capability under strong parameter/data/compute
+0150 | controls. That remains unresolved. The workspace now contains a tested
+0151 | mechanism, an explicit failed transfer, trained small models, and a concrete
+0152 | 1B architecture/evaluation specification to support further research.

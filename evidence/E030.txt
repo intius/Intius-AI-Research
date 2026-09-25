@@ -1,0 +1,69 @@
+E030 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: breakthrough_orchestra_20260923/agents/07_reasoning/04_KV_TOY_RESULT.txt
+Original SHA-256: 8f8726f13d83fdbdf00e68881b0418a7b69d063cfbae176e81ab1092db88cc93
+Original byte count: 6367
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | AGENT 07 — REASONING AND UNCERTAINTY
+0002 | 04 — STATE-CONDITIONAL KV TOY RESULT
+0003 | Date: 2026-09-23
+0004 | 
+0005 | DECISION
+0006 | OBSERVED: On the frozen synthetic duplicate-evidence task, a small selector trained on state-conditional answer-loss labels retained both required evidence groups in all 1,000 held-out episodes at a hard 2-of-8 KV-block cap. It matched a programmed exact group-count baseline and the conditional oracle.
+0007 | OBSERVED: Attention, recency, and both static learned selectors retained the answer-support pair in 0/1,000 episodes. Random retention did so in 138/1,000.
+0008 | INFERRED: The narrow cause is a changing marginal value: a support block is dispensable while a duplicate remains, then becomes essential after its duplicate is evicted.
+0009 | REJECTED_FOR_GPU_PROMOTION: The result does not justify a shared GPU job. The exact group-count algorithm matches the candidate without training, the world relation is supplied, the cache has only eight logical blocks, and no actual LLM KVs or VRAM were measured.
+0010 | 
+0011 | PROTOCOL AND SPLIT
+0012 | The candidate, controls, hard cap, features, label rule, and pass/fail conditions were frozen in 03_KV_MECHANISM_DELTA_AND_TOY_PROTOCOL.txt before this run. The pure standard-library implementation is kv_conditional_utility_toy.py. No model API, public dataset, CUDA, GPU, Kaggle/Colab session, or paid compute was used.
+0013 | 
+0014 | Train episodes: 256 synthetic seeds beginning at 100000.
+0015 | Held-out episodes: 1,000 seeds beginning at 900000.
+0016 | Train/test seed overlap: 0.
+0017 | Each episode contains two copies of evidence A, two copies of evidence B, and four distractor KV blocks. The answer is A XOR B. The fixed toy reader answers only when at least one A and one B are present. All value norms match. Distractors have higher attention and later positions. The reader and key/query match are exact programmed functions.
+0018 | 
+0019 | HELD-OUT RESULTS
+0020 | Metric is fraction of episodes where both evidence groups remain available after retaining two of eight blocks. A missing group leaves a uniform/abstaining reader. If forced to guess in that case, expected exact accuracy is 50%; where both groups survive, it is 100% by construction. These figures are not language-model accuracy.
+0021 | 
+0022 | | Policy | Evidence available | Expected forced-answer accuracy | Mean A copies | Mean B copies | Mean distractors |
+0023 | |---|---:|---:|---:|---:|---:|
+0024 | | Full cache, 8 blocks | 100.0% | 100.0% | 2.000 | 2.000 | 4.000 |
+0025 | | Top attention, 2 blocks | 0.0% | 50.0% | 0.000 | 0.000 | 2.000 |
+0026 | | Most recent, 2 blocks | 0.0% | 50.0% | 0.000 | 0.000 | 2.000 |
+0027 | | Equal-norm random, 2 blocks | 13.8% | 56.9% | 0.487 | 0.510 | 1.003 |
+0028 | | Static full-cache LOO selector | 0.0% | 50.0% | 1.054 | 0.946 | 0.000 |
+0029 | | Static-label replay, matched feature rows | 0.0% | 50.0% | 0.000 | 0.000 | 2.000 |
+0030 | | State-conditional learned selector | 100.0% | 100.0% | 1.000 | 1.000 | 0.000 |
+0031 | | Conditional gold-answer oracle | 100.0% | 100.0% | 1.000 | 1.000 | 0.000 |
+0032 | | Exact group-count program | 100.0% | 100.0% | 1.000 | 1.000 | 0.000 |
+0033 | 
+0034 | The static full-cache selector was trained on 2,048 single-block ablation rows, all with zero answer-loss increase because each evidence copy had a duplicate. The static-label replay control was trained on the same 8,448 intermediate-state feature rows as the candidate, but reused only the full-cache ablation labels. The state-conditional candidate received the correct answer-loss ablation label for each current cache state. All learned selectors had ten parameters (40 raw FP32 weight bytes); the two state-conditioned models used the same feature rows, optimizer, and training schedule.
+0035 | 
+0036 | COST
+0037 | - Static full-cache label generation: 2,048 counterfactual block ablations.
+0038 | - State-conditional label generation: 8,448 ablations, a 4.125x increase. The 8-block dynamic path evaluates 8+7+6+5+4+3 candidate removals.
+0039 | - Candidate scorer: 33 tiny selector evaluations per held-out episode to reduce 8 blocks to 2.
+0040 | - Script-reported toy selector fitting time: 21.07 s across the static, replay, and conditional fits. Label-generation time: 0.152 s for the exact toy reader. Whole script elapsed time: 22.50 s.
+0041 | - Logical KV-block count fell by 75% (8 to 2). This is only a synthetic count; no K/V tensor bytes, peak GPU use, system RSS, or real serving latency were measured.
+0042 | 
+0043 | ATTRIBUTION AND LIMITS
+0044 | This supports one finite mechanism point: labels collected only at the full cache can miss a support token’s changing role under later evictions. Updating its predicted removal harm from the current cache state solved this synthetic redundant-evidence construction.
+0045 | 
+0046 | The exact group-count program also scored 1,000/1,000. It directly uses the known query-key categories, has no learned parameters, and is the simplest adequate solution in this toy. The candidate therefore demonstrates a training-target effect, not a new reasoning ability. At the eight-block scale, 4.125x more label ablations are easy to afford; the candidate feature/score work grows roughly quadratically as the cache is reduced token-by-token. This makes scaling to long contexts a separate and potentially fatal bottleneck.
+0047 | 
+0048 | No general language, coding, factual reasoning, transfer, or VRAM improvement is established. The external KV-retention field already includes future-utility, query-aware, confidence-aware, learned-gate, RL and online low-rank methods; the local answer-loss target is a narrow comparator, not a global novelty claim.
+0049 | 
+0050 | INTEGRITY
+0051 | Source file: kv_conditional_utility_toy.py
+0052 | Source SHA-256: 61b2f9baf1ac8cec2d583a623f118bb0861a88d3fe514e327ce615d65af56742
+0053 | Raw per-case result: 04_KV_TOY_RAW.json
+0054 | Raw SHA-256: 38e500dc4cbd09b292f413dbc5b4c0075547e29706833f1d6086dabe388146f1
+0055 | Frozen protocol: 03_KV_MECHANISM_DELTA_AND_TOY_PROTOCOL.txt
+0056 | Protocol SHA-256: 5f2c750dae48cbf4c0c41adc500301a4aec8139fa7657002fc5d17a5fb730a5f
+0057 | 
+0058 | NEXT STUDY
+0059 | Pursue a distinct real-model-state screen only if its candidate answers a question beyond the exact group-count rule: no supplied category/group semantics, answer-quality labels from real model states, a realistic equal-byte learned and published-policy control, and a fixed measured KV-byte cap. No GPU slot is requested from this toy. Use local GPT-2 checkpoint/native-engine artifacts only for read-only feasibility analysis, then ask root to schedule any shared accelerator test after the protocol and no-repeat audit are frozen. Keep the lane goal ACTIVE.
+0060 |

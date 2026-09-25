@@ -1,0 +1,38 @@
+E027 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/cognitive_kernel_project_20260916/experiment_AH_exact_primitive_learned_routing/REPORT.md
+Original SHA-256: 97b1013b01e5ab2b53555b581fa24e5f0cf8a1b2fb9b08f6f2607ffe5fbe52fa
+Original byte count: 1306
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Experiment AH — Exact primitives with learned routing
+0002 | 
+0003 | ## Verdict
+0004 | 
+0005 | **PASS. Promote the hybrid semantic-adaptive routed executor.**
+0006 | 
+0007 | Across all three seeds, the 5,377-parameter learned router achieved 100.00% on every seen/unseen suite when driven by AF's exact coefficients and exact differentiable modular transitions. This includes unseen moduli, eight registers and depth 32.
+0008 | 
+0009 | Shuffled coefficients fell to 22.40%, erased state to 12.50%, and uniform addressing to 11.98%. All coefficient recovery checks were 100%.
+0010 | 
+0011 | This is the strongest semantic-adaptive result so far, but its semantic solver and arithmetic primitives are engineered. Learning when to construct/select such primitives remains open.
+0012 | 
+0013 | ## Promotion gates
+0014 | 
+0015 | - PASS — solved accuracy 95
+0016 | - PASS — unseen accuracy 90
+0017 | - PASS — depth32 90
+0018 | - PASS — address 95
+0019 | - PASS — shuffle drop 30
+0020 | - PASS — erase drop 30
+0021 | - PASS — uniform drop 30
+0022 | - PASS — solver recovery 99
+0023 | - PASS — hashes
+0024 | 
+0025 | ## Decision
+0026 | 
+0027 | Promote the architecture `demonstrations → exact semantic solver → exact differentiable primitive → learned content-address routing`. It preserves learned distributed routing while eliminating the neural arithmetic bottleneck identified by AG.
+0028 | 
+0029 | All three checkpoints and emitted hashes verified.

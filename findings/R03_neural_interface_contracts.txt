@@ -1,0 +1,71 @@
+R03 — A neural interface must train both sides of its contract
+
+EVIDENCE STATUS: CONTROLLED INTEROPERABILITY SUCCESS; TEXT AND LONG-CHAIN LIMITS
+
+Training decoders on the exact shared code repaired cross-model compatibility in controlled experiments.
+
+THE IDEA
+Independently trained encoders and heads should exchange a defined latent
+message. Penalizing encoder deviations from that message is insufficient if
+heads learn to rely on their own encoder's small private deviations. Train
+each head on clean protocol messages as well as its own encoder outputs.
+
+WHAT SUCCEEDED
+Stage 1 supplied a four-coordinate numerical protocol. The original shared
+port penalty achieved 0.862559 cross-component score; decoder-conformance
+training raised it to 0.998502, versus native 0.998494. Score means one minus
+variance-normalized squared error, NOT classification accuracy. An ordinary
+affine adapter reached 0.985618. Three source/recipient seed groups were used.
+
+Stage 2 learned a 24-dimensional reference code, then froze it as a shared
+standard. MLP, GRU and Transformer clients trained against this same reference.
+Same-version head swaps reached 99.97% fresh and 99.96% held-out-combination
+whole-state exact accuracy. Ordinary unaligned swaps scored 0%. Three seed
+groups were trained; directed swaps sharing models are not independent repeats.
+A new head attached after encoders froze answered functions of information
+already present in the code; it did not acquire a new represented concept.
+
+CRITICAL FOLLOW-UPS
+Description reordering reduced ABI field accuracy to about 25-38% and whole
+state exactness to 0%. Cross-version swaps were about 24% per-field and 0%
+whole-state: equal dimensionality does not mean equal semantics. At 128
+closed-loop operations, noise-trained chains retained only 48.78% whole-state
+correctness. These stress probes were selected after the main result.
+Known Deep Sets structure or ordinary order augmentation repaired the tested
+reordering problem, both reaching 100% on a later 192-case specialist suite.
+
+COST AND FAIRNESS
+The neural message uses 96 bytes (24 float32 values); the simple exact
+categorical protocol uses 12 bytes and solves the supplied operations exactly.
+ABI training and posthoc adapters had unequal supervision/compute budgets.
+The learned standard is a shared reference, not spontaneous semantic agreement.
+
+HOW TO BUILD ON IT
+Version the reference code and train both producers and consumers against it.
+Test swapped modules, permuted coordinates, new input orders and long chains.
+This is an experiment-design pattern for modular systems; direct compatibility
+between arbitrary pretrained LLMs or LoRAs has not been established.
+
+ORIGINALITY
+The conformance failure/repair and stress chain are the useful empirical
+package. Shared latent spaces and representation alignment are prior art.
+
+SOURCE REPORTS
+  E007: evidence/E007.txt
+    Original: idea_tests_004_005/REPORT_004.md
+  E008: evidence/E008.txt
+    Original: neural_abi_stage2/REPORT.md
+  E009: evidence/E009.txt
+    Original: neural_abi_stage2/STRESS_REPORT.md
+  E010: evidence/E010.txt
+    Original: abi_llm_comparison/REPORT.md
+  E011: evidence/E011.txt
+    Original: abi_llm_comparison/SCALAR_REPORT.md
+
+PRIOR-WORK CONTEXT
+  P03: Latent Translation: Crossing Modalities by Bridging Generative Models (2019)
+    https://arxiv.org/abs/1902.08261
+  P04: Deep Sets (Zaheer et al., 2017)
+    https://arxiv.org/abs/1703.06114
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

@@ -1,0 +1,205 @@
+RESEARCH Q/A — EDITORIAL SYNTHESIS, NOT NEW EXPERIMENTS
+
+Twenty source-linked records. Use as an alternative to the full cards, not
+an independent duplicate training source. Do not separate answers from scope.
+No model trained on these records was evaluated.
+
+BEGIN_RECORD
+record_id: QA_R01
+source_card: findings/R01_exact_sparse_language_corrections.txt
+source_ids: E001, E002, E003, E004
+evidence_status: CONFIRMED LOCAL LANGUAGE RESULT; STRONGER-PRIOR SPEED GATE FAILED
+question: What useful result did R01 establish, and what limits its interpretation?
+answer: A token-specific sparse correction improved byte prediction while reducing training time against a tested dense correction. The stronger-prior wall saving was only 6.193%, so its combined gate failed. Component and complete-training speedups must stay separate.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_R02
+source_card: findings/R02_intervention_coordinates.txt
+source_ids: E005, E006
+evidence_status: CONFIRMED SYNTHETIC COMPONENT; SHARP FAILURE BOUNDARY
+question: What useful result did R02 establish, and what limits its interpretation?
+answer: Learned Boolean coordinates generalized much better than raw-observation prediction within a tightly specified family. The world assumes single-coordinate actions and low-degree inverse encodings. Cubic and multi-effect stress caused complete abstention.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_R03
+source_card: findings/R03_neural_interface_contracts.txt
+source_ids: E007, E008, E009, E010, E011
+evidence_status: CONTROLLED INTEROPERABILITY SUCCESS; TEXT AND LONG-CHAIN LIMITS
+question: What useful result did R03 establish, and what limits its interpretation?
+answer: Training decoders on the exact shared code repaired cross-model compatibility in controlled experiments. Shared reference versions were required. Description reordering and long closed-loop chains exposed major failures; general LLM interoperability was not shown.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_R04
+source_card: findings/R04_evidence_cross_terms.txt
+source_ids: E012, E013
+evidence_status: THREE-INITIALIZATION SYNTHETIC ABLATION SUCCESS
+question: What useful result did R04 establish, and what limits its interpretation?
+answer: Squaring summed responses outperformed summing squared responses at the same parameter count. The gain was on a low-accuracy synthetic task with supplied execution. It was ordinary real-valued computation, not quantum advantage.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_R05
+source_card: findings/R05_canonical_operator_libraries.txt
+source_ids: E014, E012
+evidence_status: CONFIRMED COMPACT LIBRARY RESULT; NEW-RULE TRANSFER WEAK
+question: What useful result did R05 establish, and what limits its interpretation?
+answer: Canonicalization reduced a synthetic operator library while preserving or improving composition accuracy. The stronger uncapped raw library narrowed the gap, cubic rules transferred poorly, and persistence provided no overall benefit.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_R06
+source_card: findings/R06_selective_state_repair.txt
+source_ids: E015, E016
+evidence_status: FIVE-SEED TOY SUCCESS; LANGUAGE TRANSFER FAILED
+question: What useful result did R06 establish, and what limits its interpretation?
+answer: A geometry-aware finite-difference objective greatly improved long rollouts on a controlled dynamics task. The successful known-geometry toy did not transfer to language prediction; stronger contraction could worsen text loss.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_R07
+source_card: findings/R07_path_coverage.txt
+source_ids: E017, E018
+evidence_status: PARTIAL SCALE-TRANSFER SUCCESS; DEEP REASONING FAILED
+question: What useful result did R07 establish, and what limits its interpretation?
+answer: Distance-balanced training improved shallow transfer across graph sizes where more same-distribution data did not. Only shallow transfer improved. The balanced arm also changed logical-depth mixture and exposure count, so path coverage was not isolated perfectly.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_R08
+source_card: findings/R08_population_vs_communication.txt
+source_ids: E019, E020
+evidence_status: PARTIAL RECALL SUCCESS; RECURRENT-REASONING ATTRIBUTION REJECTED
+question: What useful result did R08 establish, and what limits its interpretation?
+answer: A normalized frozen population curve separated extra state from communication benefits. Removing inter-cell recurrence slightly improved the largest B2 score. Upstream weights and growing state must be counted.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_R09
+source_card: findings/R09_communication_content_binding.txt
+source_ids: E021, E022
+evidence_status: PARTIAL LEARNED-COMMUNICATION SUCCESS; COMPLETE RECONSTRUCTION FAILED
+question: What useful result did R09 establish, and what limits its interpretation?
+answer: Messages carried causally useful symbols, while reliable reconstruction of the complete vector remained at zero. Complete-vector success stayed at zero, and high probe decodability did not imply reliable source-bound use.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_R10
+source_card: findings/R10_selective_noncommutativity.txt
+source_ids: E023
+evidence_status: EXPLORATORY TWO-WORLD SUCCESS AGAINST MATCHED RANDOM OPENING
+question: What useful result did R10 establish, and what limits its interpretation?
+answer: Observed commutation violations selected useful extra matrix entries better than random selection. Only two worlds were tested. Exact algebraic closure solved the tasks, and diagonal operators won ordinary edge accuracy.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_R11
+source_card: findings/R11_zero_preserving_messages.txt
+source_ids: E023
+evidence_status: EXPLORATORY COMPONENT SUCCESS; SIMPLER CONTROL MATCHED IT
+question: What useful result did R11 establish, and what limits its interpretation?
+answer: Removing a message network's zero-input output prevented distractor accumulation in a controlled graph task. A simpler bias-free linear control matched the result. Graph structure and the computation schedule were supplied.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_R12
+source_card: findings/R12_learned_binding_controls.txt
+source_ids: E024
+evidence_status: CONTROLLED ONE-HOP MATCHING SUCCESS
+question: What useful result did R12 establish, and what limits its interpretation?
+answer: Independent query/key maps learned correct binding, while shared normalized maps supplied it at initialization. Only the independent-map arm learned matching from near chance; shared normalized maps already selected correctly at initialization. Multi-hop reasoning was untested.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_R13
+source_card: findings/R13_addressed_execution.txt
+source_ids: E025, E026, E027, E028, E029
+evidence_status: THREE-SEED SYNTHETIC EXECUTION SUCCESS; FIXED SEMANTICS
+question: What useful result did R13 establish, and what limits its interpretation?
+answer: A width/training threshold turned weak register execution into strong depth and size transfer. The semantics were fixed. Later successful adaptation relied on an engineered semantic solver and exact primitives.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_R14
+source_card: findings/R14_conditional_cache_utility.txt
+source_ids: E030
+evidence_status: SYNTHETIC TRAINING-TARGET SUCCESS; NO REAL KV OR VRAM RESULT
+question: What useful result did R14 establish, and what limits its interpretation?
+answer: A conditional removal target preserved redundant evidence that static full-cache ablations missed. The task supplied evidence groups, and an exact group-count program matched the learner. No real KV tensors or VRAM were measured.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_A01
+source_card: applied_results/A01_lora_data_mix.txt
+source_ids: E031, E032, E033, E034
+evidence_status: SMALL FROZEN CONFIRMATION PASSED; ESTABLISHED METHOD
+question: What useful result did A01 establish, and what limits its interpretation?
+answer: Continuing a rank-8 adapter improved a separate public subset from 27/48 to 35/48, with a generation-time cost. The separate suite was small and possibly present in pretraining; Stage 2 took about twice as long to generate. The mixture components were not causally isolated.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_A02
+source_card: applied_results/A02_short_run_compilation.txt
+source_ids: E035, E036
+evidence_status: REPEATABLE ENGINEERING RESULT; ESTABLISHED METHOD
+question: What useful result did A02 establish, and what limits its interpretation?
+answer: Packed scan execution reduced complete adaptation time even though its warmed update was slower. Warm scan steps were slower and the accuracy difference was unresolved; reduced setup cost explained the short-job timing result.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_A03
+source_card: applied_results/A03_compute_paced_growth.txt
+source_ids: E037
+evidence_status: ONE-SEED CORRECTED CONFIRMATION; ESTABLISHED METHOD
+question: What useful result did A03 establish, and what limits its interpretation?
+answer: Starting with fewer active blocks allowed more cheap updates before growing to the same final network. The corrected confirmation had one seed, used a computation proxy and did not demonstrate a GPU or large-model speedup.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_A04
+source_card: applied_results/A04_nonlinear_pruning.txt
+source_ids: E038, E039, E040
+evidence_status: LOCAL QUALITY/LATENCY SUCCESS; ALL-CONTROLS GATE FAILED
+question: What useful result did A04 establish, and what limits its interpretation?
+answer: A compact nonlinear FFN layout beat two tested SVD layouts, but did not win every seed against the strongest control. One quality seed lost to optimized budgeted SVD, so the all-controls gate failed. Latency was CPU full-window inference.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_A05
+source_card: applied_results/A05_frozen_reader_ranking.txt
+source_ids: E041, E042, E043, E044
+evidence_status: CROSS-DATASET COMPONENT SUCCESS; ESTABLISHED RETRIEVAL METHODS
+question: What useful result did A05 establish, and what limits its interpretation?
+answer: Small rankers improved a frozen extractive reader, with a smaller gain after transfer to another dataset. It was selected extractive QA, with repeated SQuAD development and substantial reader/index costs, not unrestricted language or full HotpotQA reasoning.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD
+
+BEGIN_RECORD
+record_id: QA_A06
+source_card: applied_results/A06_incremental_exact_computation.txt
+source_ids: E045, E046, E047
+evidence_status: EXACT COMPONENT SPEEDUPS; GENERAL CAPABILITY UNESTABLISHED
+question: What useful result did A06 establish, and what limits its interpretation?
+answer: Two studies preserved exact decisions while avoiding recomputation of unaffected dependencies. Incremental computation matched existing decisions. Direct execution or broad revision tails limited usefulness; the language writer follow-up failed.
+provenance: synthesis of local experiment reports; prepared 2026-09-25
+END_RECORD

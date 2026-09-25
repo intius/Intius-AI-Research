@@ -1,0 +1,69 @@
+E020 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/further_testing/simplified_state_comparison_20260915/RESULTS.md
+Original SHA-256: a2935357902810f719492611972df8a7626856aa22a55229b9fdd3e6233dc530
+Original byte count: 2934
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Fair comparison result
+0002 | 
+0003 | Completed 15 September 2026 on a new frozen data seed and new cue/follow-up
+0004 | wording. All four additions received identical frozen 80-neuron features, the
+0005 | same frozen ten-cell residual, the same data, optimizer, epoch count and batch
+0006 | order. Parameter counts differ by only 86.
+0007 | 
+0008 | ## Untouched test
+0009 | 
+0010 | | Added architecture | Parameters | State bytes | Follow-ups | Accuracy |
+0011 | |---|---:|---:|---:|---:|
+0012 | | Timed nonlinear 1,000-cell dendrites | 761,000 | 24,000 | 1,104/2,400 | 46.00% |
+0013 | | No-decay nonlinear dendrites | 761,000 | 24,000 | 1,504/2,400 | 62.67% |
+0014 | | No-decay linear dendritic state | 761,000 | 24,000 | 1,765/2,400 | 73.54% |
+0015 | | **Ordinary 462-unit GRU** | **760,914** | **1,848** | **2,208/2,400** | **92.00%** |
+0016 | 
+0017 | The GRU's Wilson 95% interval is 90.85–93.02%. It beats the strongest
+0018 | dendritic alternative by 18.46 percentage points; the paired episode-bootstrap
+0019 | 95% interval is 16.83–20.13 points and McNemar `p=1.05e-117`.
+0020 | 
+0021 | Resetting the GRU before every event yields 270/2,400 (11.25%), establishing
+0022 | that retained recurrent state supplies its result. The common frozen
+0023 | backbone-plus-old-ten input scores 510/2,400 (21.25%) on this new wording.
+0024 | 
+0025 | ## What the controls establish
+0026 | 
+0027 | Removing elapsed-time decay improves the dendritic architecture from 46.00%
+0028 | to 62.67%. Removing its branch value nonlinearity as well improves it to
+0029 | 73.54%. The separately retrained controls therefore agree with the earlier
+0030 | lesion direction, while showing that the earlier 98% inference-only lesion was
+0031 | not a valid estimate of a retrained architecture.
+0032 | 
+0033 | The ordinary GRU is better, smaller in persistent state, faster to train, and
+0034 | structurally simpler on this latest-method memory task. The brain-inspired
+0035 | details do not earn their complexity here.
+0036 | 
+0037 | ## Existing benchmark
+0038 | 
+0039 | All three dendritic variants preserve TRIAD at 96/96 math, 96/96 grammar,
+0040 | 48/48 grammar pairs, 96/96 coding cases and 6/6 coding tasks. The GRU records
+0041 | 95/96 math and otherwise the same perfect scores. This is a one-item known-task
+0042 | regression for the GRU.
+0043 | 
+0044 | The reused wording probe scores 11/15 for all dendritic variants and 12/15 for
+0045 | the GRU. Every model still routes the queue description to `math_affine`, so
+0046 | the queue result remains 0/5. None acquires a missing algorithm.
+0047 | 
+0048 | ## Corrected conclusion
+0049 | 
+0050 | The earlier 1,010-cell result demonstrated that increasing persistent capacity
+0051 | can produce large memory behavior. It did not demonstrate an advantage over
+0052 | ordinary recurrence. This fair parameter-matched test rejects that stronger
+0053 | interpretation: **the regular GRU is decisively better for this task and uses
+0054 | about thirteen times less persistent state.**
+0055 | 
+0056 | The current positive finding is narrower: a compact exact-tool library can gain
+0057 | useful conversational method memory from a small recurrent controller. That is
+0058 | an established hybrid design direction, not a new architecture or general
+0059 | intelligence result. Confirmation remains sealed.
+0060 |

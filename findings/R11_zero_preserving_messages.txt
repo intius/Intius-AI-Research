@@ -1,0 +1,52 @@
+R11 — Zero-preserving messages resisted unsupported distractor branches
+
+EVIDENCE STATUS: EXPLORATORY COMPONENT SUCCESS; SIMPLER CONTROL MATCHED IT
+
+Removing a message network's zero-input output prevented distractor accumulation in a controlled graph task.
+
+THE IDEA
+Use message(h,r) = phi(h,r) - phi(0,r), so a branch without supporting state
+emits exactly zero. This removes a learned bias that can create apparent
+evidence when many unsupported branches feed a relevant path.
+
+WHAT SUCCEEDED
+Models trained on depths 1-4 with one incoming distractor per chain edge.
+On the depth-16 stress with four distractors, two seeds gave:
+  Plain MLP message:              608/1,024 (59.38%).
+  Plain MLP plus RMS:             516/1,024 (50.39%).
+  Null subtraction:             1,024/1,024 (100%).
+  Null subtraction plus RMS:    1,024/1,024 (100%).
+  Bias-free linear map plus RMS:1,024/1,024 (100%).
+The last control learns W_relation*h and preserves zero more simply. It also
+matched the internal-edge-flip, anchor-flip and relabeling results. At original
+distractor density, ordinary controls already generalized well to depth 32.
+
+WHAT THE RESULT MEANS
+Learned relation semantics plus an exact zero-in/zero-out invariant were useful.
+The subtraction itself was not uniquely superior. Graph adjacency, the queried
+node and the execution schedule were supplied. This was one relevant chain
+with unsupported incoming leaves, not unrestricted competing hypotheses.
+An epsilon-based gate was corrected because it was not exactly zero at zero.
+The original readout-erasure test was invalid for retention; a corrected
+between-round erasure retained one-hop behavior and damaged deep performance.
+
+HOW TO BUILD ON IT
+Test the algebraic invariant directly, including exact-zero inputs. Compare
+null subtraction against a bias-free linear control and against normalized
+ordinary messages. Do not assume a null hidden vector means absence of evidence
+in an arbitrary pretrained LLM; that mapping must be established separately.
+
+ORIGINALITY
+This is a concrete stress result explaining a useful engineering invariant.
+Message passing and learned belief propagation are established. No new
+reasoning mechanism was demonstrated.
+
+SOURCE REPORTS
+  E023: evidence/E023.txt
+    Original: !!!Current/novel_micro_sprint_20260919_1610/REPORT.md
+
+PRIOR-WORK CONTEXT
+  P10: Neural Algorithmic Reasoning (Velickovic and Blundell, 2021)
+    https://arxiv.org/abs/2105.02761
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

@@ -1,0 +1,72 @@
+E003 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: block_sparse_extension/21_audit.txt
+Original SHA-256: ea1aae49a087506a91db57ca7e7dbf016dcbb834b74b31370c11eaac4084745a
+Original byte count: 1517
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | {
+0002 |   "integrity": "pass",
+0003 |   "component_benchmarks": [
+0004 |     {
+0005 |       "support": 16,
+0006 |       "pointer": false,
+0007 |       "speedup": 5.890922889656298
+0008 |     },
+0009 |     {
+0010 |       "support": 16,
+0011 |       "pointer": true,
+0012 |       "speedup": 5.010250065895952
+0013 |     },
+0014 |     {
+0015 |       "support": 256,
+0016 |       "pointer": false,
+0017 |       "speedup": 4.021238697291021
+0018 |     },
+0019 |     {
+0020 |       "support": 256,
+0021 |       "pointer": true,
+0022 |       "speedup": 3.2839171701477072
+0023 |     }
+0024 |   ],
+0025 |   "retrieval_query_controls_passed": 6,
+0026 |   "verified_neural_checkpoints": 9,
+0027 |   "maximum_validation_replay_error": 0.0,
+0028 |   "means": {
+0029 |     "dense": {
+0030 |       "test_ce": 2.058281649805093,
+0031 |       "wall": 35.95203466662982,
+0032 |       "cpu": 53.739583333333336
+0033 |     },
+0034 |     "block": {
+0035 |       "test_ce": 2.1023650019716333,
+0036 |       "wall": 10.635650567070115,
+0037 |       "cpu": 17.510416666666668
+0038 |     },
+0039 |     "tilt": {
+0040 |       "test_ce": 2.0217416983502257,
+0041 |       "wall": 19.56194030023956,
+0042 |       "cpu": 31.442708333333332
+0043 |     }
+0044 |   },
+0045 |   "local_gate": "pass",
+0046 |   "test_loss_reduction_percent": 1.7752648894444278,
+0047 |   "time_reduction_percent": 45.58878104777564,
+0048 |   "cpu_reduction_percent": 41.49059895328553,
+0049 |   "grammar": [
+0050 |     {
+0051 |       "model": "dense",
+0052 |       "raw_accuracy": 0.5222686567164179,
+0053 |       "tie_half_accuracy": 0.522320895522388
+0054 |     },
+0055 |     {
+0056 |       "model": "tilt",
+0057 |       "raw_accuracy": 0.526910447761194,
+0058 |       "tie_half_accuracy": 0.5269477611940299
+0059 |     }
+0060 |   ],
+0061 |   "hundredfold_high_quality_goal": "not achieved",
+0062 |   "novelty": "not established"
+0063 | }

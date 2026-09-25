@@ -1,0 +1,57 @@
+E017 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/further_testing/experiment_E_data_vs_distance_20260915/RESULTS.md
+Original SHA-256: f284bb26f02f33e39bf8782dc098e7057454ef89208dac14fbf2cd3945ce5567
+Original byte count: 3775
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Experiment E results
+0002 | 
+0003 | Five arms completed from the identical neutral hash, with 600 updates each and no restarts. All frozen test scores and pair-balanced distance bins were recomputed before interpretation.
+0004 | 
+0005 | ## Hypothesis verdicts
+0006 | 
+0007 | - H1 raw data quantity: **False**.
+0008 | - H2 mixed-scale/path coverage improves shallow/medium paths: **True**; unseen depths solved: **False**.
+0009 | - H3 hard architectural inability: **False**. A magnitude-matched frozen random rule reaches 100.00% on a deep condition, so the rule family can represent near-lossless deep propagation.
+0010 | - Optimization/objective bottleneck: **True**. Strong all-scale trained result: **False**.
+0011 | 
+0012 | Best D/E trained unseen-depth score anywhere at 128 sweeps: 50.00%. Best 150k macro arm: E.
+0013 | 
+0014 | ## Primary table
+0015 | 
+0016 | | Arm | Unique | Updates | Example exposures | Training cells | Positive-hop coverage | Relay gate | Relation gate | 20k macro | 50k macro | 150k macro |
+0017 | |---|---|---|---|---|---|---|---|---|---|---|
+0018 | | A | 240 | 600 | 96,000 | 20000 | 3–13 (mean 7.6) | 0.925578 | 0.945305 | 67.78 ± 1.17 | 63.75 ± 1.40 | 60.49 ± 0.61 |
+0019 | | B | 2,400 | 600 | 960,000 | 20000 | 2–15 (mean 7.5) | 0.925298 | 0.944895 | 67.78 ± 1.17 | 63.75 ± 1.40 | 60.49 ± 0.61 |
+0020 | | C | 24,000 | 600 | 9,600,000 | 20000 | 2–15 (mean 7.5) | 0.925757 | 0.944877 | 67.78 ± 1.17 | 63.75 ± 1.40 | 60.49 ± 0.61 |
+0021 | | D | 2,400 | 600 | 960,000 | 20000/50000/150000 | 2–19 (mean 8.7) | 0.931642 | 0.949146 | 69.58 ± 0.44 | 67.29 ± 0.77 | 62.78 ± 1.17 |
+0022 | | E | 2,400 | 600 | 826,400 | 20000/50000/150000 | 3–18 (mean 10.4) | 0.941490 | 0.956847 | 70.21 ± 0.31 | 70.00 ± 0.00 | 69.86 ± 0.28 |
+0023 | 
+0024 | Macro is the equal-count average across depths 1/2/4/8/16 at normal 128-sweep inference. Full depth values are in `DEPTH_TABLE.md`.
+0025 | 
+0026 | ## Interpretation
+0027 | 
+0028 | A/B/C isolate unique same-distribution examples with identical update counts. D changes substrate exposure; E balances actual positive-route hops. The verdict booleans use predeclared materiality thresholds in `finalize.py`; always inspect the raw point estimates and distance table.
+0029 | Performance follows physical-hop coverage far more closely than raw example count. D/E move gates closer to one, but their fixed 600-update objective stops before lossless propagation. A predeclared magnitude-matched random control with gates near 0.99 solves deep conditions, so the architecture can express the behavior; the trained failure is primarily optimization/objective coverage, not hard representational impossibility. Shuffled-source equality indicates topology-agnostic flooding rather than learned use of one graph.
+0030 | 
+0031 | This remains a fixed max-product/equality primitive. Training adjusts attenuation gates; it does not learn representations or discover arbitrary reasoning. Physical cells are tied in blocks of 80.
+0032 | 
+0033 | ## Resource truth
+0034 | 
+0035 | | Physical cells | Independent units | Physical edges | Physical state MiB/example | Compressed state MiB/example | Graph preprocessing seconds |
+0036 | |---|---|---|---|---|---|
+0037 | | 20,000 | 250 | 320,000 | 5.19 | 0.065 | 0.23 ± 0.00 |
+0038 | | 50,000 | 625 | 800,000 | 12.97 | 0.162 | 1.47 ± 0.04 |
+0039 | | 150,000 | 1,875 | 2,400,000 | 38.91 | 0.486 | 14.63 ± 1.07 |
+0040 | 
+0041 | Total five-arm training wall time: 138.242s. Compressed post scoring: 2.853s, peak RSS 243.84 MiB. VRAM 0. These are exact compressed resources, not dense physical recurrent runtime.
+0042 | 
+0043 | ## Audit
+0044 | 
+0045 | Post physical-cell comparisons: 96; maximum error 2.22e-16; predictions identical True; all 80 lanes tied True.
+0046 | No A/B/C/D files changed. No per-cell/per-edge/ID trainables. Full artifacts: `PRIMARY_TABLE.md`, `DEPTH_TABLE.md`, `DISTANCE_TABLE.md`, `CAUSAL_TABLE.md`, `INDIVIDUAL_REPLICATES.md`, `RETENTION.md`, and `RESULTS.json`.
+0047 | 
+0048 | ![Experiment E](E_RESULTS.png)

@@ -1,0 +1,146 @@
+E019 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/further_testing/strict_frozen_B_scaling_20260915/RESULTS.md
+Original SHA-256: 4032e85828eeb4c2f6da9cfc72220504bc9b71e23ee7cc2fa5102a3c023547e7
+Original byte count: 11403
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Strict frozen B1/B2 population-scaling result
+0002 | 
+0003 | All four population sizes, five graph seeds, both frozen branches and all four ablations completed before interpretation: 160 fresh-process runs. No training, tuning or recalibration.
+0004 | These scores are known-method follow-up recall on the same previously observed 2,400-response test, not general reasoning, coding, math, IQ or consciousness scores.
+0005 | 
+0006 | [Scientific conclusion and limitations](INTERPRETATION.md): B2 improves at every tested size; B1 peaks at 20k. Disabling inter-cell recurrence gives nearly the same scores, so a recurrent-reasoning advantage is not established.
+0007 | 
+0008 | ## Final comparison table
+0009 | 
+0010 | | Arm | Cells | B params | Fθ SHA-256¹ | Decoder SHA-256¹ | Connections | Degree in / avg out | Steps/event | State KiB/session | Normal peak RSS MiB² | Normal runtime s² | Normal mean % | Normal SD pp | No recurrence %³ | Shuffled messages %³ | State erased %³ |
+0011 | |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+0012 | | B1 | 1,010 | 1,959 | 7f67de5b1632 | 9d919c942d58 | 4,040 | 4 / 4 | 2 | 23.67 | 203.7 ± 0.1 | 2.65 ± 0.10 | 7.24 | 0.112 | 7.21 ± 0.00 | 7.20 ± 0.05 | 6.33 ± 0.00 |
+0013 | | B1 | 5,000 | 1,959 | 7f67de5b1632 | 9d919c942d58 | 20,000 | 4 / 4 | 2 | 117.19 | 211.3 ± 0.1 | 7.09 ± 0.25 | 16.26 | 0.382 | 15.88 ± 0.00 | 15.86 ± 0.11 | 6.29 ± 0.00 |
+0014 | | B1 | 20,000 | 1,959 | 7f67de5b1632 | 9d919c942d58 | 80,000 | 4 / 4 | 2 | 468.75 | 252.3 ± 0.7 | 33.12 ± 0.94 | 36.33 | 0.356 | 36.29 ± 0.00 | 36.51 ± 0.18 | 7.04 ± 0.00 |
+0015 | | B1 | 50,000 | 1,959 | 7f67de5b1632 | 9d919c942d58 | 200,000 | 4 / 4 | 2 | 1171.88 | 303.2 ± 0.4 | 90.98 ± 0.92 | 33.42 | 0.539 | 33.33 ± 0.00 | 33.14 ± 0.23 | 6.42 ± 0.00 |
+0016 | | B2 | 1,010 | 1,959 | 9a9d90916c52 | d118f4699072 | 4,040 | 4 / 4 | 2 | 23.67 | 203.4 ± 0.3 | 2.59 ± 0.04 | 6.56 | 0.086 | 6.58 ± 0.00 | 6.57 ± 0.14 | 6.33 ± 0.00 |
+0017 | | B2 | 5,000 | 1,959 | 9a9d90916c52 | d118f4699072 | 20,000 | 4 / 4 | 2 | 117.19 | 211.0 ± 0.1 | 7.17 ± 0.20 | 18.20 | 0.258 | 18.08 ± 0.00 | 18.13 ± 0.14 | 6.29 ± 0.00 |
+0018 | | B2 | 20,000 | 1,959 | 9a9d90916c52 | d118f4699072 | 80,000 | 4 / 4 | 2 | 468.75 | 252.1 ± 0.6 | 33.52 ± 0.84 | 39.80 | 0.143 | 40.12 ± 0.00 | 40.20 ± 0.07 | 7.04 ± 0.00 |
+0019 | | B2 | 50,000 | 1,959 | 9a9d90916c52 | d118f4699072 | 200,000 | 4 / 4 | 2 | 1171.88 | 302.9 ± 0.4 | 91.51 ± 0.72 | 41.99 | 0.304 | 42.29 ± 0.00 | 41.58 ± 0.16 | 6.42 ± 0.00 |
+0020 | 
+0021 | ¹ Hash prefixes for table readability; complete hashes are printed below and for all 160 runs in `RUN_PARAMETER_PROOF.md` and each process log.
+0022 | ² Mean ± sample SD across the five graph seeds, for normal recurrence. RSS is sampled peak process memory during inference; runtime excludes loading/serialization and upstream language encoding. Two concurrent fresh processes, each with two CPU threads; host load affects timings. Every ablation has full resource rows in `RUN_RESOURCE_DETAILS.md`.
+0023 | ³ Five-seed mean ± sample SD in percentage points. Normal mean and SD are separate columns. This is not an average across ablation modes.
+0024 | State uses six float32 values/cell. Two sweeps/event, four events/episode. Stored edges are 4N in all modes; no-recurrence uses zero edges while retaining the same update count. GPU/VRAM use is zero.
+0025 | 
+0026 | ## Complete frozen parameter hashes
+0027 | 
+0028 | ### B1
+0029 | 
+0030 | - Fθ (24 values): `7f67de5b1632b356a8005015a943f42e69e421cc824543fb5fd03014c0e0df1a`
+0031 | - Decoder (1,935 values): `9d919c942d58056c4e5a305a2492f535574e45fa2cf9164cb8e07ba14f67fd11`
+0032 | - All shared/decoder/normalization values: `5033aa6e922b53a02dd15676b7337a3f7861fe0b5987ead1fce2cc6d208126e5`
+0033 | 
+0034 | ### B2
+0035 | 
+0036 | - Fθ (24 values): `9a9d90916c5289865f298c828577a1141cf70cbcb387621f29ba032fa91baa3d`
+0037 | - Decoder (1,935 values): `d118f4699072e7a0222e1f3cee0aa240312491c06e7ce0fe4d61836b92691685`
+0038 | - All shared/decoder/normalization values: `f31aa3a34d31171ea08a86d9a7fcfc3624dc06c6dad130dd82da0987b0c99e2b`
+0039 | 
+0040 | The scaled rule/readout contains 1,959 learned values. The separate, unchanged upstream feature backbone stores 3,725,153; the full saved tool stores 3,727,112 learned values, plus 256 fitted normalization statistics. Some stored upstream heads are unused. No tensor is trainable during testing, including all cell-indexed or edge-indexed tensors.
+0041 | Hash method: sorted tensor names and shapes followed by exact contiguous tensor bytes, SHA-256; same method for every run. Decoder hashes exclude normalization statistics, which are checked separately.
+0042 | 
+0043 | ## Controls enforced
+0044 | 
+0045 | - The prerequisite signal-normalization experiment was complete and its entire manifest verified before these runs.
+0046 | - Direct per-pool mean aggregation in fixed units, frozen standardization, then unit-RMS actual decoder input. Same rule at all N/modes; no legacy sum is fed to the decoder, no per-size gain is fitted. Every event RMS was checked.
+0047 | - Same exact examples, order, cached hidden80 features, backbone logits, labels, elapsed-time inputs, tools, knowledge, update equation and code.
+0048 | - Same canonical cell-configuration prefix at every N; graph seeds change only random recurrent endpoints. Ring-plus-two-random-neighbors algorithm at all sizes, including 50k. Five genuinely different graphs at 50k as well.
+0049 | - Shuffling permutes signed outgoing messages anew each sweep, without changing stored graph or cross-mixing episode state. B1 and B2 share the exact same seeded permutation stream.
+0050 | - No recurrence retains local memory; erased-state zeros all six fields before every event and retains two within-event sweeps.
+0051 | - Every rule/decoder value is bit-identical within its branch. B1 decoder equals A exactly; B2 decoder equals its completed jointly trained checkpoint. No neuron/edge-indexed trainable tensor exists.
+0052 | 
+0053 | ## Scaling and ablation differences
+0054 | 
+0055 | ### B1
+0056 | 
+0057 | Normal-recurrence means: 7.242% → 16.258% → 36.325% → 33.425%.
+0058 | Mean curve nondecreasing across every adjacent size: **False**.
+0059 | 50k minus 1,010, paired graph-seed delta: 26.18 ± 0.48 percentage points (mean ± seed SD).
+0060 | 
+0061 | | Cells | Normal minus no-recurrence, pp | Normal minus shuffled, pp | Normal minus erased, pp |
+0062 | |---|---|---|---|
+0063 | | 1,010 | 0.03 ± 0.11 | 0.04 ± 0.08 | 0.91 ± 0.11 |
+0064 | | 5,000 | 0.38 ± 0.38 | 0.40 ± 0.47 | 9.97 ± 0.38 |
+0065 | | 20,000 | 0.03 ± 0.36 | -0.18 ± 0.42 | 29.28 ± 0.36 |
+0066 | | 50,000 | 0.09 ± 0.54 | 0.28 ± 0.47 | 27.01 ± 0.54 |
+0067 | 
+0068 | ### B2
+0069 | 
+0070 | Normal-recurrence means: 6.558% → 18.200% → 39.800% → 41.992%.
+0071 | Mean curve nondecreasing across every adjacent size: **True**.
+0072 | 50k minus 1,010, paired graph-seed delta: 35.43 ± 0.28 percentage points (mean ± seed SD).
+0073 | 
+0074 | | Cells | Normal minus no-recurrence, pp | Normal minus shuffled, pp | Normal minus erased, pp |
+0075 | |---|---|---|---|
+0076 | | 1,010 | -0.02 ± 0.09 | -0.01 ± 0.13 | 0.22 ± 0.09 |
+0077 | | 5,000 | 0.12 ± 0.26 | 0.07 ± 0.31 | 11.91 ± 0.26 |
+0078 | | 20,000 | -0.33 ± 0.14 | -0.40 ± 0.12 | 32.76 ± 0.14 |
+0079 | | 50,000 | -0.30 ± 0.30 | 0.41 ± 0.36 | 35.58 ± 0.30 |
+0080 | 
+0081 | ## Interpretation boundary
+0082 | 
+0083 | A size-dependent recall change under these controls is a result about frozen-checkpoint inference on this specific test. It is not proof that independent memory capacity, useful recurrent reasoning, or general intelligence caused the difference. Extra fixed features, pool coverage, averaging, graph geometry and closeness to the original 50k training distribution still change when cells are added.
+0084 | In particular, judge useful inter-cell recurrence by normal-versus-no-recurrence and normal-versus-shuffled comparisons, not merely by a large-versus-small score. Judge persistence separately with erased-state results. Prefix selection is fixed here; these are graph seeds, not multiple training seeds or independently sampled cell-feature banks.
+0085 | The unit-RMS operation is the same previously tested control and is fixed everywhere; it also changes the original trained decoder-input distribution globally. These results must not be substituted for the earlier unnormalized 50k scores.
+0086 | 
+0087 | ## All individual seed scores
+0088 | 
+0089 | | Arm | Cells | Graph seed | Normal % | No recurrence % | Shuffled messages % | State erased % |
+0090 | |---|---|---|---|---|---|---|
+0091 | | B1 | 1,010 | 710001 | 7.3333 | 7.2083 | 7.2500 | 6.3333 |
+0092 | | B1 | 1,010 | 710002 | 7.1667 | 7.2083 | 7.1250 | 6.3333 |
+0093 | | B1 | 1,010 | 710003 | 7.3333 | 7.2083 | 7.2083 | 6.3333 |
+0094 | | B1 | 1,010 | 710004 | 7.2917 | 7.2083 | 7.2500 | 6.3333 |
+0095 | | B1 | 1,010 | 710005 | 7.0833 | 7.2083 | 7.1667 | 6.3333 |
+0096 | | B1 | 5,000 | 710001 | 15.9167 | 15.8750 | 16.0000 | 6.2917 |
+0097 | | B1 | 5,000 | 710002 | 16.4167 | 15.8750 | 15.9167 | 6.2917 |
+0098 | | B1 | 5,000 | 710003 | 16.5000 | 15.8750 | 15.7500 | 6.2917 |
+0099 | | B1 | 5,000 | 710004 | 15.7917 | 15.8750 | 15.8750 | 6.2917 |
+0100 | | B1 | 5,000 | 710005 | 16.6667 | 15.8750 | 15.7500 | 6.2917 |
+0101 | | B1 | 20,000 | 710001 | 35.7917 | 36.2917 | 36.6667 | 7.0417 |
+0102 | | B1 | 20,000 | 710002 | 36.5417 | 36.2917 | 36.3333 | 7.0417 |
+0103 | | B1 | 20,000 | 710003 | 36.1250 | 36.2917 | 36.3333 | 7.0417 |
+0104 | | B1 | 20,000 | 710004 | 36.5417 | 36.2917 | 36.5000 | 7.0417 |
+0105 | | B1 | 20,000 | 710005 | 36.6250 | 36.2917 | 36.7083 | 7.0417 |
+0106 | | B1 | 50,000 | 710001 | 33.9167 | 33.3333 | 33.3750 | 6.4167 |
+0107 | | B1 | 50,000 | 710002 | 33.2083 | 33.3333 | 33.0417 | 6.4167 |
+0108 | | B1 | 50,000 | 710003 | 33.0000 | 33.3333 | 32.7917 | 6.4167 |
+0109 | | B1 | 50,000 | 710004 | 34.0833 | 33.3333 | 33.2083 | 6.4167 |
+0110 | | B1 | 50,000 | 710005 | 32.9167 | 33.3333 | 33.2917 | 6.4167 |
+0111 | | B2 | 1,010 | 710001 | 6.6667 | 6.5833 | 6.5417 | 6.3333 |
+0112 | | B2 | 1,010 | 710002 | 6.5417 | 6.5833 | 6.5000 | 6.3333 |
+0113 | | B2 | 1,010 | 710003 | 6.6250 | 6.5833 | 6.7917 | 6.3333 |
+0114 | | B2 | 1,010 | 710004 | 6.5000 | 6.5833 | 6.4167 | 6.3333 |
+0115 | | B2 | 1,010 | 710005 | 6.4583 | 6.5833 | 6.5833 | 6.3333 |
+0116 | | B2 | 5,000 | 710001 | 17.8333 | 18.0833 | 18.0833 | 6.2917 |
+0117 | | B2 | 5,000 | 710002 | 18.3750 | 18.0833 | 18.0417 | 6.2917 |
+0118 | | B2 | 5,000 | 710003 | 18.0417 | 18.0833 | 18.3333 | 6.2917 |
+0119 | | B2 | 5,000 | 710004 | 18.2917 | 18.0833 | 18.0000 | 6.2917 |
+0120 | | B2 | 5,000 | 710005 | 18.4583 | 18.0833 | 18.2083 | 6.2917 |
+0121 | | B2 | 20,000 | 710001 | 39.6250 | 40.1250 | 40.1667 | 7.0417 |
+0122 | | B2 | 20,000 | 710002 | 40.0000 | 40.1250 | 40.2500 | 7.0417 |
+0123 | | B2 | 20,000 | 710003 | 39.7083 | 40.1250 | 40.1667 | 7.0417 |
+0124 | | B2 | 20,000 | 710004 | 39.8333 | 40.1250 | 40.1250 | 7.0417 |
+0125 | | B2 | 20,000 | 710005 | 39.8333 | 40.1250 | 40.2917 | 7.0417 |
+0126 | | B2 | 50,000 | 710001 | 42.0417 | 42.2917 | 41.7917 | 6.4167 |
+0127 | | B2 | 50,000 | 710002 | 42.3333 | 42.2917 | 41.3750 | 6.4167 |
+0128 | | B2 | 50,000 | 710003 | 42.0000 | 42.2917 | 41.5417 | 6.4167 |
+0129 | | B2 | 50,000 | 710004 | 42.0833 | 42.2917 | 41.6667 | 6.4167 |
+0130 | | B2 | 50,000 | 710005 | 41.5000 | 42.2917 | 41.5417 | 6.4167 |
+0131 | 
+0132 | ## Reproduction and artifacts
+0133 | 
+0134 | Run `python "!!!Current/further_testing/strict_frozen_B_scaling_20260915/run_matrix.py"` from the main folder. It verifies and reuses completed runs; it does not train. Then run `finalize.py` in the same folder to independently reconstruct every readout from saved feature traces, recompute scores, check invariants and rebuild the tables.
+0135 | `TEST_INPUTS.pt`: exact shared data; `graphs/`: all 20 graphs; `runs/`: all 160 traces, resource records and hashes; `logs/`: complete process output; `PARAMETERS.json`: parameter/tensor inventory; `FREEZE.json`: pre-score frozen sources; `AUDIT.json` and `MANIFEST.json`: verified inventory.
+0136 | 
+0137 | ![Scaling and ablations](SCALING_ABLATIONS.png)

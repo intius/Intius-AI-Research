@@ -1,0 +1,113 @@
+E001 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: block_sparse_extension/RESULTS.txt
+Original SHA-256: 01c4f149dd9191d26d3395dd0d461c3390bc2133073949b83cd3e002a17e0704
+Original byte count: 6412
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | USER-SUPPLIED SPARSE-LIKELIHOOD REPORT: INDEPENDENT REBUILD AND EXTENSION
+0002 | Completed locally on 2026-09-07 in workspace.
+0003 | 
+0004 | The report helped identify a real limitation and a modest improvement.
+0005 | We have NOT demonstrated 100x cheaper high-quality language-model training.
+0006 | 
+0007 | SOURCE STATUS
+0008 | ai_sparse_likelihood_round3 supplied only a narrative and explanation. Its
+0009 | original linked code, JSON data and sandbox ZIP were unavailable here. I did
+0010 | not treat its 15.8x, 11.3x, 5.0x or 2.4x numbers as independently reproduced.
+0011 | Original files were left untouched; snapshots of what was read are saved here.
+0012 | 
+0013 | EXACT COMPUTATION REBUILT
+0014 | For q_i(v)=alpha_i*u(v)+s_i(v), a block-shared correction exp(b_g(v)) has
+0015 | Z_i=alpha_i*sum_v u(v)*exp(b_g(v))+sum_sparse s_i(v)*exp(b_g(v)).
+0016 | Independent float64 loss/gradient comparisons and finite differences passed.
+0017 | Against a prepacked dense batched-matrix control on one CPU thread:
+0018 |  16 sparse entries/token: 5.891x forward+backward component speedup.
+0019 |  256 sparse entries/token: 4.021x.
+0020 | Adding query-specific pointer mass retained exact gradients and yielded
+0021 | 5.010x and 3.284x respectively. These exclude prior preparation and the neural
+0022 | backbone/optimizer. They are component measurements, not full training savings.
+0023 | 
+0024 | THE QUERY PROBLEM AND ITS FIX
+0025 | One correction shared by a block cannot independently respond to every local
+0026 | query when the cheap prior gives those queries the same distribution.
+0027 | I tested query-dependent sparse/copy distributions, then token-specific sparse
+0028 | logit corrections that refine the existing prior directly. For a sparse tilt d:
+0029 |  Z_i=Z_static_i+sum_(v in S_i) q_i(v)*exp(b_g(v))*expm1(d_i(v)).
+0030 | S_i is selected from the prior using observed context, never the target label.
+0031 | Local/global signals are normalized separately. A bounded tilt limits numerical
+0032 | cancellation. The expensive core still operates on completed previous patches;
+0033 | causal checks show no access to future tokens in the current patch.
+0034 | 
+0035 | This avoids making an initially weak new expert compete with a strong prior
+0036 | behind a gate that closes before the expert learns. The evidence supports the
+0037 | tested combination of local normalization and prior-relative corrections;
+0038 | it does not establish that every improvement comes from one isolated change.
+0039 | 
+0040 | STRUCTURED RETRIEVAL DIAGNOSTIC
+0041 | Three seeds each: block-shared predictor, learned dense attention/copy control,
+0042 | and equivalent sparse likelihood implementation. All six query-dependent runs
+0043 | reached 100% on held-out random tables from initial 3.7-9.3% accuracy. Shared-block
+0044 | controls stayed 5.97-6.40%. These models had 8,289 parameters.
+0045 | The keys/values were explicitly provided fields and used a familiar 64-symbol
+0046 | vocabulary. This is a successful mechanism/positive-control diagnostic, NOT
+0047 | raw-text reasoning, unseen-vocabulary generalization or a general LLM result.
+0048 | This pointer diagnostic must not be attributed to the no-pointer text winner.
+0049 | 
+0050 | REAL-TEXT CONFIRMATION
+0051 | Prior fitted on first 1M WikiText training bytes; neural correction trained on
+0052 | the next 2M-byte pool, 600 updates, 614,400 sampled target-byte presentations.
+0053 | Three fresh initialization/data-stream seeds, rotated execution order, actual
+0054 | saved final checkpoints and full-test scoring. Context 128; test 1,291,904 bytes.
+0055 | 
+0056 | Model                Neural parameters    Train+monitor (mean)    Test CE (mean)
+0057 | Dense correction         112,960               35.952035s          2.058281650
+0058 | Shared block only         98,752               10.635651s          2.102365002
+0059 | Sparse token tilt        111,808               19.561940s          2.021741698
+0060 | 
+0061 | Tilt vs dense: 45.589% less time,
+0062 | 41.491% less process CPU, and
+0063 | 1.775% lower test loss. All three paired test wins.
+0064 | The prewritten modest local gate PASSED (>=1% lower mean loss, >=10% less time,
+0065 | all three test wins). Common prior state is 398,574 bytes for every model.
+0066 | Adding its separately measured 0.266635-second warm fit gives 36.218670 s for
+0067 | dense and 19.828575 s for tilt. Runtime warmup/imports and checkpoint saving
+0068 | remain separate. This is roughly 1.8x, NOT 100x, and parameter counts are similar.
+0069 | 
+0070 | QUALITY LIMITS
+0071 | The earlier strong statistical model scored 1.708708 on the pilot's identical
+0072 | validation sample; the new neural tilt scored 2.003369 there. Beating a weak
+0073 | count prior or one neural correction baseline is not sufficient by itself.
+0074 | Full BLiMP diagnostic, 67,000 pairs, 128-byte contexts with causal padding:
+0075 |   dense          52.227%
+0076 |   tilt           52.691%
+0077 | These results do not establish high-quality grammar. Anaphor agreement in
+0078 | the selected diagnostic seed fell from 59.35% for dense to 45.70% for tilt,
+0079 | despite the small aggregate accuracy increase. Capabilities are not uniformly
+0080 | preserved. Thirty-two evaluated sentences exceeded the 128-byte window and
+0081 | were scored with documented resets. No BLiMP labels trained these models.
+0082 | 
+0083 | WHY THIS IS NOT THE REQUESTED BREAKTHROUGH
+0084 | The normalized-loss trick and query fix are useful building blocks. Exponential
+0085 | tilting, neural corrections, copy/pointer mechanisms and hierarchical computation
+0086 | have prior art; no exhaustive novelty result is claimed. With a fixed per-example
+0087 | cost model, running a component every K tokens alone cannot give more than Kx
+0088 | savings even if all other work vanished. A 16-token block is therefore not by
+0089 | itself a 100x fixed-work training solution. Different sample efficiency could
+0090 | change time-to-quality, but must be measured and was not established here.
+0091 | No 1B model, frontier benchmark win, GPU-scale result or broad reasoning advance
+0092 | was demonstrated. The original 100x-and-size study's failed quality gate remains
+0093 | failed and is separate from the modest neural-correction success reported here.
+0094 | 
+0095 | REPRODUCIBILITY
+0096 | 01_likelihood.py.txt /03_component_results.txt -- exact identity and benchmarks.
+0097 | 04_query_experiment.py.txt /05_query_results.txt -- all nine recall runs.
+0098 | 07_text_model.py.txt /09_text_results.txt -- first real-text failure/controls.
+0099 | 11_tilt_model.py.txt /13_tilt_results.txt -- normalization and tilt ablations.
+0100 | 15_confirm_text.py.txt /16_confirmation_results.txt /16_checkpoints/ -- confirmation.
+0101 | 18_grammar_check.py.txt /19_grammar_results.txt -- every grammar pair score.
+0102 | 20_audit.py.txt /21_audit.txt -- independent arithmetic and checkpoint audit.
+0103 | All nine confirmation checkpoints loaded with finite correct-sized parameters;
+0104 | validation replay error was 0. All raw outcomes, including failures, are retained.

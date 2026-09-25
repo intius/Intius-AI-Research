@@ -1,0 +1,35 @@
+E011 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: abi_llm_comparison/SCALAR_REPORT.md
+Original SHA-256: b27c9d9d2aea8d2cba97371e203d720925c16f36b3f2bc2713ef8fa0458f71b9
+Original byte count: 1394
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Plain-word diagnostic (posthoc)
+0002 | 
+0003 | The primary vector-output benchmark remains unchanged. This follow-up asks one
+0004 | ordinary property word or yes/no per case, with only the relevant instructions.
+0005 | It was designed after the 0.5B model repeatedly failed the original answer format.
+0006 | The same 32 scenes are reused, so this is a diagnostic rather than an independent
+0007 | confirmation benchmark. There was one fixed prompt construction, no prompt search
+0008 | or best-of-n. Complete raw outputs are in artifacts/scalar/.
+0009 | 
+0010 | Candidate answers are the corresponding elements of previously saved predictions;
+0011 | their models are not retrained. LLMs receive English questions, while the scene
+0012 | systems use external task/index dispatch. This remains a specialist comparison.
+0013 | 
+0014 | | System | All 96 questions | Read one field | One comparison | One field after four operations |
+0015 | |---|---:|---:|---:|---:|
+0016 | | original | 75.00% | 70.83% | 84.38% | 69.79% |
+0017 | | set | 100.00% | 100.00% | 100.00% | 100.00% |
+0018 | | augmented | 100.00% | 100.00% | 100.00% | 100.00% |
+0019 | | qwen05 | 54.17% | 62.50% | 59.38% | 40.62% |
+0020 | | qwen15 | 68.75% | 84.38% | 68.75% | 53.12% |
+0021 | 
+0022 | This score cannot be compared numerically to full-vector exact accuracy as though the tasks were equally difficult.
+0023 | 
+0024 | qwen05: 0/96 capped; 0/96 unrecognized; median generation 0.0767s.
+0025 | 
+0026 | qwen15: 1/96 capped; 0/96 unrecognized; median generation 0.0960s.

@@ -1,0 +1,48 @@
+Intius+AI: SELECTED RESEARCH FINDINGS
+
+This collection extracts useful measured successes from a much larger research
+archive. It is meant to help people design experiments, build model components,
+and choose better training and evaluation procedures.
+
+Start with 01_READING_MAP.txt. Each finding explains the mechanism, actual
+measurement, relevant control, failure boundary and possible application.
+
+WHAT IS HERE
+  findings/             14 distinctive local experiments with a positive signal.
+  applied_results/       6 practical results using established methods.
+  evidence/             Selected source reports, sanitized and line-numbered.
+  02_NOVELTY_AND_PRIOR_WORK.txt  What can and cannot be called original.
+  03_USING_THIS_FOR_LLMS_AND_LORAS.txt  Practical use and training-data guidance.
+  04_RESEARCH_QA.txt     20 compact, source-linked research question/answer records.
+  05_CLAIMS_THAT_NEED_THEIR_CAVEATS.txt  Corrections that must travel with gains.
+  06_X_POST_DRAFT.txt    A short post and optional thread, ready to edit.
+  07_SCOPE_AND_SELECTION.txt  Coverage, exclusions and curation limits.
+  08_SOURCE_REGISTER.txt  Original paths and source SHA-256 identifiers.
+  09_VALIDATION.txt      What was checked while preparing this release.
+  10_REUSE_AND_ATTRIBUTION.txt  Attribution and release scope.
+  MANIFEST_SHA256.txt    Integrity hashes for the packaged text files.
+
+THE NOVELTY STANDARD
+- No world-first invention is certified by this release. The strongest material
+is specific experimental evidence, diagnostic designs and implementation
+details whose broader originality remains unresolved. Public popularity was
+not measured. Established techniques are named and credited, not rebranded.
+The applied appendix is optional for readers interested only in distinctive
+experiments; it includes the directly useful LoRA recipe.
+
+THE SUCCESS STANDARD
+- A positive component can survive even when a broader experiment fails. Every
+card keeps that distinction explicit. A toy-world success is not a general
+language-model result. A component speedup is not a full-training speedup.
+
+HOW STRONG IS THE EVIDENCE?
+- The cards summarize local reports and their recorded audits. This curation
+checked sources, selected numerical records, arithmetic and packaging. It did
+not retrain models or independently reproduce all experiments. Most results
+are small, synthetic or development-set observations. The archive contains
+no demonstrated AGI, frontier parity or universal efficiency breakthrough.
+
+This is a self-contained research-text collection, not a runnable reproduction
+repository, model-weight release or task-training dataset. Original scripts,
+checkpoints and raw task corpora remain in the source archive. No publication
+or upload was performed while preparing this folder.

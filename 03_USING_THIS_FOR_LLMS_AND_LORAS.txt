@@ -1,0 +1,75 @@
+USING THIS COLLECTION FOR LLM AND LORA WORK
+
+There are two different uses: learn about these experiments, or implement their
+mechanisms. Training a model to describe a sparse normalizer does not install
+that normalizer. Reading a report about causal coordinates does not confer the
+ability to discover them. Architectural changes need code and fresh evaluation.
+
+IF YOU WANT A PRACTICAL ADAPTER EXPERIMENT
+Read A01 first. It documents a real rank-8 continuation with a four-way data
+mix, exact base revision, training settings, retention checks and a separate
+48-question confirmation. It also reports the extra generation time and the
+failure of a larger follow-up to meet its promotion gate. The data mixture is
+a tested starting point, not an isolated or universally optimal treatment.
+
+IF YOU WANT TO CHANGE MODEL COMPUTATION
+R01 needs a compatible sparse-prior output distribution and exact likelihood
+implementation. R03 needs jointly specified producer/consumer interfaces.
+R04 changes evidence scoring. R02 concerns an algebraic world-model learner.
+R10/R11 concern structured operators and graph messages. None can be obtained
+by applying a standard LoRA configuration unchanged to arbitrary models.
+
+IF YOU WANT BETTER TRAINING DATA OR EVALUATION
+R07 motivates measuring dependency-distance coverage. R09 motivates complete
+answer and source-binding checks. R12 motivates step-zero and content-swap
+controls. R14 motivates labels that reflect the state after earlier choices.
+These are plausible design lessons; their transfer to an LLM is not established
+by the original toy experiments.
+
+IF YOU WANT A RESEARCH-KNOWLEDGE CORPUS
+Use complete cards in findings/ and optionally applied_results/. Each is a
+self-contained unit with a stable ID and explicit evidence status. Keep the
+measurement and its limits in the same chunk. The compact records in
+04_RESEARCH_QA.txt are an alternative representation, not extra independent
+evidence. Choose cards OR Q/A for a small fine-tuning corpus to avoid counting
+the same fact twice. For retrieval, index the detailed cards and attach source
+IDs from 08_SOURCE_REGISTER.txt.
+
+Do not indiscriminately train on evidence/ or the administrative files. Evidence
+snapshots preserve historical wording, including superseded status and old
+next-step instructions; those are records, not current commands. Do not strip
+away a failed follow-up and leave only the attractive earlier score.
+
+SUGGESTED RECORD SCHEMA
+  record_id: stable card or Q/A ID
+  question: the bounded research question
+  answer: observation plus scope and caveat
+  evidence_status: the card's stated status
+  source_ids: bundled evidence IDs
+  provenance: local report synthesis, 2026-09-25
+  use: research knowledge; not a task label or independent benchmark
+
+SPLITS AND EVALUATION
+Split by experiment family, not random paragraph. R01 and its stronger-prior
+follow-up must remain together; R03 and its ABI stress/repair chain belong
+together; all A01 stages belong together. Otherwise the evaluation merely
+tests paraphrases of training facts. This collection is too small and related
+to claim a general-purpose training benchmark. Evaluate factual fidelity,
+correct uncertainty and preservation of counterevidence on genuinely new
+questions. No LoRA trained on these notes was evaluated during curation.
+
+WHAT TO REPRODUCE
+Recover the original implementation through the source register. Recreate its
+frozen inputs, seeds and metric definitions; use new output directories.
+Distinguish source-hash matching, prediction replay and independent retraining.
+Each proves something different. For a new domain, first reproduce the baseline,
+then test a single stated change with matched data, resources and stopping rules.
+
+TERMS
+pp = percentage points. CE/NLL = cross-entropy/negative log likelihood; lower
+is better on the same tokenizer and scoring protocol. BPB = bits per byte.
+EM = exact match. F1 here usually measures token overlap, not whole-answer
+truth. OOD = a specified distribution shift, not arbitrary unfamiliar tasks.
+Parameter bytes, stored model bytes, host RSS and GPU allocation are different
+resource quantities. Timing boundaries and independent units matter as much
+as the headline ratio.

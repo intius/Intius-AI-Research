@@ -1,0 +1,38 @@
+E028 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/cognitive_kernel_project_20260916/experiment_AI_robust_semantic_solver/REPORT.md
+Original SHA-256: f290c5a2aa5eb5802916468fd89c5d91cf439db40629a7723508b3fc92299170
+Original byte count: 1416
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Experiment AI — Robust semantic recovery
+0002 | 
+0003 | ## Verdict
+0004 | 
+0005 | **PASS. Maximum-consensus semantic recovery is robust to corrupted demonstrations.**
+0006 | 
+0007 | Strict all-demo consistency collapses after even 10% corruption. The robust solver retains 100% semantic query and coefficient accuracy through 40% corruption with both 16 and 32 demonstrations.
+0008 | 
+0009 | For depth-32/eight-register programs, robust recovery retains 100% complete accuracy through 40% corruption with 32 demos. With 16 demos and 40% corruption it still reaches 93.75%.
+0010 | 
+0011 | | Demos | Noise | strict semantic | robust semantic | strict deep | robust deep |
+0012 | |---:|---:|---:|---:|---:|---:|
+0013 | | 16 | 0% | 100.00% | 100.00% | 100.00% | 100.00% |
+0014 | | 16 | 10% | 13.87% | 100.00% | 9.38% | 100.00% |
+0015 | | 16 | 25% | 9.96% | 100.00% | 12.50% | 100.00% |
+0016 | | 16 | 40% | 11.52% | 100.00% | 3.12% | 93.75% |
+0017 | | 32 | 0% | 100.00% | 100.00% | 100.00% | 100.00% |
+0018 | | 32 | 10% | 8.59% | 100.00% | 9.38% | 100.00% |
+0019 | | 32 | 25% | 9.96% | 100.00% | 15.62% | 100.00% |
+0020 | | 32 | 40% | 10.35% | 100.00% | 9.38% | 100.00% |
+0021 | 
+0022 | ## Promotion gates
+0023 | 
+0024 | - PASS — semantic 32demo noise25 95
+0025 | - PASS — semantic 32demo noise40 80
+0026 | - PASS — deep 32demo noise25 90
+0027 | - PASS — deep 32demo noise40 80
+0028 | 
+0029 | Promote maximum-consensus hypothesis selection as the default semantic-recovery rule for the AH hybrid. Confidence margins decrease with noise and can serve as an uncertainty signal.

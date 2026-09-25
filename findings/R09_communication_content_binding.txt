@@ -1,0 +1,51 @@
+R09 — Useful message content did not yield reliable source-bound recall
+
+EVIDENCE STATUS: PARTIAL LEARNED-COMMUNICATION SUCCESS; COMPLETE RECONSTRUCTION FAILED
+
+Messages carried causally useful symbols, while reliable reconstruction of the complete vector remained at zero.
+
+THE IDEA
+Separate three questions: does a message contain information, is that
+information attached to the right source, and does the receiver use it to
+produce a completely correct answer?
+
+WHAT SUCCEEDED
+Experiment I supervised reconstruction of 20 private symbols at every cell;
+message/gate meanings were not separately specified. At four rounds:
+  20 cells: normal symbol accuracy 25.57%; no messages 15.66%.
+  64 cells: normal symbol accuracy 21.65%; no messages 13.68%.
+Cross-episode shuffling reduced these to 13.80% and 12.56%. Removing one
+source hurt its corresponding slot more than unrelated slots: specificity
+12.367 and 9.022 percentage points. This supports useful learned communication.
+
+WHY THAT WAS NOT ENOUGH
+Complete-vector success was 0%. At 20 cells, symbol accuracy fell from 25.57%
+at four rounds to 19.84% at sixteen rounds. More recurrence was not better.
+Follow-up J tried widths 16-128 and a curriculum. No width reached reliable
+complete-vector reconstruction. At width 32, symbol probes decoded messages
+at about 99.14%, while source-slot probes were about 11.17-11.21%; complete
+vectors still failed. Probe decodability is not operational competence.
+
+HOW TO BUILD ON IT
+Evaluate complete outputs alongside per-symbol scores. Use source-specific
+deletion, source identity shuffling, episode shuffling and long-round curves.
+For an LLM memory or agent message system, track attribution to entities and
+sources as well as whether content can be recovered by an auxiliary probe.
+That downstream application is a design inference, not tested in this study.
+
+ORIGINALITY
+This particular diagnostic combination is a plausible empirical contribution.
+Learned communication already has direct precedents such as CommNet. Weak
+source binding is a supported hypothesis here, not a fully isolated cause.
+
+SOURCE REPORTS
+  E021: evidence/E021.txt
+    Original: !!!Current/further_testing/experiment_I_emergent_communication_20260915/RESULTS.md
+  E022: evidence/E022.txt
+    Original: !!!Current/further_testing/experiment_J_reliable_emergent_communication_20260915/RESULTS.md
+
+PRIOR-WORK CONTEXT
+  P08: Learning Multiagent Communication with Backpropagation (Sukhbaatar et al., 2016)
+    https://arxiv.org/abs/1605.07736
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

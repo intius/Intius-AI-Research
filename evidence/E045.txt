@@ -1,0 +1,225 @@
+E045 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: non_llm_continuation_lab/RESULTS.txt
+Original SHA-256: c6b5fb8fe9085343c67fd29a305b09930bf6a21191aab81fd2962620d320754c
+Original byte count: 13235
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | AGENT 4 -- RESULTS OF THE FIRST NON-LLM RESEARCH ROUND
+0002 | 2026-09-07. Local work; no online idea search, remote compute, model calls or uploads.
+0003 | 
+0004 | THE ACTUAL GOAL
+0005 | A tool much smaller than frontier LLMs that matches or exceeds their broad
+0006 | capabilities without containing an LLM. This goal remains OPEN. Neither
+0007 | experiment meets it, establishes global novelty, or merits a breakthrough claim.
+0008 | The compact-LLM work of the other agents was read and left undisturbed.
+0009 | 
+0010 | DECISION
+0011 | Reject both candidates as demonstrated capability/efficiency advances toward
+0012 | the broad goal. Two exact implementation optimizations worked, but BOTH
+0013 | preregistered combined mechanism gates FAILED. Do not promote the component
+0014 | speedups into claims about superior intelligence or frontier model efficiency.
+0015 | Keep the code, raw data, proofs, and failures for subsequent research.
+0016 | 
+0017 | ROUND 1: EXECUTABLE RULE INDUCTION WITH CONTINUATION MARGINALS
+0018 | The engine selects consistent executable rules from a 289-function prior,
+0019 | composes the surviving assignments, and probes to reduce uncertainty about the
+0020 | requested answer. It retains evidence across changing programs. A compiled
+0021 | answer-conditioned marginal replaces repeated scans of the joint hypotheses.
+0022 | The score itself is ordinary answer-aware active learning; its implementation
+0023 | was the candidate contribution. There is no neural model or token objective.
+0024 | 
+0025 | Confirmation: 3 fresh seeds, 24 worlds, 192 tasks/method, 4 short then 4 long
+0026 | programs/world. Long programs contain 16, 24, 32 or 48 unknown-operation call
+0027 | instructions, sometimes conditional. All methods get at most 24 oracle replies
+0028 | per task. A direct executor can consequently abstain on a longer program.
+0029 | 
+0030 | Method          Correct Wrong Abstain  Oracle calls   Planning wall seconds
+0031 | direct           188/192    0      4         1914               0.003780
+0032 | entropy          192/192    0      0          303               0.384308
+0033 | random           192/192    0      0          371               0.438303
+0034 | exact_answer     192/192    0      0          319               1.027702
+0035 | cme              192/192    0      0          319               0.774639
+0036 | 
+0037 | CME query reduction versus relevant rule entropy:
+0038 | -5.281% (paired world bootstrap 95% interval -7.483% to -2.980%).
+0039 | A negative reduction means MORE queries. The required 25% reduction FAILED.
+0040 | Ordinary entropy achieves the same answers with fewer probes and less planning.
+0041 | 
+0042 | CME planning reduction versus exact answer-aware scanning:
+0043 | 24.624% (paired world bootstrap 95% interval 13.049% to 34.895%).
+0044 | All 192 decisions, probe trajectories and conditional certificates match.
+0045 | This meets the point-estimate 20% implementation gate; the uncertainty interval
+0046 | is retained rather than silently turned into a stronger significance claim.
+0047 | 
+0048 | Cold/short phase:
+0049 | Method          Correct Wrong Abstain  Oracle calls   Planning wall seconds
+0050 | direct            96/96     0      0          457               0.000969
+0051 | entropy           96/96     0      0          257               0.300531
+0052 | random            96/96     0      0          315               0.342652
+0053 | exact_answer      96/96     0      0          254               0.876388
+0054 | cme               96/96     0      0          254               0.613274
+0055 | 
+0056 | Transfer/long phase (observations retained, no prior task answers given):
+0057 | Method          Correct Wrong Abstain  Oracle calls   Planning wall seconds
+0058 | direct            92/96     0      4         1457               0.002811
+0059 | entropy           96/96     0      0           46               0.083777
+0060 | random            96/96     0      0           56               0.095651
+0061 | exact_answer      96/96     0      0           65               0.151314
+0062 | cme               96/96     0      0           65               0.161365
+0063 | 
+0064 | Interpretation: answering only today's question can leave unresolved rule
+0065 | differences that matter later. This is a plausible explanation for the probe
+0066 | loss to entropy, not a proven causal decomposition. Most importantly, learning
+0067 | here only selects functions from a supplied bank; it does not invent concepts.
+0068 | 
+0069 | Rule-class stress test: 3 different seeds, 24 worlds, another 192 tasks/method.
+0070 | Half the worlds add local exceptions; half use unrestricted random tables.
+0071 | Actual tables outside the bank: 144/144.
+0072 | 
+0073 | Method          Correct Wrong Abstain  Oracle calls   Planning wall seconds
+0074 | direct           184/192    0      8         2094               0.003696
+0075 | entropy           61/192   16    115          264               0.323969
+0076 | random            60/192   13    119          284               0.345930
+0077 | exact_answer      73/192    9    110          254               0.993543
+0078 | cme               73/192    9    110          254               0.662930
+0079 | 
+0080 | CME returned 9 wrong answers despite finite-class certificates.
+0081 | These are real wrong answers, not successes excused by the certificate wording.
+0082 | The theorem about the supplied rule class is true; the true world can violate
+0083 | its assumption. A general architecture cannot ignore this gap.
+0084 | 
+0085 | ROUND 2: CONTINUATION REASONING WITHOUT A RULE BANK
+0086 | The second solver accepts any deterministic function on the declared 32-state
+0087 | domain. It propagates possible final answers backward using observed values;
+0088 | unobserved calls range over all 32 outputs. Repeated unknown calls are relaxed
+0089 | independently, creating a conservative overapproximation. Singleton answers
+0090 | therefore have a sound all-functions interpretation, though the approximation
+0091 | can miss valid shortcuts. No 289-function bank is available to this solver.
+0092 | 
+0093 | The candidate updates only backward rows affected by a new observation and
+0094 | stops propagation through unchanged rows. The control rebuilds every row.
+0095 | Fresh confirmation: 6 seeds, 48 worlds, 384 tasks/method, including both rule-
+0096 | like worlds and previously unseen exceptions/random functions. Same 24-reply cap.
+0097 | 
+0098 | Method          Correct Wrong Abstain  Oracle calls   Planning wall seconds
+0099 | direct           372/384    0     12         4043               0.009021
+0100 | full             372/384    0     12         4043               1.394092
+0101 | incremental      372/384    0     12         4043               0.887869
+0102 | 
+0103 | Query reduction versus direct execution:
+0104 | 0.000% (paired world bootstrap 95% interval 0.000% to 0.000%).
+0105 | There is NO query saving on the frozen distribution. The 10% gate FAILED.
+0106 | The zero wrong-answer result comes with 12 budget abstentions.
+0107 | 
+0108 | Incremental versus full planning reduction:
+0109 | 36.312% (paired world bootstrap 95% interval 33.724% to 38.785%).
+0110 | Backward rows: 178,388 full versus 59,458 incremental.
+0111 | All 384 trajectories, answers, and complete certificate-table hashes match.
+0112 | This is useful exact compiler engineering, not a new capability on these tasks.
+0113 | Direct execution remains much faster and uses the SAME oracle calls.
+0114 | 
+0115 | Second-round rule-like cohort:
+0116 | Method          Correct Wrong Abstain  Oracle calls   Planning wall seconds
+0117 | direct           187/192    0      5         1960               0.004591
+0118 | full             187/192    0      5         1960               0.681278
+0119 | incremental      187/192    0      5         1960               0.439860
+0120 | 
+0121 | Second-round exception/random cohort:
+0122 | Method          Correct Wrong Abstain  Oracle calls   Planning wall seconds
+0123 | direct           185/192    0      7         2083               0.004431
+0124 | full             185/192    0      7         2083               0.712814
+0125 | incremental      185/192    0      7         2083               0.448009
+0126 | 
+0127 | STATE, PRIOR, WORK AND TIMING
+0128 | Round 1: bank 9,248 raw bytes for 289 x 32 uint8 values; expression
+0129 | descriptions 6,440 JSON bytes; supplied arithmetic grammar and
+0130 | interpreter code are additional prior. Initial candidate arrays occupy 6,936
+0131 | bytes for six operations. CME's largest candidate arrays across
+0132 | the confirmation task results were 5,784 bytes, observation JSON
+0133 | 134 bytes, and largest marginal 73,984 bytes.
+0134 | Largest enumerated joint population: 54,910. Major numeric workspace
+0135 | lower bound: 2,361,162 bytes. Enumeration is still exponential
+0136 | in relevant ambiguous components and falls back to entropy above 65,536 models.
+0137 | 
+0138 | Round 2: persistent observation array 384 bytes; maximum continuation
+0139 | compilation numeric storage 13,984 bytes. Solver source is
+0140 | 6,707 bytes. Input programs, Python objects, interpreter, NumPy and process
+0141 | overhead are additional. These numeric/source counts are NOT total resident
+0142 | memory measurements and are NOT an apples-to-apples frontier model footprint.
+0143 | There are no neural weights, but code, finite-state knowledge and observations
+0144 | still carry information. Peak resident memory and energy are unmeasured.
+0145 | 
+0146 | Wall figures sum complete solve/planning intervals, including per-task program
+0147 | compilation. They exclude importing Python/NumPy, data generation, and scoring.
+0148 | Round 1's reusable bank construction is separately recorded in its manifest.
+0149 | Oracle replies were cheap local array reads. The capped first-round CME/direct
+0150 | runs would have a rough cost crossover at 0.483 ms per oracle reply if all
+0151 | other costs stayed fixed; their answered counts differ, so this is NOT an
+0152 | equal-quality benchmark. CME is worse than entropy on both measured planning
+0153 | and query count. Round 2 saves no calls, so extra oracle latency does not pay
+0154 | for its additional planning on this distribution.
+0155 | 
+0156 | One CPU thread was requested through numerical runtime environment variables;
+0157 | no GPU used. Three other agents were reported active. These are short timings
+0158 | on shared hardware, not exclusive-resource throughput or guaranteed latency.
+0159 | Per-task CPU counters have coarse Windows resolution; small direct-execution
+0160 | CPU totals should not be interpreted as precise microbenchmarks.
+0161 | Bootstrap intervals resample paired worlds, not dependent tasks, 20,000 times.
+0162 | They describe this generated workload and timing run, not unseen real domains.
+0163 | 
+0164 | AUDIT
+0165 | Round 1: 9,248 scalar rule/input checks; 16 independently scalar-replayed joint
+0166 | populations; 1,403 exact/compiled probe-score comparisons. Both confirmation
+0167 | cohorts: 1,920 records, all 6,376 oracle replies and 1,082 finite-class
+0168 | certificates replayed. All 384 exact/compiled task traces match. The 47 wrong
+0169 | finite-class certificates across ALL four learners in the stress cohort remain
+0170 | recorded, including CME's nine. Zero in-class wrong certificates.
+0171 | Round 2: 576 complete incremental/full table comparisons, 768 arbitrary
+0172 | completion soundness checks, 1,152 records and 12,129 oracle replies replayed.
+0173 | Zero wrong answers, all 384 full/incremental traces match. A constructed
+0174 | irrelevant-call proof fixture passes but is EXCLUDED from performance rankings.
+0175 | All data/source hashes and summaries were checked. This is an internal audit,
+0176 | not independent external replication. No successful tests were cherry-picked.
+0177 | 
+0178 | WHAT THIS DOES NOT SHOW
+0179 | No natural-language understanding, general code synthesis, broad mathematical
+0180 | reasoning, factual knowledge, open-ended concept invention, or comparison with
+0181 | a current strong LLM has been demonstrated. The same scalar 32-state interface
+0182 | underlies both rounds; exceptions are not a new application domain. No existing
+0183 | MBPP result from the shared folder was reused as a misleading baseline.
+0184 | No component here is established as globally novel. Program induction, active
+0185 | learning, sufficient statistics, abstract interpretation and incremental
+0186 | dependency propagation are known ideas. This round built and falsified
+0187 | specific implementations rather than claiming a renamed subject is a discovery.
+0188 | 
+0189 | NEXT RESEARCH DECISION
+0190 | Move the novelty target to invention of reusable executable concepts from
+0191 | evidence. Merely choosing among supplied operations is too weak; executing
+0192 | arbitrary functions correctly is too expensive without reusable knowledge.
+0193 | The next design and its falsifiers are in 16_concept_invention_direction.txt.
+0194 | It is a proposal, not an implemented third success. The broad user goal stays
+0195 | open, and no background process or scheduled research is implied by this file.
+0196 | 
+0197 | REPRODUCTION
+0198 | From this directory, use new output names to preserve immutable evidence:
+0199 |   python 03_experiment.py.txt --mode confirm --out repeat_confirmation
+0200 |   python 04_audit.py.txt --run repeat_confirmation --out repeat_audit.json.txt
+0201 |   python 03_experiment.py.txt --mode out_of_class --out repeat_misspecification
+0202 |   python 10_open_experiment.py.txt --out repeat_open
+0203 |   python 11_open_audit.py.txt --run repeat_open --out repeat_open_audit.json.txt
+0204 | Both experiment runners refuse to overwrite an existing result directory.
+0205 | 14_build_report.py.txt generates this report and 15_analysis.json.txt from the
+0206 | original runs and refuses to overwrite them. It is a post-experiment analysis.
+0207 | 
+0208 | EVIDENCE INDEX
+0209 | 00_protocol.txt; 01_derivation_and_novelty.txt; 06_pilot_decision.txt
+0210 | confirmation/: frozen data, source hashes, all task records, and summary
+0211 | misspecification/: separate finite-prior stress test and raw records
+0212 | 07_confirmation_audit.json.txt
+0213 | 08_open_world_protocol.txt; 09_open_engine.py.txt
+0214 | open_confirmation/: fresh two-cohort evaluation and all records
+0215 | 12_open_preflight.json.txt; 13_open_audit.json.txt
+0216 | 15_analysis.json.txt: paired uncertainty and machine-readable gate decisions

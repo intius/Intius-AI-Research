@@ -1,0 +1,67 @@
+KEEP THESE QUALIFICATIONS ATTACHED TO THE POSITIVE RESULTS
+
+R01: 5.891x is an isolated exact-likelihood component. The weak-prior text
+comparison saved 45.589% training time; the stronger-prior comparison saved
+only 6.193% and failed its combined gate. These are not interchangeable.
+
+R02: 99.634% applies to six constrained quadratic Boolean worlds. Cubic
+encodings and multi-effect actions caused complete abstention. Model JSON
+bytes are not total RAM. The text renderer was handwritten.
+
+R03: Stage 1 scores near 0.9985 are regression scores, not percent-correct.
+Stage 2 near-perfect swaps used the same learned reference standard. Layout
+changes and incompatible protocol versions failed; long chains accumulated
+errors. A later input-order repair is a known architectural/data fix.
+
+R04/R05: Cross terms gave a matched +6.07-point neural gain. The much larger
+symbolic-mixture gain came mainly from a supplied polynomial prior. These
+are different results. Neither establishes quantum advantage.
+
+R06: Selective repair improved the known-geometry toy but not actual text.
+Reducing measured sensitivity was insufficient to improve language loss.
+
+R07: Distance coverage improved shallow transfer; deeper unseen reasoning
+stayed at chance. Depth mix and total example exposure were also changed.
+
+R08: Population scaling did not show a communication benefit. The 1,959
+shared values exclude a 3.725M-parameter upstream backbone and growing state.
+
+R09: Useful message content coexisted with zero complete-vector success.
+R10: Adaptive opening beat random opening but lost to exact algebraic closure
+and did not beat diagonal operators on ordinary held-out edges.
+R11: A simpler zero-preserving linear control matched null subtraction.
+R12: Shared normalized keys already matched at initialization; only the
+independent-key arm demonstrated learning that matching behavior.
+R13: Fixed-operation execution was strong; new semantics required engineered
+solvers/primitives in the successful follow-up.
+R14: Retaining two of eight synthetic blocks is not 75% measured VRAM savings.
+
+A01: The first public subset helped select Stage 2. The separate 48-question
+confirmation is better evidence, but small and possibly pretraining-exposed.
+It also used about twice the output tokens and time. No peer-model superiority
+or universal recipe follows. Stage 3 and kernel/cache follow-ups did not promote.
+A02: Faster complete short-job execution had slower warm steps. Accuracy
+superiority over dense was statistically unresolved.
+A03: The corrected time-to-quality confirmation had one seed; earlier failed
+rules were not relabeled as passing.
+A04: Strict all-controls pruning superiority failed. A tiny byte-model win
+did not establish retention of a stronger pretrained model's capabilities.
+A05: These are selected extractive-QA datasets, not general dialogue or full
+HotpotQA multi-hop results. Pretrained GloVe knowledge still counts.
+A06: Exact recomputation savings did not beat direct execution on oracle
+efficiency; language-grounded revision memory did not pass its writer gate.
+
+OTHER EARLY HEADLINES NOT PROMOTED
+Experiment C reachability was already present at initialization: trained and
+initial predictions agreed on all 11,200 normal decisions. It is not evidence
+that training learned the advertised reachability capability.
+U's short-budget GRU/cell hybrid gain did not persist in V's longer matched
+training. The newer ordinary GRU controls won the relevant final losses.
+The 27B-under-8-GiB observation was synthetic placement with slow decode,
+not a matched-quality success. D54 strict zeros were dominated by malformed
+answer schemas, not clean measurements of underlying reasoning ability.
+SMF numerical-gradient checks passed, but learning/fission were never reached.
+Consciousness/self-binding work did not demonstrate phenomenality or AGI.
+
+These corrections explain selection; they are not a catalog of every failed
+experiment, nor proofs that the broader research families cannot succeed.

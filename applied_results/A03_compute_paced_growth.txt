@@ -1,0 +1,48 @@
+A03 — Compute-paced growth improved time to quality in a small byte LM
+
+EVIDENCE STATUS: ONE-SEED CORRECTED CONFIRMATION; ESTABLISHED METHOD
+
+Starting with fewer active blocks allowed more cheap updates before growing to the same final network.
+
+RECIPE
+Train with 4, then 8, then 12 blocks. Grow at one quarter and one half of the
+estimated computation budget. Copy neighboring features, zero new output
+projections, retain old optimizer states, and give new blocks independent
+parameters. Pace the learning rate by computation rather than step count.
+
+WHAT SUCCEEDED
+The prospective corrected check used a 1,212,768-parameter byte-level
+WikiText-2 model on two CPU threads, seed 5801. Reference/progressive:
+  Timed wall:       152.942 / 90.666 seconds.
+  Process CPU:      269.500 / 160.656 seconds.
+  Updates:         1,150 / 1,410.
+  Full-test CE:    1.9274640 / 1.8635314 nats/byte.
+Snapshot-adjusted wall saving was 40.700%; CPU saving 40.373%.
+The reference used its earliest single qualifying validation checkpoint;
+the fully expanded candidate had to qualify twice consecutively and then stop.
+Actual saved stopped checkpoints were evaluated on the full test split.
+
+LIMITS AND HISTORY
+This was one new prospective seed after a flawed original reference rule;
+the original failed gates were preserved. Earlier three-seed growth screens
+support the direction but are not three independent repeats of this corrected
+time-to-quality protocol. Extra training examples are part of the mechanism.
+The work proxy is not exact FLOPs. Warmup and research/calibration costs are
+outside the quoted interval. No GPU, large-model or peak-memory gain was shown.
+The more unusual temporary-cancellation variant did not consistently beat
+simple growth and is not the promoted result.
+
+HOW TO USE THIS
+Grow the model only with explicit insertion correctness checks and a fixed
+time-to-quality rule. Measure complete saved-model quality at the stop, not
+the later final-budget model. Model growth itself has substantial prior art.
+
+SOURCE REPORTS
+  E037: evidence/E037.txt
+    Original: training_efficiency/RESULTS.txt
+
+PRIOR-WORK CONTEXT
+  P12: Stacking Your Transformers: A Closer Look at Model Growth for Efficient LLM Pre-Training (2024)
+    https://arxiv.org/abs/2405.15319
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.

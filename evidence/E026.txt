@@ -1,0 +1,80 @@
+E026 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/cognitive_kernel_project_20260916/experiment_AD_semantic_adaptation/REPORT.md
+Original SHA-256: d40c56830717156fe38c410426e2bf47d9b9ddb452865ec76677b987e711594d
+Original byte count: 3478
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Experiment AD — Semantic adaptation from demonstrations
+0002 | 
+0003 | ## Verdict
+0004 | 
+0005 | **FAIL. Final-answer-only training did not bootstrap semantic induction.**
+0006 | 
+0007 | The attention demo encoder achieved only 8.89% macro accuracy, statistically indistinguishable from no demonstrations (8.93%) and DeepSets (8.96%). Even the shallow seen-distribution suite stayed near chance. The models did not learn routing reliably because they never acquired the prerequisite operation-inference skill.
+0008 | 
+0009 | Demo removal and shuffling have no effect, confirming that the demonstration channel is unused rather than merely weak. AC remains valid for fixed learned semantics; AD shows that changing semantics creates a new learning problem.
+0010 | 
+0011 | ## Main comparison
+0012 | 
+0013 | | Model | parameters | macro | held coefficients/seen modulus | unseen coefficients+modulus | depth 16 | address probe |
+0014 | |---|---:|---:|---:|---:|---:|---:|
+0015 | | no_demo | 493,329 | 8.93% ± 0.09% | 5.83% | 10.16% | 9.31% | 38.45% |
+0016 | | deepset_demo | 493,329 | 8.96% ± 0.09% | 5.96% | 10.19% | 9.35% | 32.96% |
+0017 | | attention_demo | 493,329 | 8.89% ± 0.06% | 6.05% | 10.22% | 8.96% | 25.53% |
+0018 | 
+0019 | ## Per-suite means
+0020 | 
+0021 | | Suite | no demos | DeepSets | attention |
+0022 | |---|---:|---:|---:|
+0023 | | seen_d4_r3 | 9.77% | 9.64% | 9.96% |
+0024 | | seen_d8_r4 | 8.72% | 8.92% | 8.59% |
+0025 | | seen_d16_r6 | 11.00% | 10.81% | 10.29% |
+0026 | | held_coeff_d8_m16 | 5.73% | 5.79% | 6.05% |
+0027 | | held_coeff_d16_m16 | 5.92% | 6.12% | 6.05% |
+0028 | | unseen_mod_d8 | 9.96% | 10.03% | 9.77% |
+0029 | | unseen_both_d8 | 9.31% | 9.24% | 9.90% |
+0030 | | unseen_both_d16_r6 | 11.00% | 11.13% | 10.55% |
+0031 | 
+0032 | ## Primary controls
+0033 | 
+0034 | | Condition | macro | change | held/seen | unseen both | address probe |
+0035 | |---|---:|---:|---:|---:|---:|
+0036 | | normal | 8.89% | — | 6.05% | 10.22% | 25.53% |
+0037 | | no_demos | 8.94% | +0.04 points | 5.83% | 10.77% | 25.53% |
+0038 | | episode_shuffle | 8.89% | +0.00 points | 6.05% | 10.22% | 25.53% |
+0039 | | group_shuffle | 8.89% | +0.00 points | 6.05% | 10.22% | 25.53% |
+0040 | | four_demos | 8.89% | +0.00 points | 6.05% | 10.22% | 25.53% |
+0041 | | state_erased | 8.94% | +0.05 points | 5.96% | 10.22% | 25.53% |
+0042 | | uniform_addresses | 9.09% | +0.20 points | 6.54% | 10.29% | 23.10% |
+0043 | 
+0044 | ## Efficiency
+0045 | 
+0046 | | Model | train seconds | examples/s | peak CUDA MiB |
+0047 | |---|---:|---:|---:|
+0048 | | no_demo | 139.99 | 2744 | 27.4 |
+0049 | | deepset_demo | 156.96 | 2447 | 141.2 |
+0050 | | attention_demo | 175.19 | 2192 | 162.7 |
+0051 | 
+0052 | ## Promotion gate
+0053 | 
+0054 | - FAIL — held coefficients seen moduli at least 80 percent
+0055 | - FAIL — held coefficients and moduli at least 60 percent
+0056 | - FAIL — depth16 at least 60 percent
+0057 | - FAIL — beats no demo by 30pp
+0058 | - FAIL — episode shuffle drops 20pp
+0059 | - FAIL — group shuffle drops 20pp
+0060 | - FAIL — address accuracy at least 95 percent
+0061 | - PASS — all checkpoint hashes match
+0062 | 
+0063 | Overall AD promotion: **FAIL**.
+0064 | 
+0065 | ## Decision
+0066 | 
+0067 | Do not scale this end-to-end objective. Introduce a developmental curriculum: first train the frozen-context adapter to predict one-step demonstration consequences or held-out demo queries, then train short programs, then deep programs, and finally remove auxiliary losses. A direct coefficient-regression oracle and an exact least-squares solver should be included to distinguish identifiability from neural optimization failure.
+0068 | 
+0069 | ## Reproducibility
+0070 | 
+0071 | Nine checkpoints were recovered and all hashes matched. The performance-only pre-checkpoint relaunch is documented in `RELAUNCH_NOTE.md`. `MANIFEST.sha256` covers every retained file except itself.

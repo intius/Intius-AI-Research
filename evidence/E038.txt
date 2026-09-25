@@ -1,0 +1,85 @@
+E038 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: pareto_pruning_lab/FINDINGS.txt
+Original SHA-256: f3411bdf5f0b820823cc3989f3789847da54589ecc512a091b9d4d64453eca0e
+Original byte count: 4189
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | FINDING: A MEASURED PARETO IMPROVEMENT OVER THE ORIGINAL LOW-RANK BASELINE
+0002 | 
+0003 | Method: select complementary nonlinear FFN neurons, allocate their widths
+0004 | globally, and reconstruct outputs using the actual compressed states.
+0005 | The final model uses ordinary smaller dense FFNs with no extra inference
+0006 | branch, mask, calibration memory or original-size shadow matrices.
+0007 | 
+0008 | Confirmed on the declared loss/weights/work/CPU-latency axes against:
+0009 |   1. The original activation-aware uniform SVD recipe.
+0010 |   2. Budgeted SVD given the same sequential reconstruction procedure.
+0011 | 
+0012 | Second independent article cohort; means of three recovery data seeds.
+0013 | All rows have587,232 parameters and560,256 projection MACs per token.
+0014 | Latency is FP32 eager CPU forward on64-byte windows.
+0015 | 
+0016 | Method                Fresh loss   Batch1 ms   Batch8 ms   Grammar accuracy
+0017 | svd_uniform           1.8962126   8.719      26.728      50.796%
+0018 | svd_budget            1.8824691   8.829      26.029      50.373%
+0019 | svd_sequential        1.8829742   8.728      26.638      50.473%
+0020 | prune_sequential      1.8817407   7.938      23.691      51.542%
+0021 | 
+0022 | Against svd_uniform:
+0023 |   Loss reduction: 0.7632%.
+0024 |   Latency reduction: 8.97% at batch1; 11.36% at batch8.
+0025 |   Lower loss in all3 seeds; paired95% loss interval [-0.01515270, -0.01374858] nats/byte.
+0026 |   Grammar change: +0.746 percentage points.
+0027 | 
+0028 | Against svd_sequential:
+0029 |   Loss reduction: 0.0655%.
+0030 |   Latency reduction: 9.06% at batch1; 11.06% at batch8.
+0031 |   Lower loss in all3 seeds; paired95% loss interval [-0.00190025, -0.00055776] nats/byte.
+0032 |   Grammar change: +1.070 percentage points.
+0033 | 
+0034 | The important remaining limitation
+0035 | Against optimized budgeted SVD without sequential reconstruction, the
+0036 | pruner has lower mean loss and faster measured inference, but loses one
+0037 | of three individual quality seeds. The strict all-seed requirement was
+0038 | written before testing, so the overall all-controls gate remains FAIL.
+0039 | Its mean paired loss difference is -0.00072840, with95% document interval [-0.00135392, -0.00009088].
+0040 | Do not turn the observed mean advantage into a universal low-rank claim.
+0041 | 
+0042 | Training cost is also visible
+0043 | The revised pruner uses extra sequential preprocessing. Compression plus
+0044 | timed recovery averages63.19s versus61.01s for original SVD,61.20s for
+0045 | budgeted SVD and65.99s for equally reconstructed SVD. Thus the original
+0046 | SVD comparison is an inference-profile Pareto win, not a claim of lower
+0047 | everywhere-included training cost. Shared calibration and research are
+0048 | additional and recorded separately.
+0049 | 
+0050 | The earlier, simpler pruner is another useful point:586,080 parameters,
+0051 | lower fresh loss and8.5-11.5% lower CPU latency than original SVD on
+0052 | cohortA. Its strict comparison with optimized SVD failed; that result
+0053 | is preserved in RESULTS.txt. The follow-up uses a separately frozen
+0054 | cohortB, not a relabeled rerun on cohortA.
+0055 | 
+0056 | Verification and boundaries
+0057 | Two disjoint128-article cohorts, fresh grammar subsets, paired training
+0058 | data and equal500-update recovery budgets. Twenty-one non-smoke training
+0059 | runs plus four excluded smoke checks were completed across both stages.
+0060 | Independent audits replayed checkpoint counts, hashes and validation
+0061 | losses, checked new-data isolation and actual document predictions, and
+0062 | recomputed the statistics and1,680 timing records. Audits passed.
+0063 | All models descend from one small, undertrained1.21M-parameter byte LM.
+0064 | This does not demonstrate50B frontier quality or hardware-independent
+0065 | dominance. A stronger pretrained subword model is the next scale test.
+0066 | 
+0067 | Artifacts
+0068 | sequential_followup/RESULTS.txt              Complete second-stage results.
+0069 | sequential_followup/evaluation/summary.json.txt Exact comparisons and intervals.
+0070 | sequential_followup/confirm/checkpoints/     Six new trained checkpoints.
+0071 | sequential_followup/01_runtime.py.txt        Sequential reconstruction code.
+0072 | 01_runtime.py.txt                           Selection, refitting and SVD controls.
+0073 | 10_mechanism.txt                            Why the parameterizations differ.
+0074 | RESULTS.txt                                 Complete first-stage results.
+0075 | 
+0076 | Earlier research and other agents' files were preserved. Nothing was uploaded.

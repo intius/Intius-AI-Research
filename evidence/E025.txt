@@ -1,0 +1,96 @@
+E025 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/cognitive_kernel_project_20260916/experiment_AC_width_horizon_scaling/REPORT.md
+Original SHA-256: eb8c6c40da7d14d2b5633a4cde285a2732439531cec1f2a90a9121a6fef48f56
+Original byte count: 4580
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Experiment AC — Width and training-horizon scaling
+0002 | 
+0003 | ## Verdict
+0004 | 
+0005 | **PASS. Promote a scalable addressed finite-register execution component.**
+0006 | 
+0007 | The preregistered width-512/8K model reached 98.42% mean frozen-Y transfer, 99.78% exhaustive local-transition accuracy, and 97.01% on depth-32/eight-register extrapolation. Every promotion gate passed.
+0008 | 
+0009 | A smaller 75K/8K model also reached 96.96% frozen transfer and 93.38% extended accuracy, making it the efficient candidate. The result shows that Y's apparent 50% architecture ceiling was an operation-capacity/training threshold, not a failure of learned addressing or recurrent composition.
+0010 | 
+0011 | This remains a synthetic finite-state execution result. Operations, value domain and instruction schema are fixed; it is not evidence of language understanding, open-ended reasoning, or AGI.
+0012 | 
+0013 | ## Scaling grid
+0014 | 
+0015 | | Model | parameters | updates | frozen transfer | worst transfer suite | extended | transition probe |
+0016 | |---|---:|---:|---:|---:|---:|---:|
+0017 | | w292_4k | 75,045 | 4,000 | 74.67% ± 1.25% | 62.47% | 60.38% ± 1.43% | 93.00% |
+0018 | | w292_8k | 75,045 | 8,000 | 96.96% ± 1.74% | 94.79% | 93.38% ± 3.94% | 99.50% |
+0019 | | w512_4k | 113,985 | 4,000 | 92.80% ± 2.46% | 87.92% | 83.22% ± 4.43% | 98.66% |
+0020 | | w512_8k | 113,985 | 8,000 | 98.42% ± 1.83% | 97.40% | 97.01% ± 3.20% | 99.78% |
+0021 | | w768_4k | 159,297 | 4,000 | 97.50% ± 1.01% | 94.92% | 95.19% ± 2.33% | 99.77% |
+0022 | 
+0023 | ## Seed replication
+0024 | 
+0025 | | Seed | 75K/4K | 75K/8K | 114K/4K | 114K/8K | 159K/4K |
+0026 | |---:|---:|---:|---:|---:|---:|
+0027 | | 2101 | 75.81% | 98.90% | 90.00% | 99.52% | 98.61% |
+0028 | | 2102 | 73.34% | 95.53% | 93.79% | 96.30% | 97.25% |
+0029 | | 2103 | 74.88% | 96.46% | 94.60% | 99.43% | 96.63% |
+0030 | 
+0031 | All three 8K checkpoints exceed 95% transfer at both 75K and 114K scales. Width strongly improves sample efficiency at 4K; additional training lets the smaller model nearly close the gap.
+0032 | 
+0033 | ## Extended extrapolation
+0034 | 
+0035 | | Model | depth32/r6 | depth16/r8 | depth32/r8 | partial depth16/r8 | mean |
+0036 | |---|---:|---:|---:|---:|---:|
+0037 | | w292_4k | 55.57% | 64.91% | 56.58% | 64.45% | 60.38% |
+0038 | | w292_8k | 92.42% | 95.18% | 91.60% | 94.30% | 93.38% |
+0039 | | w512_4k | 79.92% | 87.99% | 79.75% | 85.22% | 83.22% |
+0040 | | w512_8k | 96.68% | 97.72% | 96.74% | 96.88% | 97.01% |
+0041 | | w768_4k | 95.51% | 97.04% | 94.79% | 93.42% | 95.19% |
+0042 | 
+0043 | ## Primary causal controls
+0044 | 
+0045 | | Condition | frozen transfer | change | extended | partial suites | address probe |
+0046 | |---|---:|---:|---:|---:|---:|
+0047 | | normal | 98.42% | — | 97.01% | 97.85% | 100.00% |
+0048 | | state_erased | 10.10% | -88.31 points | 6.71% | 9.47% | 100.00% |
+0049 | | source_keys_shuffled | 11.95% | -86.47 points | 7.37% | 9.44% | 65.94% |
+0050 | | uniform_addresses | 6.90% | -91.52 points | 6.55% | 6.54% | 27.38% |
+0051 | | clues_removed | 79.68% | -18.73 points | 78.16% | 22.92% | 97.89% |
+0052 | 
+0053 | State accumulation, source identity and learned addressing are indispensable. Removing relational clues selectively damages the partially observed suites while leaving fully observed execution much stronger.
+0054 | 
+0055 | ## Efficiency
+0056 | 
+0057 | | Model | train seconds | examples/s | peak CUDA MiB |
+0058 | |---|---:|---:|---:|
+0059 | | w292_4k | 100.98 | 5071 | 26.7 |
+0060 | | w292_8k | 202.40 | 5060 | 26.7 |
+0061 | | w512_4k | 100.75 | 5082 | 28.0 |
+0062 | | w512_8k | 201.92 | 5071 | 28.0 |
+0063 | | w768_4k | 101.21 | 5059 | 31.5 |
+0064 | 
+0065 | ## Promotion gate
+0066 | 
+0067 | - PASS — primary transfer at least 80 percent
+0068 | - PASS — every Y transfer suite at least 70 percent
+0069 | - PASS — address probe at least 95 percent
+0070 | - PASS — transition probe at least 95 percent
+0071 | - PASS — extended mean at least 50 percent
+0072 | - PASS — state erasure drops at least 10pp
+0073 | - PASS — source shuffle drops at least 10pp
+0074 | - PASS — uniform address drops at least 10pp
+0075 | - PASS — all checkpoint hashes match
+0076 | 
+0077 | Overall AC promotion: **PASS**.
+0078 | 
+0079 | ## Decision and next boundary
+0080 | 
+0081 | Promote the shared smooth transition plus learned content addressing as a reliable scalable executor within the tested finite-state instruction family. Use 75K/8K when efficiency matters and 114K/8K as the quality reference.
+0082 | 
+0083 | The next experiment must change semantics rather than merely add depth: hold out entire operations, change the value domain, and require learning a new operation from demonstrations with frozen slow weights. That will test whether this is a reusable cognitive substrate or only a well-trained interpreter for a fixed algebra.
+0084 | 
+0085 | ## Reproducibility
+0086 | 
+0087 | Generator alignment was verified before launch. Fifteen checkpoints were recovered and every hash matched. `MANIFEST.sha256` covers every retained file except itself.

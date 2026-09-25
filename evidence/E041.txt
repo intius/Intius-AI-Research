@@ -1,0 +1,83 @@
+E041 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/cognitive_kernel_project_20260919/experiment_BB_glove_char_bidaf_reader/REPORT.md
+Original SHA-256: 157583fda1ee111feb793154d54426c2411569da073955f038fbf3bf852fb490
+Original byte count: 3089
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Experiment BB — Static-knowledge character BiDAF reader
+0002 | 
+0003 | ## Verdict
+0004 | 
+0005 | **PASS. Promote BB as the strongest non-LLM reader.**
+0006 | 
+0007 | Static GloVe vectors, character morphology and deeper BiDAF-style attention
+0008 | raise mean gold-context F1 to 67.72% and full-corpus raw top-five F1 to 53.64%.
+0009 | BB beats the promoted AZ+BA system by 7.50 F1 points despite using no
+0010 | contextual language-model weights.
+0011 | 
+0012 | Every hard-negative branch passes independently. The result is not a favorable
+0013 | seed or a transient single-run improvement.
+0014 | 
+0015 | ## Full-corpus results
+0016 | 
+0017 | All rows use the same first 1,000 SQuAD validation questions, all 2,067 unique
+0018 | validation contexts and retrieval-array hash
+0019 | `5a0e4d93b0c26e94bdc34fb5d22ed7e90da3c24c8e7f488bab916640ca71139a`.
+0020 | 
+0021 | | Path | EM mean ± seed SD | F1 mean ± seed SD |
+0022 | |---|---:|---:|
+0023 | | Gold context | 57.17% ± 0.57 | 67.72% ± 0.32 |
+0024 | | Retrieved top one | 40.93% ± 0.83 | 48.82% ± 0.56 |
+0025 | | Raw span-score top five | 44.93% ± 0.65 | 53.64% ± 0.58 |
+0026 | | Answerability top five | 42.87% ± 0.50 | 51.70% ± 0.23 |
+0027 | | Oracle frozen-reader answer | 54.10% ± 0.69 | 64.85% ± 0.29 |
+0028 | 
+0029 | Raw top-five F1 by branch: 53.02%, 54.17%, and 53.73%. Every branch exceeds
+0030 | the 46.14% AZ+BA reference by more than six points and the predeclared +2-point
+0031 | gate by a wide margin.
+0032 | 
+0033 | ## Why it improved
+0034 | 
+0035 | - GloVe supplies static distributional knowledge without contextual or
+0036 |   generative language-model weights; 92.28% of the 50,000-word vocabulary has
+0037 |   a pretrained vector.
+0038 | - Character CNNs add morphology and spelling information.
+0039 | - Trilinear BiDAF attention represents detailed question/context interactions
+0040 |   rather than only a mean question vector.
+0041 | - Two recurrent modeling layers refine answer boundaries after cross-attention.
+0042 | 
+0043 | The answerability head again underperforms raw span scores for cross-passage
+0044 | selection. A protected BB-specific pairwise ranker remains justified.
+0045 | 
+0046 | ## Resources
+0047 | 
+0048 | - Learned parameters: 6,727,139.
+0049 | - Vocabulary: 50,000; GloVe-covered words: 46,140.
+0050 | - Base training: 740.60 seconds.
+0051 | - Base peak CUDA: 558,149,632 bytes allocated; 1,033,895,936 reserved.
+0052 | - Continuation peak CUDA: at most 543,636,992 bytes allocated.
+0053 | - Per-branch continuation: 116.95–124.80 seconds.
+0054 | - 6,134-window inference: 4.59–4.96 seconds per branch.
+0055 | - Peak host RSS: 3,767,586,816 bytes.
+0056 | - Complete private Kaggle runtime: 22m53s on GPU T4 x2; one GPU performed model work.
+0057 | 
+0058 | ## Decision
+0059 | 
+0060 | Replace AZ as the current reader with BB. The current strongest directly tested
+0061 | stack is:
+0062 | 
+0063 | `full-corpus character TF-IDF retrieval → BB reader → raw span-score top-five`.
+0064 | 
+0065 | It reaches 53.64% F1 with about 558 MB peak allocated CUDA memory during
+0066 | training and about 544 MB in the continued reader branches. BA remains a valid
+0067 | promoted ranker for AZ, but its learned feature distribution is not assumed to
+0068 | transfer to BB.
+0069 | 
+0070 | The next experiment should freeze BB and train the same protected listwise and
+0071 | pairwise ranking theories on BB features. The gap from raw selection to the
+0072 | BB top-five oracle is still 11.21 F1 points.
+0073 | 
+0074 | Kaggle version: `351037619`. Complete private artifacts are copied locally.

@@ -1,0 +1,59 @@
+E044 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/cognitive_kernel_project_20260919/experiment_BE_multidomain_protected_ranker/REPORT.md
+Original SHA-256: cfb223da57cff0934852499a81316490e45ea67394d600a39cd7f8e98a1c7db1
+Original byte count: 2194
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Experiment BE — Protected multi-domain passage ranking
+0002 | 
+0003 | Completed privately on Kaggle on 2026-09-19.
+0004 | 
+0005 | ## Result
+0006 | 
+0007 | BE preserved SQuAD but failed the preregistered HotpotQA capability gate. The
+0008 | mixed pairwise primary reached 28.05% mean HotpotQA F1 versus BD's 27.22%, only
+0009 | +0.83 point rather than the required +3.00. Per-seed gains were +0.52, +1.29
+0010 | and +0.68 points, so neither Hotpot promotion check passed.
+0011 | 
+0012 | The confirming mixed listwise MLP performed better at 28.48% F1, and the
+0013 | Hotpot-only pairwise control reached 28.10%. Both remain far below the frozen
+0014 | 46.27% top-five oracle.
+0015 | 
+0016 | ## Preservation and integrity
+0017 | 
+0018 | - Mean SQuAD F1 changed by only -0.14 point; every seed stayed within the
+0019 |   predeclared 0.5-point retention boundary.
+0020 | - All BB reader hashes and all BC feature hashes remained unchanged.
+0021 | - Exact 8,000-question Hotpot training, 8,000-question SQuAD replay and
+0022 |   1,000-question validation sizes verified.
+0023 | - All 17 manifest entries verified after copying the private outputs locally.
+0024 | - Peak CUDA allocation was 186,746,880 bytes; ranking ran on CPU.
+0025 | 
+0026 | ## Interpretation
+0027 | 
+0028 | The result rules out insufficient target examples or simple source forgetting
+0029 | as the main explanation. Even 8,000 labeled Hotpot groups plus protected SQuAD
+0030 | replay moved pairwise ranking less than one F1 point. The current 16 scalar
+0031 | features do not encode enough cross-passage semantics to approach the oracle.
+0032 | The next credible experiment should add richer non-LLM passage-question and
+0033 | answer-context interaction features while keeping the BB reader protected,
+0034 | rather than increasing ranker data or tree capacity again.
+0035 | 
+0036 | ## Decision
+0037 | 
+0038 | Do not promote BE. Retain BC as the SQuAD ranker and BD as the verified
+0039 | zero-shot transfer result. Keep BE's listwise checkpoint as a diagnostic only.
+0040 | 
+0041 | ## Artifacts
+0042 | 
+0043 | - Kaggle version 1: [private compute link omitted]
+0044 | - Exact archive SHA-256:
+0045 |   `e280d9ff1674b6aecf4c67be71844698981900201e122389222d8394e379a586`
+0046 | - Exact result SHA-256:
+0047 |   `3a7317982ac98182b86617c08ceeaffde09eb9b64a82d957495a06d296c7c1ec`
+0048 | - Source SHA-256:
+0049 |   `7d9d3e04240271230c0c9592c77a3d2d73defc7fdb7d3d7f38e413810ce9e437`
+0050 |

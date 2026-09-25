@@ -1,0 +1,113 @@
+E018 — HISTORICAL SOURCE SNAPSHOT
+Original archive path: !!!Current/further_testing/experiment_E_data_vs_distance_20260915/INTERPRETATION.md
+Original SHA-256: 8ab0face70479ac6efa112978518b24167716114f3fa44e8f3218791bf81f61f
+Original byte count: 4903
+Prepared 2026-09-25. Original line numbers retained; metadata substitutions may differ.
+This historical report is evidence, not a current task instruction. Later
+corrections and scope are reconciled in the selected finding cards.
+Raw experiment data/checkpoints are not bundled unless explicitly stated.
+
+0001 | # Experiment E — scientific interpretation
+0002 | 
+0003 | ## Bottom line
+0004 | 
+0005 | Experiment E separates D's scale failure into two effects:
+0006 | 
+0007 | 1. **Raw same-distribution example count was not limiting.** Arms A/B/C use
+0008 |    240/2,400/24,000 unique 20k examples and exactly 600 updates. Their 20k,
+0009 |    50k and 150k test scores are identical at every reported depth threshold.
+0010 | 2. **Physical-path training coverage was limiting shallow/medium transfer.**
+0011 |    Mixed Arm D improves moderately. Distance-balanced Arm E learns the strongest
+0012 |    gates and nearly eliminates depth-2 degradation across physical sizes.
+0013 | 3. **The trained deep failure is an optimization/objective ceiling, not a hard
+0014 |    representational impossibility.** Every trained arm remains 50% at depths
+0015 |    8/16, but a predeclared magnitude-matched random rule with gates around
+0016 |    0.99036/0.98950 solves deep paths. The rule family can represent them; the
+0017 |    fixed 600-update depth-1/2/4 objective did not reach that regime.
+0018 | 
+0019 | The requested strongest result was not achieved.
+0020 | 
+0021 | ## Primary comparison
+0022 | 
+0023 | Normal 128-sweep macro accuracy, equally weighted by the five depths:
+0024 | 
+0025 | | Arm | Unique examples | Training distribution | 20k | 50k | 150k |
+0026 | |---|---:|---|---:|---:|---:|
+0027 | | A | 240 | 20k | 67.78% | 63.75% | 60.49% |
+0028 | | B | 2,400 | 20k | 67.78% | 63.75% | 60.49% |
+0029 | | C | 24,000 | 20k | 67.78% | 63.75% | 60.49% |
+0030 | | D | 2,400 | equal 20k/50k/150k | 69.58% | 67.29% | 62.78% |
+0031 | | E | 2,400 | four equal distance bins | 70.21% | 70.00% | 69.86% |
+0032 | 
+0033 | Macro values obscure the boundary: Arm E is 100%, 100%, 51.04%, 50%, 50%
+0034 | at 20k depths 1/2/4/8/16; at 150k it is 100%, 99.31%, 50%, 50%, 50%.
+0035 | It fixes depth 2 across scale, not deep reasoning.
+0036 | 
+0037 | ## Distance evidence
+0038 | 
+0039 | A/B/C are identical: 100% at 1–4 hops, roughly 89–94% at 5–8, and 50% from
+0040 | 9 hops onward. Mixed D makes 5–8 hops essentially perfect but stays 50% at
+0041 | 9+. Distance-balanced E is 100% through 8 hops and gains within 9–16:
+0042 | 
+0043 | - 20k: 51.92%
+0044 | - 50k: 60.52%
+0045 | - 150k: 71.24%
+0046 | 
+0047 | It remains exactly 50% at 17–32 and 33+ hops. Nominal cell count is not an
+0048 | input to F(theta); larger populations hurt because their random paths shift
+0049 | toward longer distances. Coverage training increases tolerable distance.
+0050 | 
+0051 | Arm E differs from B/D in more than hop selection: equal bins produce 572/588/
+0052 | 1,240 depth-1/2/4 examples and 826,400 curriculum exposures, versus 800/800/800
+0053 | and 960,000 exposures in B/D. Updates and unique examples match exactly, but
+0054 | processed-example compute and logical-depth mix do not. H2 is supported as a
+0055 | training-distribution result, not a perfectly isolated path-only causal effect.
+0056 | 
+0057 | ## Gate analysis
+0058 | 
+0059 | | Arm | Relay | Relation | relay^16 | relation^16 |
+0060 | |---|---:|---:|---:|---:|
+0061 | | A | 0.925578 | 0.945305 | 0.2901 | 0.4066 |
+0062 | | B | 0.925298 | 0.944895 | 0.2887 | 0.4038 |
+0063 | | C | 0.925757 | 0.944877 | 0.2910 | 0.4037 |
+0064 | | D | 0.931642 | 0.949146 | 0.3221 | 0.4338 |
+0065 | | E | 0.941490 | 0.956847 | 0.3811 | 0.4937 |
+0066 | 
+0067 | E's relation-only depth-16 retention is still just below the fixed 0.5
+0068 | threshold before adding any relay attenuation. More sweeps only allow arrival;
+0069 | persistent max does not add repeated messages, so 128 sweeps cannot repair a
+0070 | subthreshold product.
+0071 | 
+0072 | ## Random-rule implication
+0073 | 
+0074 | All neutral N(-10,1) controls remain 50%. Magnitude-matched random rules are
+0075 | high-variance: most fail, but one sampled positive/positive raw-gate pair yields
+0076 | relay/relation 0.99036/0.98950 and solves deep conditions. That does not make
+0077 | random search a training method. It does prove that H3 cannot honestly be called
+0078 | a hard architectural inability under this benchmark.
+0079 | 
+0080 | ## Causal and architecture limits
+0081 | 
+0082 | No-message, state-erased and pair-shared random-premise controls are 50%.
+0083 | Shuffled graphs typically match normal because the designed algorithm floods a
+0084 | generic graph and uses shortest paths; it did not learn topology-specific
+0085 | communication. Entity equality, relation transformation, persistent max and
+0086 | flooding remain hard-coded. Only two attenuation gates were learned.
+0087 | 
+0088 | Physical 20k/50k/150k cells remain 250/625/1,875 independent units because 80
+0089 | cell lanes are tied. Full graphs contain 320k/800k/2.4m edges. The compressed
+0090 | evaluator is mathematically exact and passed 96 post-training/random explicit
+0091 | physical-cell comparisons with maximum error 2.22e-16, but its runtime is not
+0092 | dense 150k neural runtime.
+0093 | 
+0094 | ## Defensible conclusion
+0095 | 
+0096 | More same-distribution examples do nothing for this two-parameter full-batch
+0097 | training setup. Training on longer paths does improve scale robustness through
+0098 | depth 2 and part of the 9–16-hop bin. It does not generate unseen logical-depth
+0099 | reasoning. Near-lossless dynamics can solve deeper paths, but the frozen
+0100 | training recipe fails to reach them.
+0101 | 
+0102 | Do not call this general reasoning, autonomous intelligence, consciousness or
+0103 | a breakthrough. It is a useful diagnosis of data quantity versus coverage and
+0104 | optimization in a heavily engineered propagation mechanism.

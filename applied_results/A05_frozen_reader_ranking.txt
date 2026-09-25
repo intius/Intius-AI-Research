@@ -1,0 +1,57 @@
+A05 — Improve answer selection without updating the reader
+
+EVIDENCE STATUS: CROSS-DATASET COMPONENT SUCCESS; ESTABLISHED RETRIEVAL METHODS
+
+Small rankers improved a frozen extractive reader, with a smaller gain after transfer to another dataset.
+
+THE RECIPE
+Character TF-IDF retrieves candidate paragraphs. A GloVe/character/BiDAF-style
+reader proposes answer spans. A separate ranker learns which frozen candidate
+answer to choose from retrieval, span and relative-score features. The
+ranker's target is candidate-answer F1 on training questions.
+
+WHAT SUCCEEDED
+Experiment BC reused 1,000 SQuAD validation questions and 2,067 validation
+contexts. The BB reader's raw top-five token F1 was 53.64%; pairwise XGBoost
+raised it to 56.91%, with gains of 3.24, 2.58 and 4.01 points in the three
+reader branches. A 3,201-parameter listwise MLP independently reached 56.94%.
+All reader checkpoint hashes and original predictions remained unchanged.
+
+BD transferred the frozen readers, rankers and normalization to a deterministic
+answer-bearing HotpotQA distractor subset without fitting HotpotQA labels.
+Raw top-five F1 was 25.63%; pairwise selection reached 27.22% (about +1.60
+points before rounding). Gold-context F1 was 51.76%; top-five answer oracle
+46.27%. This was subset extractive QA, not the full HotpotQA benchmark or a
+demonstration of multi-hop reasoning.
+
+RESOURCES AND LIMITS
+The BB reader had 6,727,139 learned parameters and also used pretrained static
+GloVe knowledge. BC feature extraction peaked at 207,316,992 allocated CUDA
+bytes and 3,036,246,016 host RSS bytes; ranking ran on CPU. A small ranker does
+not eliminate reader, retrieval-index or corpus costs. Repeated SQuAD
+development use and shared reader lineage limit independent confirmation.
+Later multidomain and richer-ranker screens did not deliver their required
+additional gains.
+
+HOW TO USE THIS
+Keep a competent reader frozen while learning calibrated selection. Include
+retrieval-only, raw-span and answer-oracle controls, then transfer unchanged
+to another dataset. This can guide retrieval systems around an LLM, but this
+archive did not prove the same gains for LLM-generated answers. BiDAF,
+GloVe, TF-IDF and ranking are established methods.
+
+SOURCE REPORTS
+  E041: evidence/E041.txt
+    Original: !!!Current/cognitive_kernel_project_20260919/experiment_BB_glove_char_bidaf_reader/REPORT.md
+  E042: evidence/E042.txt
+    Original: !!!Current/cognitive_kernel_project_20260919/experiment_BC_protected_bb_reranker/REPORT.md
+  E043: evidence/E043.txt
+    Original: !!!Current/cognitive_kernel_project_20260919/experiment_BD_zero_shot_hotpotqa_transfer/REPORT.md
+  E044: evidence/E044.txt
+    Original: !!!Current/cognitive_kernel_project_20260919/experiment_BE_multidomain_protected_ranker/REPORT.md
+
+PRIOR-WORK CONTEXT
+  P13: Bidirectional Attention Flow for Machine Comprehension (Seo et al., 2016)
+    https://arxiv.org/abs/1611.01603
+
+Curation date: 2026-09-25. Reported experiments were not retrained for this release.
